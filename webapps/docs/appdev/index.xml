@@ -23,49 +23,47 @@
   &project;
 
   <properties>
-    <author email="craigmcc@apache.org">Craig R. McClanahan</author>
-    <title>Table of Contents</title>
+    <author email="craigmcc@apache.org">크레이그 R. 맥클라나한</author>
+    <title>컨텐트 테이블</title>
   </properties>
 
 <body>
 
 
-<section name="Preface">
+<section name="서문">
 
-<p>This manual includes contributions from many members of the Tomcat Project
-developer community.  The following authors have provided significant content:
+<p>이 매뉴얼은 톰캣 프로젝트 개발자 커뮤니티의 많은 멤버들로부터 기여를 받았습니다.
+다음의 저자는 상당한 컨텐트를 제공하였습니다:
 </p>
 <ul>
-<li>Craig R. McClanahan
+<li>크레이그 R. 맥클라나한
     (<a href="mailto:craigmcc@apache.org">craigmcc@apache.org</a>)</li>
 </ul>
 
 </section>
 
 
-<section name="Table of Contents">
+<section name="컨텐트 테이블">
 
-<p>The information presented is divided into the following sections:</p>
+<p>제공되는 정보는 다음과 같은 부문으로 나뉘어져 있습니다.:</p>
 <ul>
-<li><a href="introduction.html"><strong>Introduction</strong></a> -
-    Briefly describes the information covered here, with
-    links and references to other sources of information.</li>
+<li><a href="introduction.html"><strong>소개</strong></a> -
+    여기에서는 링크와 다른 소스 정보를 참조를 포함한 정보를 간단하게 설명하고 있습니다.</li>
 <li><a href="installation.html"><strong>Installation</strong></a> -
-    Covers acquiring and installing the required software
-    components to use Tomcat for web application development.</li>
-<li><a href="deployment.html"><strong>Deployment Organization</strong></a> -
-    Discusses the standard directory layout for a web application
-    (defined in the Servlet API Specification), the Web Application
-    Deployment Descriptor, and options for integration with Tomcat
-    in your development environment.</li>
-<li><a href="source.html"><strong>Source Organization</strong></a> -
+    웹 어플리케이션 개발을 위한 톰캣을 사용하기 위해 요구되는 
+    소프트웨어 컴포넌트의 습득과 설치에 대해 다루고 있습니다.</li>
+<li><a href="deployment.html"><strong>개발 구조</strong></a> -
+    웹 어플리케이션을 위한 표준 디렉토리 구조,
+    (서블릿 API 사양에 정의된), 웹 어플리케이션 배포 서술자
+    , 그리고 톰캣을 당신의 개발환경에 통합시키기 위한 옵션에 대해 설명하고 있습니다.</li>
+<li><a href="source.html"><strong>소스 구조</strong></a> -
     Describes a useful approach to organizing the source code
     directories for your project, and introduces the
     <code>build.xml</code> used by Ant to manage compilation.</li>
-<li><a href="processes.html"><strong>Development Processes</strong></a> -
+<li><a href="processes.html"><strong>개발 과정</strong></a> -
     Provides brief descriptions of typical development processes
     utilizing the recommended deployment and source organizations.</li>
-<li><a href="sample/" target="_new"><strong>Example Application</strong></a> -
+<li><a href="sample/" target="_new"><strong>예제 어플리케이션</strong></a> -
     This directory contains a very simple, but functionally complete,
     "Hello, World" application built according to the principles
     described in this manual.  You can use this application to
