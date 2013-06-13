@@ -36,129 +36,48 @@
 <section name="Directory Structure">
 
     <blockquote><em>
-    <p>The description below uses the variable name $CATALINA_BASE to refer the
-    base directory against which most relative paths are resolved. If you have
-    not configured Tomcat for multiple instances by setting a CATALINA_BASE
-    directory, then $CATALINA_BASE will be set to the value of $CATALINA_HOME,
-    the directory into which you have installed Tomcat.</p>
+    <p>다음 설명은 대부분의 상대 경로가 해결되고 그에 대한 기본 디렉토리를 참조하는 변수 이름을 $ CATALINA_BASE를 사용하고 있습니다. 당신이 CATALINA_BASE 디렉토리를 설정하여 여러 인스턴스에 Tomcat을 구성하지 않은 경우 다음 $ CATALINA_BASE는 $ CATALINA_HOME, Tomcat을 설치 한 디렉토리의 값으로 설정됩니다.</p>
     </em></blockquote>
 
-<p>A key recommendation of this manual is to separate the directory
-hierarchy containing your source code (described in this section) from
-the directory hierarchy containing your deployable application
-(described in the preceding section).  Maintaining this separation has
-the following advantages:</p>
+<p>이 설명서의 주요 권고 사항은 배포 응용 프로그램을 포함하는 디렉토리 계층 구조에서 소스 코드를 포함하는 디렉토리 계층을 분리하는 것입니다. 이 분리를 유지하는 것은 다음과 같은 장점이 있습니다:</p>
 <ul>
-<li>The contents of the source directories can be more easily administered,
-    moved, and backed up if the "executable" version of the application
-    is not intermixed.
+<li>소스 디렉토리의 내용을 보다 쉽게 관리할 수 있는 "실행 가능한" 응용 프로그램 버전이 혼합되지 않은 경우 백업합니다.
     <br/><br/></li>
-<li>Source code control is easier to manage on directories that contain
-    only source files.
+<li>소스 코드 관리, 소스 파일이 있는 디렉토리의 관리가 용이합니다.
     <br/><br/></li>
-<li>The files that make up an installable distribution of your
-    application are much easier to select when the deployment
-    hierarchy is separate.</li>
+<li>응용 프로그램 설치 가능한 배포판을 구성하는 파일은 배포 계층이 다른 때 선택하는 것이 훨씬 쉽습니다.</li>
 </ul>
 
-<p>As we will see, the <code>ant</code> development tool makes the creation
-and processing of such directory hierarchies nearly painless.</p>
+<p>우리가 본대로, Ant의 개발 도구는 이러한 디렉터리 계층 생성 및 처리가 거의 고통 수준입니다.</p>
 
-<p>The actual directory and file hierarchy used to contain the source code
-of an application can be pretty much anything you like.  However, the
-following organization has proven to be quite generally applicable, and is
-expected by the example <code>build.xml</code> configuration file that
-is discussed below.  All of these components exist under a top level
-<em>project source directory</em> for your application:</p>
+<p>응용 프로그램의 소스 코드를 저장하는 데 사용되는 실제 디렉터리 및 파일 계층을 아름답게 구성할 수 있습니다. 그러나 다음의 조직은 매우 일반적으로 적용 가능한 것으로 판명되어 후술하는 실제 예의 build.xml 구성 파일이 예상됩니다. 이러한 모든 구성 요소는 응용 프로그램의 최상위 프로젝트 소스 디렉토리에 존재합니다.:</p>
 <ul>
-<li><strong>docs/</strong> - Documentation for your application, in whatever
-    format your development team is using.<br/><br/></li>
-<li><strong>src/</strong> - Java source files that generate the servlets,
-    beans, and other Java classes that are unique to your application.
-    If your source code is organized in packages (<strong>highly</strong>
-    recommended), the package hierarchy should be reflected as a directory
-    structure underneath this directory.<br/><br/></li>
-<li><strong>web/</strong> - The static content of your web site (HTML pages,
-    JSP pages, JavaScript files, CSS stylesheet files, and images) that will
-    be accessible to application clients.  This directory will be the
-    <em>document root</em> of your web application, and any subdirectory
-    structure found here will be reflected in the request URIs required to
-    access those files.<br/><br/></li>
-<li><strong>web/WEB-INF/</strong> - The special configuration files required
-    for your application, including the web application deployment descriptor
-    (<code>web.xml</code>, defined in the
-    <a href="http://wiki.apache.org/tomcat/Specifications">Servlet Specification</a>),
-    tag library descriptors for custom tag libraries
-    you have created, and other resource files you wish to include within
-    your web application.  Even though this directory appears to be a
-    subdirectory of your <em>document root</em>, the Servlet Specification
-    prohibits serving the contents of this directory (or any file it contains)
-    directly to a client request.  Therefore, this is a good place to store
-    configuration information that is sensitive (such as database connection
-    usernames and passwords), but is required for your application to
-    operate successfully.</li>
+<li><strong>docs/</strong> - 응용 프로그램 설명서는 어떤 형식으로 개발팀이 사용하고 있습니다.<br/><br/></li>
+<li><strong>src/</strong> - Java 소스 서블릿, Bean 및 응용 프로그램 별 다른 Java 클래스를 생성한 파일입니다. 당신의 소스 코드를 패키지로 구성되어 있으면 패키지 계층이 디렉토리 아래의 디렉토리 구조에 반영되어야 합니다.<br/><br/></li>
+<li><strong>web/</strong> - 응용 프로그램 클라이언트에 액세스 할 수 있습니다. 귀하의 웹 사이트 (HTML 페이지, JSP 페이지, JavaScript 파일, CSS 스타일 시트 파일, 이미지)의 정적 콘텐츠입니다. 이 디렉토리에는 Web 응용 프로그램의 문서 루트가 여기서 발견 된 하위 디렉토리 구조는 해당 파일에 액세스하는데 필요한 요청 URI에 반영됩니다.<br/><br/></li>
+<li><strong>web/WEB-INF/</strong> - Web 응용 프로그램 배포 설명자가 (web.xml 서블릿 사양에 정의되어 있습니다.) 만든 커스텀 태그 라이브러리의 태그 라이브러리 설명자 및 기타 리소스 파일 등 응용 프로그램에 필요한 특수 설정 파일은 당신의 Web 응용 프로그램에 포함하게 됩니다. 이 디렉토리는 문서 루트의 하위 디렉토리 인 것으로 보임에도 불구하고, Servlet 사양은 고객의 요구에 직접이 디렉토리의 내용을 (또는 여기에 포함 된모든 파일) 전송 금지합니다. 따라서 이것은 (데이터베이스 연결 아이디와 비밀번호 등)의 영향을 받기 쉽습니다. 구성 정보를 저장하기에 좋은 장소이며, 성공적으로 실행되는 응용 프로그램에 필요하게 됩니다.</li>
 </ul>
 
-<p>During the development process, two additional directories will be
-created on a temporary basis:</p>
+<p>프로그램 개발과정에서 두 추가 디렉토리가 일시적으로 생성됩니다:</p>
 <ul>
-<li><strong>build/</strong> - When you execute a default build
-    (<code>ant</code>), this directory will contain an exact image
-    of the files in the web application archive for this application.
-    Tomcat allows you to deploy an application in an unpacked
-    directory like this, either by copying it to the
-    <code>$CATALINA_BASE/webapps</code> directory, or by <em>installing</em>
-    it via the "Manager" web application.  The latter approach is very
-    useful during development, and will be illustrated below.
+<li><strong>build/</strong> - 기본 빌드를 실행하면 이 디렉토리에는 이 응용 프로그램에 대한 Web 애플리케이션 아카이브 파일의 정확한 이미지가 포함되어 있습니다. Tomcat은 당신이 $ CATALINA_BASE/webapps 디렉토리에 복사하여 또는 "관리자"의 Web 응용 프로그램을 통해 그것을 설치하면, 어느 쪽이든 이렇게 추출한 디렉토리에 응용 프로그램을 배포 할 수 있습니다. 후자의 방식은 개발시 매우 유용합니다.
     <br/><br/></li>
-<li><strong>dist/</strong> - When you execute the <code>ant dist</code>
-    target, this directory will be created.  It will create an exact image
-    of the binary distribution for your web application, including an license
-    information, documentation, and README files that you have prepared.</li>
+<li><strong>dist/</strong> - 당신이 <code> ant dist </code> 대상을 실행하면 이 디렉토리가 생성됩니다. 당신이 준비한 라이센스 정보 문서 및 README 파일을 포함 Web 응용 프로그램의 바이너리 디스트리뷰션의 정확한 이미지를 만듭니다.</li>
 </ul>
 
-<p>Note that these two directories should <strong>NOT</strong> be archived in
-your source code control system, because they are deleted and recreated (from
-scratch) as needed during development.  For that reason, you should not edit
-any source files in these directories if you want to maintain a permanent
-record of the changes, because the changes will be lost the next time that a
-build is performed.</p>
+<p>이 두 디렉토리는 그들이 삭제되므로 귀하의 소스 코드 관리 시스템에 보관하고 개발 중에 필요한 경우, 처음부터 다시 만들지 않는 것에 주의하십시오. 당신은 변경이 빌드가 실행되는 다음 때 소실되므로 변경 사항을 영구 기록을 유지하고 싶다면, 이러한 디렉토리 내의 모든 소스 파일을 편집하지 마십시오.</p>
 
   <subsection name="External Dependencies">
 
-  <p>What do you do if your application requires JAR files (or other
-  resources) from external projects or packages?  A common example is that
-  you need to include a JDBC driver in your web application, in order to
-  operate.</p>
+  <p>당신의 응용 프로그램이 외부 프로젝트 및 패키지에서 JAR 파일(또는 다른 자원)을 필요로하는 경우에, 당신은 무엇을 하시겠습니까? 일반적인 예제에서는 작동하기 위해 Web 응용 프로그램은 JDBC 드라이버를 포함해야한다는 것입니다.</p>
 
-  <p>Different developers take different approaches to this problem.
-  Some will encourage checking a copy of the JAR files you depend on into
-  the source code control archives for every application that requires those
-  JAR files.  However, this can cause significant management issues when you
-  use the same JAR in many applications - particular when faced with a need
-  to upgrade to a different version of that JAR file.</p>
+  <p>다른 개발자는 이 문제에 대한 다른 접근 방식을 취합니다. 일부는 당신이 그 JAR 파일을 필요로하는 모든 응용 프로그램의 소스 코드 제어 아카이브에 의존하는 JAR 파일의 복사본을 체크 장려합니다. 그 JAR 파일의 다른 버전으로 업그레이드 할 필요성에 직면했을 때, 당신은 많은 응용 프로그램에서 동일한 JAR을 사용할 때에 중요한 경영상의 문제를 일으킬 수 있습니다.</p>
 
-  <p>Therefore, this manual recommends that you <strong>NOT</strong> store
-  a copy of the packages you depend on inside the source control archives
-  of your applications.  Instead, the external dependencies should be
-  integrated as part of the process of <strong>building</strong> your
-  application.  In that way, you can always pick up the appropriate version
-  of the JAR files from wherever your development system administrator has
-  installed them, without having to worry about updating your application
-  every time the version of the dependent JAR file is changed.</p>
+  <p>따라서 이 설명서에서는 당신이 당신의 응용 프로그램의 소스 컨트롤 아카이브 내부에 의존하는 패키지의 복사본을 저장하지 않는 것이 좋습니다. 대신 외부 종속성 응용 프로그램을 구축하는 과정의 일부로 통합되어야합니다. 그렇게 당신은 항상 당신의 응용 프로그램에 의존하는 JAR 파일의 버전이 변경될 때마다 업데이트를 걱정하지 않고 개발, 시스템 관리자가이를 설치 한 위치에서 JAR 파일의 올바른 버전을 데리고 올 수 있습니다.</p>
 
-  <p>In the example Ant <code>build.xml</code> file, we will demonstrate
-  how to define <em>build properties</em> that let you configure the locations
-  of the files to be copied, without having to modify <code>build.xml</code>
-  when these files change.  The build properties used by a particular
-  developer can be customized on a per-application basis, or defaulted to
-  "standard" build properties stored in the developer's home directory.</p>
+  <p>예를 들어 Ant build.xml 파일에서, 우리는 당신이 이 파일을 변경하는 build.xml을 변경하지 않고 복사할 파일의 위치를 설정할 수 있습니다. 빌드 속성을 정의하는 방법을 설명하고 있으며, 특정 개발자에 의해 사용되는 빌드 속성은 응용 프로그램에 대해 정의된 또는 개발자의 홈 디렉토리에 저장되어있는 "표준"의 빌드 속성에 기본이 될 수 있습니다.</p>
 
-  <p>In many cases, your development system administrator will have already
-  installed the required JAR files into the <code>lib</code> directory of Tomcat.
-  If this has been done, you need
-  to take no actions at all - the example <code>build.xml</code> file
-  automatically constructs a compile classpath that includes these files.</p>
+  <p>종종 당신의 개발 시스템 관리자는 이미 Tomcat의 lib 디렉토리에 필요한 JAR 파일을 설치하는 것입니다. 예를 들면,  build.xml 파일이 자동으로 이러한 파일이 포함되어 컴파일 클래스 경로를 구축하고, 이것이 완료되면 당신은 행동을 해야합니다.</p>
 
   </subsection>
 
@@ -167,154 +86,68 @@ build is performed.</p>
 
 <section name="Source Code Control">
 
-<p>As mentioned earlier, it is highly recommended that you place all of the
-source files that comprise your application under the management of a
-source code control system like the Concurrent Version System (CVS).  If you
-elect to do this, every directory and file in the source hierarchy should be
-registered and saved -- but none of the generated files.  If you register
-binary format files (such as images or JAR libraries), be sure to indicate
-this to your source code control system.</p>
+<p>전에 언급했듯이, 그것은 당신이 동시 버전 시스템 (CVS)과 같은 소스 코드 관리 시스템 관리 응용 프로그램을 구성하는 모든 소스 파일을 배치하는 것이 좋습니다. 이렇게 선택할 경우 소스 계층의 모든 디렉토리와 파일이 생성되고 저장되어야합니다. 그러나 생성된 파일인 바이너리 파일(이미지 나 JAR 라이브러리)을 등록하려면 소스 코드 관리 시스템에서 하십시오.</p>
 
-<p>We recommended (in the previous section) that you should not store the
-contents of the <code>build/</code> and <code>dist/</code> directories
-created by your development process in the source code control system.  An
-easy way to tell CVS to ignore these directories is to create a file named
-<code>.cvsignore</code> (note the leading period) in your top-level source
-directory, with the following contents:</p>
+<p>우리는 소스 코드 제어 시스템의 개발 프로세스에서 생성된 bulid/와 dist/ 디렉토리의 내용을 저장하지 않는 것이 좋습니다. 이 디렉토리를 무시하도록 CVS에 지시하는 간단한 방법은 이름의 파일을 작성하는 것입니다. CVS는 다음과 같은 내용으로 당신의 최상위 소스 디렉토리를 무시합니다:</p>
 <source>
 build
 dist
 build.properties
 </source>
 
-<p>The reason for mentioning <code>build.properties</code> here will be
-explained in the <a href="processes.html">Processes</a> section.</p>
+<p>여기에 build.properties가 언급되어 이유는 프로세스 섹션에서 설명합니다.</p>
 
-<p>Detailed instructions for your source code control environment are beyond
-the scope of this manual.  However, the following steps are followed when
-using a command-line CVS client:</p>
+<p>당신의 소스 코드 관리 환경에 대한 자세한 절차는이 설명서의 범위를 초과합니다. 명령 줄 CVS 클라이언트를 사용하는 경우에는 다음 단계가 계속되고 있습니다.:</p>
 <ul>
-<li>To refresh the state of your source code to that stored in the
-    the source repository, go to your project source directory, and
-    execute <code>cvs update -dP</code>.
+<li>소스 저장소에 저장되는 것으로 소스 코드의 상태를 새로 고치려면 프로젝트의 소스 디렉토리로 이동하여 CVS update -dp를 실행합니다.
     <br/><br/></li>
-<li>When you create a new subdirectory in the source code hierarchy, register
-    it in CVS with a command like <code>cvs add {subdirname}</code>.
+<li>소스 코드 계층의 새로운 하위 디렉토리를 만들 때 cvs add {하위 디렉토리 이름}과 같은 명령을 사용하여 CVS에 등록합니다.
     <br/><br/></li>
-<li>When you first create a new source code file, navigate to the directory
-    that contains it, and register the new file with a command like
-    <code>cvs add {filename}</code>.
+<li>먼저 새로운 소스 코드 파일을 생성하고 그것을 포함하는 디렉토리로 이동하여 CVS add {파일 이름}과 같은 명령을 사용하여 새 파일을 등록합니다.
     <br/><br/></li>
-<li>If you no longer need a particular source code file, navigate to the
-    containing directory and remove the file.  Then, deregister it in CVS
-    with a command like <code>cvs remove {filename}</code>.
+<li>당신은 더 이상 특정 소스 코드 파일을 필요로하지 않는 경우 저장되어있는 디렉토리로 이동하여 파일을 삭제합니다. 그러면 CVS remove {파일 이름}과 같은 명령을 사용하여 CVS에서 그것을 제거합니다.
     <br/><br/></li>
-<li>While you are creating, modifying, and deleting source files, changes
-    are not yet reflected in the server repository.  To save your changes in
-    their current state, go to the project source directory
-    and execute <code>cvs commit</code>.  You will be asked to write a brief
-    description of the changes you have just completed, which will be stored
-    with the new version of any updated source file.</li>
+<li>당신이 생성, 수정 및 소스 파일을 삭제하는 동안, 변경 사항이 아직 서버 저장소에 반영되지 않습니다. 그들의 현재 상태의 변경 사항을 저장하려면 프로젝트의 소스 디렉토리로 이동하여 CVS 커밋을 수행합니다. 당신은 어떤 업데이트 된 소스 파일의 새로운 버전으로 저장됩니다. 당신이 지금 막 완료한 변경에 대한 간략한 설명을 기술하도록 요구됩니다.</li>
 </ul>
 
-<p>CVS, like other source code control systems, has many additional features
-(such as the ability to tag the files that made up a particular release, and
-support for multiple development branches that can later be merged).  See the
-links and references in the <a href="introduction.html">Introduction</a> for
-more information.</p>
+<p>CVS는 다른 소스 코드 관리 시스템과 마찬가지로 많은 추가 기능(나중에 병합 할 수 여러 개발 브랜치에 대한 특정 자료를 파일을 태그하는 기능 및 지원 등)이 있습니다. 자세한 내용은 소개의 링크와 참조를 참조하십시오.</p>
 
 </section>
 
 
 <section name="BUILD.XML Configuration File">
 
-<p>We will be using the <strong>ant</strong> tool to manage the compilation of
-our Java source code files, and creation of the deployment hierarchy.  Ant
-operates under the control of a build file, normally called
-<code>build.xml</code>, that defines the processing steps required.  This
-file is stored in the top-level directory of your source code hierarchy, and
-should be checked in to your source code control system.</p>
+<p>우리는 Java 소스 코드 파일의 컴파일 및 배포 계층 만들기를 관리하기 위한 Ant 도구를 사용하는 것입니다. Ant는 필요한 작업을 정의하고 일반적으로 불리는 build.xml을 빌드 파일의 제어하에 실행한다. 이 파일은 소스 코드 계층의 최상위 디렉토리에 저장됩니다. 귀하의 소스 코드 관리 시스템에 체크인해야합니다.</p>
 
-<p>Like a Makefile, the <code>build.xml</code> file provides several
-"targets" that support optional development activities (such as creating
-the associated Javadoc documentation, erasing the deployment home directory
-so you can build your project from scratch, or creating the web application
-archive file so you can distribute your application.  A well-constructed
-<code>build.xml</code> file will contain internal documentation describing
-the targets that are designed for use by the developer, versus those targets
-used internally.  To ask Ant to display the project documentation, change to
-the directory containing the <code>build.xml</code> file and type:</p>
+<p>Makefile과 같이 build.xml 파일은 선택적 개발 활동 (예 : 관련 Javadoc 문서를 만들려면 처음부터 프로젝트를 빌드 할 수 있도록 확장 홈 디렉토리를 삭제, 또는 이렇게 Web 어플리케이션 아카이브 파일을 생성 하도록 지원하는 몇 가지 "목표"를 제공 귀하의 응용 프로그램을 배포 할 수 있습니다. 잘 구성 build.xml 파일은 내부 개발자가 사용하도록 설계되어있는 대상을 기술 한 문서 대해 내부적으로 사용되는 그 대상이 포함됩니다. 프로젝트 문서를 표시하려면 Ant를 요청하기 위해 저장되어있는 디렉토리로 변경합니다. build.xml 파일 및 유형:</p>
 <source>
 ant -projecthelp
 </source>
 
-<p>To give you a head start, a <a href="build.xml.txt">basic build.xml file</a>
-is provided that you can customize and install in the project source directory
-for your application.  This file includes comments that describe the various
-targets that can be executed.  Briefly, the following targets are generally
-provided:</p>
+<p>당신에게 유리한 출발을 주고, 기본적인 build.xml 파일은 응용 프로그램 프로젝트 소스 디렉토리로 지정하여 설치할 수 있습니다. 이 파일에는 실행할 수 다양한 목표를 설명하는 주석이 포함되어 있습니다. 간단히 말하면 다음 표적은 일반적 제공되어 볼 수 있습니다.:</p>
 <ul>
-<li><strong>clean</strong> - This target deletes any existing
-    <code>build</code> and <code>dist</code> directories, so that they
-    can be reconstructed from scratch.  This allows you to guarantee that
-    you have not made source code modifications that will result in
-    problems at runtime due to not recompiling all affected classes.
+<li><strong>clean</strong> - 그들은 처음부터 다시 구축할 수 있도록 이 대상은 삭제되고 기존 빌드와 dist 디렉토리가 존재합니다. 이것은 당신이 영향을 받는 모든 클래스를 재컴파일하지 않기 때문에 런타임에 문제가 소스 코드를 변경하지 않는 것을 보장 할 수 있습니다.
     <br/><br/></li>
-<li><strong>compile</strong> - This target is used to compile any source code
-    that has been changed since the last time compilation took place.  The
-    resulting class files are created in the <code>WEB-INF/classes</code>
-    subdirectory of your <code>build</code> directory, exactly where the
-    structure of a web application requires them to be.  Because
-    this command is executed so often during development, it is normally
-    made the "default" target so that a simple <code>ant</code> command will
-    execute it.
+<li><strong>compile</strong> - 이 목표는 이전의 컴파일이 수행된 이후 변경된 모든 소스 코드를 컴파일하는 데 사용됩니다. 결과 클래스 파일은 Web 응용 프로그램의 구조들이 있는 필요와 위치를 정확하게 귀하의 빌드 디렉토리의 하위 디렉토리 WEB-INF/classes 디렉토리에 생성됩니다. 이 명령은 개발할 때 이렇게 빈번하게 실행되므로 간단한 ant 명령이 그것을 실행하도록 그것은 일반적으로 "기본"대상으로하고 있습니다.
     <br/><br/></li>
-<li><strong>all</strong> - This target is a short cut for running the
-    <code>clean</code> target, followed by the <code>compile</code> target.
-    Thus, it guarantees that you will recompile the entire application, to
-    ensure that you have not unknowingly introduced any incompatible changes.
+<li><strong>all</strong> - 이 대상은 컴파일 대상에 이어 clean 타겟을 실행하기위한 지름길입니다. 따라서 당신이 무의식적으로 어떤 호환되지 않는 변경을 도입하지 않는 것을 보장하기 위해 전체 응용 프로그램을 다시 컴파일하는 것을 보장합니다.
     <br/><br/></li>
-<li><strong>javadoc</strong> - This target creates Javadoc API documentation
-    for the Java classes in this web application.  The example
-    <code>build.xml</code> file assumes you want to include the API
-    documentation with your app distribution, so it generates the docs
-    in a subdirectory of the <code>dist</code> directory.  Because you normally
-    do not need to generate the Javadocs on every compilation, this target is
-    usually a dependency of the <code>dist</code> target, but not of the
-    <code>compile</code> target.
+<li><strong>javadoc</strong> - 이 대상이 Web 어플리케이션의 Java 클래스의 Javadoc API 문서를 만듭니다. 예를 들어 build.xml 파일은 안드로이드의 배포 및 API 문서를 포함 전제로 하고 있기 때문에, dist 디렉토리의 하위 디렉토리에 문서를 생성합니다. 당신은 일반적으로 모든 컴파일에서 Javadoc을 생성할 필요가 없기 때문에 이 목표는 일반적으로 dist 대상 종속이 아닌 컴파일된 것입니다.
     <br/><br/></li>
-<li><strong>dist</strong> - This target creates a distribution directory for
-    your application, including any required documentation, the Javadocs for
-    your Java classes, and a web application archive (WAR) file that will be
-    delivered to system administrators who wish to install your application.
-    Because this target also depends on the <code>deploy</code> target, the
-    web application archive will have also picked up any external dependencies
-    that were included at deployment time.</li>
+<li><strong>dist</strong> - 이 목표는 모든 서류는 Java 클래스의 Javadoc 및 Web 어플리케이션 아카이브 (WAR)에 응용 프로그램을 설치하려는 시스템 관리자에게 전달되는 파일을 포함하는 응용 프로그램의 배포 디렉토리를 만듭니다. 이 대상을 deploy 대상에 의존하고 있기 때문에 Web 응용 프로그램 아카이브 또한 배포시에 포함 된 모든 외부 종속성을 갖고 있습니다.</li>
 </ul>
 
-<p>For interactive development and testing of your web application using
-Tomcat, the following additional targets are defined:</p>
+<p>Tomcat을 사용하여 Web 응용 프로그램의 인터랙티브 개발 및 테스트를 위해 다음 추가 대상이 정의되어 있습니다.:</p>
 <ul>
-<li><strong>install</strong> - Tell the currently running Tomcat to make
-    the application you are developing immediately available for execution
-    and testing.  This action does not require Tomcat to be restarted, but
-    it is also not remembered after Tomcat is restarted the next time.
+<li><strong>install</strong> - 실행 및 테스트를 위해 당신이 개발하는 응용 프로그램이 즉시 사용할 수 있도록 현재 실행중인 Tomcat을 알린다. 이 작업은 다시 시작하도록 Tomcat을 필요로하지 않지만, Tomcat은 다시 시작한 후, 그것은 또한 저장되지 않습니다.
     <br/><br/></li>
-<li><strong>reload</strong> - Once the application is installed, you can
-    continue to make changes and recompile using the <code>compile</code>
-    target.  Tomcat will automatically recognize changes made to JSP pages,
-    but not to servlet or JavaBean classes - this command will tell Tomcat
-    to restart the currently installed application so that such changes are
-    recognized.
+<li><strong>reload</strong> - 응용 프로그램이 설치되면 변경하고 컴파일 타겟을 사용하여 다시 컴파일 계속할 수 있습니다. Tomcat은 자동으로 JSP 페이지에 변경 내용을 인식하지만,하지 서블릿 또는 JavaBean 클래스 -이 명령은 그러한 변경이 인식되도록 현재 설치되어있는 응용 프로그램을 다시 시작 하는 Tomcat을 알려드립니다.
     <br/><br/></li>
-<li><strong>remove</strong> - When you have completed your development and
-    testing activities, you can optionally tell Tomcat to remove this
-    application from service.
+<li><strong>remove</strong> - 당신은 개발 및 테스트 작업을 완료한 후, 필요에 따라 서비스에서 이 응용 프로그램을 제거하려면 Tomcat을 알 수 있습니다.
     </li>
 </ul>
 
-<p>Using the development and testing targets requires some additional
-one-time setup that is described on the next page.</p>
+<p>개발 및 테스트 대상을 사용하면 다음 페이지에서 설명된 일부 추가 한 번만 설치해야합니다.</p>
 
 </section>
 
