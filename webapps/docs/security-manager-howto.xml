@@ -35,73 +35,54 @@
 <toc/>
 </section>
 
-<section name="Background">
+<section name="Background"> 
 
-  <p>The Java <strong>SecurityManager</strong> is what allows a web browser
-  to run an applet in its own sandbox to prevent untrusted code from
-  accessing files on the local file system, connecting to a host other
-  than the one the applet was loaded from, and so on.  In the same way
-  the SecurityManager protects you from an untrusted applet running in
-  your browser, use of a SecurityManager while running Tomcat can protect
-  your server from trojan servlets, JSPs, JSP beans, and tag libraries.
-  Or even inadvertent mistakes.</p>
+  <p>자바의 <strong>보안관리자</strong>는 파일 시스템에 있는 파일에 접근하거나, 
+  애플릿이 가져온 곳이 아닌 다른 호스트에 연결하려 하거나 하는 등의 신뢰하지 못할
+  코드들이 실행되는 것을 막기위해 웹 브라우저 내부의 샌드박스 내에서 애플릿을 
+  실행하도록 허가해 주는 것 입니다.보안 관리자가 브라우저에서 신뢰되지 않은 애플릿의
+  실행을 막는 것과 같이 Tomcat 운영중에 보안관리자를 사용하면, 트로이 목마형 서블릿과 
+  JSP페이지들과 JSP Bean과 태그 라이브러리와 의도적이지 않은 실수로부터 서버를 보호할수 있습니다.</p>
 
-  <p>Imagine if someone who is authorized to publish JSPs on your site
-  inadvertently included the following in their JSP:</p>
+  <p>예를들어 웹사이트의 JSP를 만질수있는 누순가가 무심결에 다음 문장을 포함하고 있는 JSP파일을 올려놓는다고 하면:</p>
 <source>
 &lt;% System.exit(1); %&gt;
 </source>
 
-  <p>Every time this JSP was executed by Tomcat, Tomcat would exit.
-  Using the Java SecurityManager is just one more line of defense a
-  system administrator can use to keep the server secure and reliable.</p>
+  <p>이 JSP페이지가 Tomccat에서 실행될 때마다. Tomcat이 종료됩니다. 자바의 보안관리자를 사용하는 것은
+  시스템관리자가 서버의 안정성과 보안성을 유지하기 위해 방어하는 하나의 라인을 더 쓰는 것입니다.</p>
 
-  <p><strong>WARNING</strong> - A security audit
-  have been conducted using the Tomcat codebase. Most of the critical
-  package have been protected and a new security package protection mechanism
-  has been implemented. Still, make sure that you are satisfied with your SecurityManager
-  configuration before allowing untrusted users to publish web applications,
-  JSPs, servlets, beans, or tag libraries.  <strong>However, running with a
-  SecurityManager is definitely better than running without one.</strong></p>
+  <p><strong>경고</strong> - Tomcat에서 보안 관리자 구현은 완벽하게 테스트되거나, 봉나 감사를 받지 않습니다.
+  신뢰할수 없는 사용자가 웹 어플리케이션, JSP, 서블릿,Bean, 태그 라이브러리에 게시하오록 허락하기 전에 보안관리자 
+  설정에 만족하는지를 확인 하십시오. 하지만, 보안관리자를 사용하는 것이 낫습니다.</strong></p>
 
 </section>
 
 
 <section name="Permissions">
 
-  <p>Permission classes are used to define what Permissions a class loaded
-  by Tomcat will have.  There are a number of Permission classes that are
-  a standard part of the JDK, and you can create your own Permission class
-  for use in your own web applications.  Both techniques are used in
-  Tomcat.</p>
+  <p>권한 즐래스는 Tomcat이 로드할 클래스의 권한을 정의하는데 사용됩니다. JDK 중의 일부로써 
+  자신의 권한 클래스를 만들 수 있고, 웹 어플리케이션에서 사용할 권한 클래스를 직접 만들 수도 있습니다.
+  두가지 기술모두  Tomcat4에서 사용이 가능합니다.</p>
 
 
   <subsection name="Standard Permissions">
 
-    <p>This is just a short summary of the standard system SecurityManager
-    Permission classes applicable to Tomcat.  See
+    <p>Tomcat에 적용할 수 있는 표준 시스템 보안관리자 권한 클래스의 간단한 요약 입니다. 자세한 내용은 
     <a href="http://java.sun.com/security/">http://java.sun.com/security/</a>
-    for more information.</p>
+    를 참조하세요</p>
 
     <ul>
-    <li><strong>java.util.PropertyPermission</strong> - Controls read/write
-        access to JVM properties such as <code>java.home</code>.</li>
-    <li><strong>java.lang.RuntimePermission</strong> - Controls use of
-        some System/Runtime functions like <code>exit()</code> and
-        <code>exec()</code>. Also control the package access/definition.</li>
-    <li><strong>java.io.FilePermission</strong> - Controls read/write/execute
-        access to files and directories.</li>
-    <li><strong>java.net.SocketPermission</strong> - Controls use of
-        network sockets.</li>
-    <li><strong>java.net.NetPermission</strong> - Controls use of
-        multicast network connections.</li>
-    <li><strong>java.lang.reflect.ReflectPermission</strong> - Controls
-        use of reflection to do class introspection.</li>
-    <li><strong>java.security.SecurityPermission</strong> - Controls access
-        to Security methods.</li>
-    <li><strong>java.security.AllPermission</strong> - Allows access to all
-        permissions, just as if you were running Tomcat without a
-        SecurityManager.</li>
+    <li><strong>java.util.PropertyPermission</strong> - <code>java.home</code>과 같은 JVM프로퍼티에 대한
+    읽기/쓰기 접근을 제어.</li>
+    <li><strong>java.lang.RuntimePermission</strong> - package access/definition의 제어와 System/Runtime함수들의
+    사용 제어 예시)<code>exit()</code> , <code>exec()</code>.</li>
+    <li><strong>java.io.FilePermission</strong> - 파일과 디렉토리에 대한 읽기/쓰기/실행 접근제어.</li>
+    <li><strong>java.net.SocketPermission</strong> - 네트워크 소캣사용 제어.</li>
+    <li><strong>java.net.NetPermission</strong> - 멀티캐스트 네트워크 연결사용 제어.</li>
+    <li><strong>java.lang.reflect.ReflectPermission</strong> - 클래스 인트로 펙션에 사용되는 리플렉션의 사용 제어</li>
+    <li><strong>java.security.SecurityPermission</strong> - 보안 메소드 접근 제어.</li>
+    <li><strong>java.security.AllPermission</strong> - 모든 권한에 대한 접근허용. Tomcat을 보안관리자 없이 사용하는 것과 동일.</li>
     </ul>
 
   </subsection>
@@ -109,23 +90,19 @@
 
   <subsection name="Tomcat Custom Permissions">
 
-    <p>Tomcat utilizes a custom permission class called
-    <strong>org.apache.naming.JndiPermission</strong>.  This permission
-    controls read access to JNDI named file based resources.  The permission
-    name is the JNDI name and there are no actions.  A trailing "*" can be
-    used to do wild card matching for a JNDI named file resource when
-    granting permission.  For example, you might include the following
-    in your policy file:</p>
+    <p>Tomcat은 <strong>org.apache.naming.JndiPermission</strong>이라 불리는 사용자 권한 클래스를 사용합니다.
+    . 이 권한은 파일 기반 자원으로 명명된 JNDI에 대한 읽기 접근을 제어 합니다. 권한명은 JNDI명이고 액션은 없습니다.
+    "*"가 따라 붙으면 권한을 부여할때 JNDI라 이름붙은 파일 자원에 대해서 와일드 카드 매칭으로 사용이 됩니다. 예를 들어,
+    정책 파일에 다음과 같은 코드를 포함할수 있습니다.</p>
 <source>
 permission  org.apache.naming.JndiPermission  "jndi://localhost/examples/*";
 </source>
 
-    <p>A Permission entry like this is generated dynamically for each web
-    application that is deployed, to allow it to read its own static resources
-    but disallow it from using file access to read any other files (unless
-    permissions for those files are explicitly granted).</p>
+    <p>이같은 권한 엔트리는 정적 리소스를 읽을수 있도록 허락하고,(명시적으로 권한이 부여되지 않았다면) 다른 파일을
+    읽는 것에 대한 접근을 막기위해 배치할 각각의 웹 어플리케이션에 동적으로 생성됩니다..</p>
 
-    <p>Also, Tomcat always dynamically creates the following file permissions:</p>
+    <p>또한, Tomcat은 항상 동적인 파일 사용 권한을 만듭니다.: </p>
+    
 <source>
 permission java.io.FilePermission "** your application context**", "read";
 
@@ -134,7 +111,7 @@ permission java.io.FilePermission
 permission java.io.FilePermission
   "** application working directory**/-", "read,write,delete";
 </source>
-    <p>Where **your application context** equals the folder (or WAR file) under which
+    <p> **application context** equals the folder (or WAR file) under which
     your application has been deployed and **application working directory** is the
     temporary directory provided to your application as required by the
     Servlet Specification.</p>
@@ -149,16 +126,12 @@ permission java.io.FilePermission
 
   <h3>Policy File Format</h3>
 
-  <p>The security policies implemented by the Java SecurityManager are
-  configured in the <code>$CATALINA_BASE/conf/catalina.policy</code> file.
-  This file completely replaces the <code>java.policy</code> file present
-  in your JDK system directories.  The <code>catalina.policy</code> file
-  can be edited by hand, or you can use the
-  <a href="http://docs.oracle.com/javase/6/docs/technotes/guides/security/PolicyGuide.html">policytool</a>
-  application that comes with Java 1.2 or later.</p>
+  <p>자바 보안관리자에서 구현되는 보안 정책은 <code>$CATALINA_BASE/conf/catalina.policy</code> 파일에 설정 됩니다.
+  이 파일은 현재 JDK 시스템 디렉토리에 있는 <code>java.policy</code> 파일을 대치합니다. <code>catalina.policy</code>파일은
+  수동으로 바꿀수 있고, java 1,2와 그 이후의 버전에 있는 정책도구인 <a href="http://docs.oracle.com/javase/6/docs/technotes/guides/security/PolicyGuide.html">policytool</a>
+  어플리케이션을 이용할 수도 있습니다.</p>
 
-  <p>Entries in the <code>catalina.policy</code> file use the standard
-  <code>java.policy</code> file format, as follows:</p>
+  <p> <code>catalina.policy</code>파일에 있는 엔트리는 다음과 같은 표준<code>java.policy</code>파일 형식을 사용 합니다:</p>
 <source>
 // Example policy file entry
 
@@ -167,19 +140,14 @@ grant [signedBy &lt;signer&gt;,] [codeBase &lt;code source&gt;] {
 };
 </source>
 
-  <p>The <strong>signedBy</strong> and <strong>codeBase</strong> entries are
-  optional when granting permissions.  Comment lines begin with "//" and
-  end at the end of the current line.  The <code>codeBase</code> is in the
-  form of a URL, and for a file URL can use the <code>${java.home}</code>
-  and <code>${catalina.home}</code> properties (which are expanded out to
-  the directory paths defined for them by the <code>JAVA_HOME</code>,
-  <code>CATALINA_HOME</code> and <code>CATALINA_BASE</code> environment
-  variables).</p>
+  <p> <strong>signedBy</strong>와 <strong>codeBase</strong>항목은 권한을 부여할때 선택적 입니다. 
+  주석 라인은 "//"로 시작하고 줄 끝까지 주석에 해단됩니다. <code>codeBase</code>는 URL형식이고,
+  (<code>JAVA_HOME</code>, <code>CATALINA_HOME</code>와 <code>CATALINA_BASE</code> 환경변수에 의해 정의된 디렉토리를 뜻하는)
+  <code>${java.home}</code>과 <code>${catalina.home}</code> 프로퍼티를 파일의 URL에서 사용 가능 합니다.</p>
 
   <h3>The Default Policy File</h3>
 
-  <p>The default <code>$CATALINA_BASE/conf/catalina.policy</code> file
-  looks like this:</p>
+  <p>기본<code>$CATALINA_BASE/conf/catalina.policy</code> 파일은 다음과 같습니다.:</p>
 
 <!-- The following pulls in the conf/catalina.policy file when the
  documentation is built -->
@@ -187,9 +155,8 @@ grant [signedBy &lt;signer&gt;,] [codeBase &lt;code source&gt;] {
 
   <h3>Starting Tomcat With A SecurityManager</h3>
 
-  <p>Once you have configured the <code>catalina.policy</code> file for use
-  with a SecurityManager, Tomcat can be started with a SecurityManager in
-  place by using the "-security" option:</p>
+  <p>Tomcat을 <code>catalina.policy</code>와 보안관리자와 함께 사용하기
+  위해 설정을 하면 "-sequrity"옵션과 보안관리자를 함께 시작할수 있습니다.:</p>
 <source>
 $CATALINA_HOME/bin/catalina.sh start -security    (Unix)
 %CATALINA_HOME%\bin\catalina start -security      (Windows)
@@ -197,20 +164,15 @@ $CATALINA_HOME/bin/catalina.sh start -security    (Unix)
 
 </section>
 <section name="Configuring Package Protection in Tomcat">
-  <p>Starting with Tomcat 5, it is now possible to configure which Tomcat
-  internal package are protected againts package definition and access. See
-  <a href="http://java.sun.com/security/seccodeguide.html">
-    http://java.sun.com/security/seccodeguide.html</a>
-    for more information.</p>
+  <p>Tomcat 5이상의 버전에선 패키기 정의 및 액세스를 보호하는 쌔츰ㅅ 내부 패키지를 구성 할 수 있게 되었습니다. 
+  자세한 내용은 <a href="http://java.sun.com/security/seccodeguide.html">
+    http://java.sun.com/security/seccodeguide.html</a>를 참조 하십시오.</p>
 
-
-  <p><strong>WARNING</strong>: Be aware that removing the default package protection
-  could possibly open a security hole</p>
+  <p><strong>경고</strong>: 패키지의 기본 보호를 제거하면 보안 구멍을 열수 있다는 점에 유의 하십시오</p>
 
   <h3>The Default Properties File</h3>
 
-  <p>The default <code>$CATALINA_BASE/conf/catalina.properties</code> file
-  looks like this:</p>
+  <p>기본<code>$CATALINA_BASE/conf/catalina.properties</code>파일은 다음과 같습니다.:</p>
 <source>
 #
 # List of comma-separated packages that start with or equal this string
@@ -233,33 +195,29 @@ org.apache.jasper.
 package.definition=sun.,java.,org.apache.catalina.,org.apache.coyote.,
 org.apache.tomcat.,org.apache.jasper.
 </source>
-  <p>Once you have configured the <code>catalina.properties</code> file for use
-  with a SecurityManager, remember to re-start Tomcat.</p>
+  <p> Once you have configured the <code>catalina.properties</code> file for use with a SecurityManager, 
+  remember to re-start Tomcat.</p>
+  <p> <code>catalina.properties</code> 파일을 SecurityManager를 사용한 설정으로 바꾸었다면, Tomcat 서버를 다시 시작해 주십시오.</p>
 </section>
 
 <section name="Troubleshooting">
 
-  <p>If your web application attempts to execute an operation that is
-  prohibited by lack of a required Permission, it will throw an
-  <code>AccessControLException</code> or a <code>SecurityException</code>
-  when the SecurityManager detects the violation.  Debugging the permission
-  that is missing can be challenging, and one option is to turn on debug
-  output of all security decisions that are made during execution.  This
-  is done by setting a system property before starting Tomcat.  The easiest
-  way to do this is via the <code>CATALINA_OPTS</code> environment variable.
-  Execute this command:</p>
+  <p>웹 어플리케이션이 필요한 권한없이 금지된 어떤 동작을 실행하려고 시도했다면 보안관리자가 위반을 감지했을때 
+    <code>AccessControLException</code> 또는 <code>SecurityException</code>를 발생시킵니다. 빠진 권한을 디버깅하는
+    하는 것은 도전적이고, 실행중에 만들어진 모든 결정사항의 디버그 출력dmf 작동하게 합니다. 이것은 Tomcat 시작 전에
+    프로퍼티를 설정하면 됩니다. 가장 쉬운 방법은 <code>CATALINA_OPTS</code> 환경 변수를 통해 하는 것입니다. 
+    당므 명령을 실행합니다.
+  </p>
 <source>
 export CATALINA_OPTS=-Djava.security.debug=all    (Unix)
 set CATALINA_OPTS=-Djava.security.debug=all       (Windows)
 </source>
 
-  <p>before starting Tomcat.</p>
+  <p>Tomcat을 시작하기 전에 말이죠.</p>
 
-  <p><strong>WARNING</strong> - This will generate <em>many megabytes</em>
-  of output!  However, it can help you track down problems by searching
-  for the word "FAILED" and determining which permission was being checked
-  for.  See the Java security documentation for more options that you can
-  specify here as well.</p>
+  <p><strong>경고</strong> - 이렇게 하면 <em>많은 megabytes</em>의 출력파일이 생성됩니다!. 그러나,
+  "denied"단어를 검색하면 문제의 원인을 추적해서 어떤 권한이 체크되고 있는지 결정할 수 있습니다. 더
+  자세한 옵션 내용은 Java보안 설명서를 참조 하십시오.</p>
 
 </section>
 
