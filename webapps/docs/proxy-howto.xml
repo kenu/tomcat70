@@ -24,7 +24,7 @@
 
     <properties>
         <author email="craigmcc@apache.org">Craig R. McClanahan</author>
-        <title>Proxy Support HOW-TO</title>
+        <title>프록시 지원 기능은 어떻게 사용하는가?</title>
     </properties>
 
 <body>
@@ -35,75 +35,66 @@
 
 <section name="Introduction">
 
-<p>Using standard configurations of Tomcat, web applications can ask for
-the server name and port number to which the request was directed for
-processing.  When Tomcat is running standalone with the
-<a href="config/coyote.html">Coyote HTTP/1.1 Connector</a>, it will generally
-report the server name specified in the request, and the port number on
-which the <strong>Connector</strong> is listening.  The servlet API
-calls of interest, for this purpose, are:</p>
+<p>톰캣의 표준 환경 설정을 사용할, 웹 어플리케이션은 처리하기 위해 요청된 서버 이름과 포트 번호를 물을 수 있습니다. 
+톰캣이 <a href="config/coyote.html">Coyote HTTP/1.1 Connector</a>을 통해 독립적으로 구동될 때, 톰캣은 일반적으로 
+요청에 부합하는 서버이름을 전해주며, 포트 번호는 <strong>Connector</strong>가 듣고 있습니다.
+서블릿 API는 아래의 목적과 같은 흥미로운 것을 불러옵니다. 아래 : </p>
 <ul>
-<li><code>ServletRequest.getServerName()</code>: Returns the host name of the server to which the request was sent.</li>
-<li><code>ServletRequest.getServerPort()</code>: Returns the host name of the server to which the request was sent.</li>
-<li><code>ServletRequest.getLocalName()</code>: Returns the host name of the Internet Protocol (IP) interface on which the request was received.</li>
-<li><code>ServletRequest.getLocalPort()</code>:  Returns the Internet Protocol (IP) port number of the interface on which the request was received.</li>
+<li><code>ServletRequest.getServerName()</code>: 요청이 전송된 서버의 호스트 이름을 반환.</li>
+<li><code>ServletRequest.getServerPort()</code>: 요청이 전송된 서버의 호스트 이름을 반환.</li>
+<li><code>ServletRequest.getLocalName()</code>: 요청된 인터넷 프로토콜(IP) 인터페이스의 호슽 이름을 반환.</li>
+<li><code>ServletRequest.getLocalPort()</code>: 요청된 인터넷 프로토콜(IP) 인터페이스의 포트 번호를 반환.</li>
 </ul>
 
-<p>When you are running behind a proxy server (or a web server that is
-configured to behave like a proxy server), you will sometimes prefer to
-manage the values returned by these calls.  In particular, you will
-generally want the port number to reflect that specified in the original
-request, not the one on which the <strong>Connector</strong> itself is
-listening.  You can use the <code>proxyName</code> and <code>proxyPort</code>
-attributes on the <code>&lt;Connector&gt;</code> element to configure
-these values.</p>
+<p>당신이 프록시 서버 뒤에서 구동시켰을 때(혹은 웹서버가 프록시 서버처럼 동작하도록 설정 돼 있을 때),
+당신은 때때로 이러한 호출에 의해 반환 된 값을 관리하는 것을 선호할 것입니다.
+특히, 당신은 일반적으로 원래 요청된 것에 명시된 포트 번호를 반영하기를 원하지,
+<strong>Connector</strong>자체가 받은 것을 원하지는 않을 것입니다.
+당신은 <code>proxyName</code> 와 <code>proxyPort</code>라는 속성의
+<code>&lt;Connector&gt;</code> 라는 요소를 이러한 값들로 사용할 수 있습니다.</p>
 
-<p>Proxy support can take many forms.  The following sections describe
-proxy configurations for several common cases.</p>
+
+<p>프록시 지원은 다양한 형태가 될 수 있습니다.
+아래의 섹션들은 서버의 일반적인 경우에 대한 프록시 환경 설정을 설명한 것입니다.</p>
 
 </section>
 
 <section name="Apache 1.3 Proxy Support">
 
-<p>Apache 1.3 supports an optional module (<code>mod_proxy</code>) that
-configures the web server to act as a proxy server.  This can be used to
-forward requests for a particular web application to a Tomcat instance,
-without having to configure a web connector such as <code>mod_jk</code>.
-To accomplish this, you need to perform the following tasks:</p>
+<p>아파치 1.3은 프록시 서버처럼 움직일 수 있는 웹서버로 설정된 선택적인 모듈(<code>mod_proxy</code>)을 지원합니다.
+이것은 <code>mod_jk</code>와 같은 웹 커넥터 설정을 할 필요 없이
+톰캣 인스턴스에 특정 웹 응용 프로그램에 대한 요청을 전달하는 데 사용할 수 있습니다,
+이것을 달성하기 위해서, 당신은 아래의 일들을 따라야 합니다. 아래 : </p>
 <ol>
-<li>Configure your copy of Apache so that it includes the
-    <code>mod_proxy</code> module.  If you are building from source,
-    the easiest way to do this is to include the
-    <code>--enable-module=proxy</code> directive on the
-    <code>./configure</code> command line.</li>
-<li>If not already added for you, make sure that you are loading the
-    <code>mod_proxy</code> module at Apache startup time, by using the
-    following directives in your <code>httpd.conf</code> file:
+<li><code>mod_proxy</code> module을 포함하여 아파치 복사본을 구성합니다.
+    만약 당신이 소스로부터 만들었다면 이것을 가장 쉽게 하는 방법은
+    <code>--enable-module=proxy</code>를 <code>./configure</code>라는 명령어 줄에 지시하는 것입니다.</li>
+<li>만약 아직 당신을 위해 추가되지 않았다면, 
+    If not already added for you, 아파치 구동 시간의 <code>mod_proxy</code>라는 모듈이 아직 로딩중인지
+    당신의 파일에 <code>httpd.conf</code>라고 지시하여 확인해 봐야 합니다.
+    file:
 <source>
 LoadModule proxy_module  {path-to-modules}/mod_proxy.so
 AddModule  mod_proxy.c
 </source></li>
-<li>Include two directives in your <code>httpd.conf</code> file for
-    each web application that you wish to forward to Tomcat.  For
-    example, to forward an application at context path <code>/myapp</code>:
+<li>당신의 <code>httpd.conf</code>라는 파일에 당신이 원하는 대로 톰캣에
+    전송해 주는 웹 응용 프로그램이  2가지 지시를 하는 것을 포함합니다.
+    예를 들어서, 응용 프로그램에서 <code>/myapp</code>라는 콘텍스트 경로를 전송합니다.:
 <source>
 ProxyPass         /myapp  http://localhost:8081/myapp
 ProxyPassReverse  /myapp  http://localhost:8081/myapp
 </source>
-    which tells Apache to forward URLs of the form
-    <code>http://localhost/myapp/*</code> to the Tomcat connector
-    listening on port 8081.</li>
-<li>Configure your copy of Tomcat to include a special
-    <code>&lt;Connector&gt;</code> element, with appropriate
-    proxy settings, for example:
+    각각은 아파치가 <code>http://localhost/myapp/*</code>라는 형태의 URL들을 톰캣 커넥터 에게 보낸 것을
+    8081포트가 듣고 있다는 것을 말해줍니다.</li>
+<li>당신의 톰캣복사본을 특별한 <code>&lt;Connector&gt;</code> 요소, 즉 적절한 프록시 셋팅으로 설정하십시오.
+    예를 들어서 : 
 <source>
 &lt;Connector port="8081" ...
               proxyName="www.mycompany.com"
               proxyPort="80"/&gt;
 </source>
-    which will cause servlets inside this web application to think that
-    all proxied requests were directed to <code>www.mycompany.com</code>
-    on port 80.</li>
+    이것은 서블릿 안의 이 웹 응용프로그램이 모든 프록시의 요구가 포트 80에 있는
+    <code>www.mycompany.com</code>로 지시되도록 만듭니다.</li>
 <li>It is legal to omit the <code>proxyName</code> attribute from the
     <code>&lt;Connector&gt;</code> element.  If you do so, the value
     returned by <code>request.getServerName()</code> will by the host
