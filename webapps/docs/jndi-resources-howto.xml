@@ -194,8 +194,8 @@ conn.close();
 
     <h3>0.  소개</h3>
 
-    <p>This resource factory can be used to create objects of <em>any</em>
-    Java class that conforms to standard JavaBeans naming conventions (i.e.
+    <p>이 리소스 팩토리는 <em>불특정 다수의</em>자바 클래스 객체를 제작하기 위해 만들어질 수 있으며. 
+    that conforms to standard JavaBeans naming conventions (i.e.
     it has a zero-arguments constructor, and has property setters that
     conform to the setFoo() naming pattern.  The resource factory will
     create a new instance of the appropriate bean class every time a
