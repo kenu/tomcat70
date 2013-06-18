@@ -195,9 +195,9 @@ conn.close();
     <h3>0.  소개</h3>
 
     <p>이 리소스 팩토리는 <em>불특정 다수의</em>자바 클래스 객체를 제작하기 위해 만들어질 수 있으며. 
-    표준 자바빈을 정의하는 약속을 확인한다.(i.e.
-    이것은 아무것도 없는 인자값 수행을 하며, and has property setters that
-    conform to the setFoo() naming pattern.  The resource factory will
+    표준 자바빈을 정의하는 약속을 확인한다.(즉,
+    이것은 아무것도 없는 인자값 수행을 하며, 그리고 해당 setFoo() 메소드의 네이밍 패턴에서 속성 지시자를 확인한다.
+    The resource factory will
     create a new instance of the appropriate bean class every time a
     <code>lookup()</code> for this entry is made.</p>
 
