@@ -1,4 +1,4 @@
-<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Apache Tomcat 7 (7.0.28-dev) - CGI How To</title><meta name="author" content="Glenn L. Nielsen"><style type="text/css" media="print">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Apache Tomcat 7 (7.0.28-dev) - CGI 어떻게 하는가</title><meta name="author" content="그렌 L. 닐슨"><style type="text/css" media="print">
             .noPrint {display: none;}
             td#mainBody {width: 100%;}
         </style><style type="text/css">
@@ -6,66 +6,44 @@
             code.attributeName, code.propertyName {background-color:transparent;}
         </style></head><body bgcolor="#ffffff" text="#000000" link="#525D76" alink="#525D76" vlink="#525D76"><table border="0" width="100%" cellspacing="0"><!--PAGE HEADER--><tr><td><!--PROJECT LOGO--><a href="http://tomcat.apache.org/"><img src="./images/tomcat.gif" align="right" alt="
       The Apache Tomcat Servlet/JSP Container
-    " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">Apache Tomcat 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, May 28 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="./images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="index.html">Docs Home</a></li><li><a href="http://wiki.apache.org/tomcat/FAQ">FAQ</a></li></ul><p><strong>User Guide</strong></p><ul><li><a href="introduction.html">1) Introduction</a></li><li><a href="setup.html">2) Setup</a></li><li><a href="appdev/index.html">3) First webapp</a></li><li><a href="deployer-howto.html">4) Deployer</a></li><li><a href="manager-howto.html">5) Manager</a></li><li><a href="realm-howto.html">6) Realms and AAA</a></li><li><a href="security-manager-howto.html">7) Security Manager</a></li><li><a href="jndi-resources-howto.html">8) JNDI Resources</a></li><li><a href="jndi-datasource-examples-howto.html">9) JDBC DataSources</a></li><li><a href="class-loader-howto.html">10) Classloading</a></li><li><a href="jasper-howto.html">11) JSPs</a></li><li><a href="ssl-howto.html">12) SSL</a></li><li><a href="ssi-howto.html">13) SSI</a></li><li><a href="cgi-howto.html">14) CGI</a></li><li><a href="proxy-howto.html">15) Proxy Support</a></li><li><a href="mbeans-descriptor-howto.html">16) MBean Descriptor</a></li><li><a href="default-servlet.html">17) Default Servlet</a></li><li><a href="cluster-howto.html">18) Clustering</a></li><li><a href="balancer-howto.html">19) Load Balancer</a></li><li><a href="connectors.html">20) Connectors</a></li><li><a href="monitoring.html">21) Monitoring and Management</a></li><li><a href="logging.html">22) Logging</a></li><li><a href="apr.html">23) APR/Native</a></li><li><a href="virtual-hosting-howto.html">24) Virtual Hosting</a></li><li><a href="aio.html">25) Advanced IO</a></li><li><a href="extras.html">26) Additional Components</a></li><li><a href="maven-jars.html">27) Mavenized</a></li><li><a href="security-howto.html">28) Security Considerations</a></li><li><a href="windows-service-howto.html">29) Windows Service</a></li><li><a href="windows-auth-howto.html">30) Windows Authentication</a></li><li><a href="jdbc-pool.html">31) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">32) WebSocket</a></li></ul><p><strong>Reference</strong></p><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">Configuration</a></li><li><a href="api/index.html">Tomcat Javadocs</a></li><li><a href="servletapi/index.html">Servlet Javadocs</a></li><li><a href="jspapi/index.html">JSP 2.2 Javadocs</a></li><li><a href="elapi/index.html">EL 2.2 Javadocs</a></li><li><a href="http://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul><p><strong>Apache Tomcat Development</strong></p><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="http://wiki.apache.org/tomcat/TomcatVersions">Status</a></li><li><a href="developers.html">Developers</a></li><li><a href="architecture/index.html">Architecture</a></li><li><a href="funcspecs/index.html">Functional Specs.</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>CGI How To</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Table of Contents"><!--()--></a><a name="Table_of_Contents"><strong>Table of Contents</strong></a></font></td></tr><tr><td><blockquote>
+    " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">Apache Tomcat 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, Jun 24 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="./images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="index.html">Docs Home</a></li><li><a href="http://wiki.apache.org/tomcat/FAQ">FAQ</a></li></ul><p><strong>User Guide</strong></p><ul><li><a href="introduction.html">1) Introduction</a></li><li><a href="setup.html">2) Setup</a></li><li><a href="appdev/index.html">3) First webapp</a></li><li><a href="deployer-howto.html">4) Deployer</a></li><li><a href="manager-howto.html">5) Manager</a></li><li><a href="realm-howto.html">6) Realms and AAA</a></li><li><a href="security-manager-howto.html">7) Security Manager</a></li><li><a href="jndi-resources-howto.html">8) JNDI Resources</a></li><li><a href="jndi-datasource-examples-howto.html">9) JDBC DataSources</a></li><li><a href="class-loader-howto.html">10) Classloading</a></li><li><a href="jasper-howto.html">11) JSPs</a></li><li><a href="ssl-howto.html">12) SSL</a></li><li><a href="ssi-howto.html">13) SSI</a></li><li><a href="cgi-howto.html">14) CGI</a></li><li><a href="proxy-howto.html">15) Proxy Support</a></li><li><a href="mbeans-descriptor-howto.html">16) MBean Descriptor</a></li><li><a href="default-servlet.html">17) Default Servlet</a></li><li><a href="cluster-howto.html">18) Clustering</a></li><li><a href="balancer-howto.html">19) Load Balancer</a></li><li><a href="connectors.html">20) Connectors</a></li><li><a href="monitoring.html">21) Monitoring and Management</a></li><li><a href="logging.html">22) Logging</a></li><li><a href="apr.html">23) APR/Native</a></li><li><a href="virtual-hosting-howto.html">24) Virtual Hosting</a></li><li><a href="aio.html">25) Advanced IO</a></li><li><a href="extras.html">26) Additional Components</a></li><li><a href="maven-jars.html">27) Mavenized</a></li><li><a href="security-howto.html">28) Security Considerations</a></li><li><a href="windows-service-howto.html">29) Windows Service</a></li><li><a href="windows-auth-howto.html">30) Windows Authentication</a></li><li><a href="jdbc-pool.html">31) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">32) WebSocket</a></li></ul><p><strong>Reference</strong></p><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">Configuration</a></li><li><a href="api/index.html">Tomcat Javadocs</a></li><li><a href="servletapi/index.html">Servlet Javadocs</a></li><li><a href="jspapi/index.html">JSP 2.2 Javadocs</a></li><li><a href="elapi/index.html">EL 2.2 Javadocs</a></li><li><a href="http://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul><p><strong>Apache Tomcat Development</strong></p><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="http://wiki.apache.org/tomcat/TomcatVersions">Status</a></li><li><a href="developers.html">Developers</a></li><li><a href="architecture/index.html">Architecture</a></li><li><a href="funcspecs/index.html">Functional Specs.</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>CGI 어떻게 하는가</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Table of Contents"><!--()--></a><a name="Table_of_Contents"><strong>Table of Contents</strong></a></font></td></tr><tr><td><blockquote>
 <ul><li><a href="#Introduction">Introduction</a></li><li><a href="#Installation">Installation</a></li><li><a href="#Configuration">Configuration</a></li></ul>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Introduction"><strong>Introduction</strong></a></font></td></tr><tr><td><blockquote>
 
-<p>The CGI (Common Gateway Interface) defines a way for a web server to
-interact with external content-generating programs, which are often
-referred to as CGI programs or CGI scripts.
+<p>CGI(Common Gateway Interface)는 종종 CGI 프로그램 혹은 CGI 스크립트라고하는 외부 콘텐츠 생성 프로그램과 상호 작용하는 Web 서버 방법을 정의합니다.
 </p>
 
-<p>Within Tomcat, CGI support can be added when you are using Tomcat as your
-HTTP server and require CGI support.  Typically this is done
-during development when you don't want to run a web server like
-Apache httpd.
-Tomcat's CGI support is largely compatible with Apache httpd's,
-but there are some limitations (e.g., only one cgi-bin directory).
+<p>여러분이 HTTP 서버로 Tomcat을 사용하여 CGI의 지원을 필요로 할 때 Tomcat 안에 CGI 지원을 추가 할 수 있습니다.  여러분은 Apache HTTP 등의 Web 서버를 실행하지 않으려면 일반적으로 이것은 개발 중에 이루어집니다.
+Tomcat의 CGI 지원은 Apache의 httpd의와 대체로 호환이 되어있지만, 몇 가지 제한이 있습니다. (예를 들어, 하나의 cgi-bin 디렉토리일 때).
 </p>
 
-<p>CGI support is implemented using the servlet class
-<code>org.apache.catalina.servlets.CGIServlet</code>.  Traditionally,
-this servlet is mapped to the URL pattern "/cgi-bin/*".</p>
+<p>CGI 지원이 서블릿 클래스의 <code> org.apache.catalina.servlets.CGIServlet </code>를 사용하여 구현됩니다. 전형적으로, 이 서블릿은 URL 패턴 "/ cgi-bin에 / *"로 매핑됩니다.</p>
 
-<p>By default CGI support is disabled in Tomcat.</p>
+<p>기본적으로 CGI 지원은 Tomcat에서 사용할 수 있습니다.</p>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Installation"><strong>Installation</strong></a></font></td></tr><tr><td><blockquote>
 
-<p><strong>CAUTION</strong> - CGI scripts are used to execute programs
-external to the Tomcat JVM. If you are using the Java SecurityManager this
-will bypass your security policy configuration in <code>catalina.policy.</code></p>
+<p><strong>CAUTION</strong> - CGI 스크립트는 Tomcat JVM 외부 프로그램을 실행하는 데 사용됩니다. Java SecurityManager를 사용하는 경우, 이것은 여러분의 보안 정책 설정에서 <code> catalina.policy. </code>를 우회합니다.</p>
 
-<p>Remove the XML comments from around the CGI servlet and servlet-mapping
-configuration in <code>$CATALINA_BASE/conf/web.xml</code>.</p>
+<p><code> $CATALINA_BASE/conf/web.xml </code> 속에서 CGI 서블릿과 서블릿 매핑 설정 주위에서 XML 주석을 제거합니다.</p>
 
-<p>Only Contexts which are marked as privileged may use the CGI servlet (see the
-privileged property of the Context element).</p>
+<p>특권으로 표시되어있는 유일한 컨텍스트는 (컨텍스트 요소의 특권 속성 참조) CGI 서블릿을 사용할 수 있습니다.</p>
 
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Configuration"><strong>Configuration</strong></a></font></td></tr><tr><td><blockquote>
 
-<p>There are several servlet init parameters which can be used to
-configure the behaviour of the CGI servlet.
+<p>CGI 서블릿의 동작 설정하면 자주 사용하는 일부 서블릿의 init 매개 변수가 있습니다.
 <ul>
-<li><strong>cgiPathPrefix</strong> - The CGI search path will start at
-the web application root directory + File.separator + this prefix.
-The default cgiPathPrefix is <code>WEB-INF/cgi</code></li>
-<li><strong>debug</strong> - Debugging detail level for messages logged
-by this servlet. Default 0.</li>
-<li><strong>executable</strong> - The of the executable to be used to
-run the script. You may explicitly set this parameter to be an empty string
-if your script is itself executable (e.g. an exe file). Default is
+<li><strong>cgiPathPrefix</strong> - CGI 검색 경로는 Web 어플리케이션의 루트 디렉토리 + File.separator + 접두사로 시작합니다.
+기본이 붙은 모양은 <code> WEB-INF/cgi </code>입니다.</li>
+<li><strong>debug</strong> - 이 서블릿이 기록된 메시지의 상세 수준의 디버깅. 기본값은 0.</li>
+<li><strong>executable</strong> - 실행 파일의 스크립트를 사용한다. 여러분의 스크립트가 실행 파일 자체인 경우는 명시 적으로 빈 문자열이 되도록 이 매개 변수를 설정할 수 있습니다. (예를 들면, 실행파일과 같은 경우). 기본값은 0.
 <code>perl</code>.</li>
 <li><strong>executable-arg-1</strong>, <strong>executable-arg-2</strong>,
-and so on - additional arguments for the executable. These precede the
-CGI script name. By default there are no additional arguments.</li>
-<li><strong>parameterEncoding</strong> - Name of the parameter encoding
-to be used with the CGI servlet. Default is
+and so on - 실행 파일의 추가 인수. 이것은 GCI 스크립트 이름 앞에 붙는다. 기본적으로 추가 인수는 없습니다.</li>
+<li><strong>parameterEncoding</strong> - 매개 변수 인코딩의 이름은 CGI 서블릿으로 사용한다. 기본값은 0.
 <code>System.getProperty("file.encoding","UTF-8")</code>.</li>
-<li><strong>passShellEnvironment</strong> - Should the shell environment
-variables (if any) be passed to the CGI script? Default is
+<li><strong>passShellEnvironment</strong> - 쉘 환경 변수가 있는 경우, CGI 스크립트에 전달해야할까요? 기본값은 0.
 <code>false</code>.</li>
-<li><strong>stderrTimeout</strong> - The time (in milliseconds) to wait for
-the reading of stderr to complete before terminating the CGI process. Default
-is 2000.</li>
+<li><strong>stderrTimeout</strong> - CGI 프로세스를 종료하기 전에 완료하기 위해 표준 오류 출력 읽기 위해 대기하는 시간 (밀리 초)입니다. 기본값은 2000.</li>
 </ul>
 </p>
 
