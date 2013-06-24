@@ -204,8 +204,8 @@ conn.close();
 
     <h3>1.  사용자의 자바빈 클래스 만들기</h3>
 
-    <p>Create the JavaBean class which will be instantiated each time
-    that the resource factory is looked up.  For this example, assume
+    <p>자바빈 클래스를 만들어라. which will be instantiated each time
+    that the resource factory is looked up.  이러한 예시에서, assume
     you create a class <code>com.mycompany.MyBean</code>, which looks
     like this:</p>
 
