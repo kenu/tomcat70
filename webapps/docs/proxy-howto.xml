@@ -15,17 +15,14 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<!DOCTYPE document [
-  <!ENTITY project SYSTEM "project.xml">
-]>
 <document url="proxy-howto.html">
 
-    &project;
+    &project;
 
-    <properties>
-        <author email="craigmcc@apache.org">Craig R. McClanahan</author>
-        <title>Proxy Support HOW-TO</title>
-    </properties>
+    <properties>
+        <author email="craigmcc@apache.org">Craig R. McClanahan</author>
+        <title>Proxy가 어떤 것을 제공하는 지</title>
+    </properties>
 
 <body>
 
@@ -35,121 +32,70 @@
 
 <section name="Introduction">
 
-<p>Using standard configurations of Tomcat, web applications can ask for
-the server name and port number to which the request was directed for
-processing.  When Tomcat is running standalone with the
-<a href="config/coyote.html">Coyote HTTP/1.1 Connector</a>, it will generally
-report the server name specified in the request, and the port number on
-which the <strong>Connector</strong> is listening.  The servlet API
-calls of interest, for this purpose, are:</p>
+<p>톰캣의 표준 구성을 사용하여, 서버 이름과 포트 번호 요청 처리에 대한 응용 프로그램을 요청할 수 있다.  톰캣은 독립적으로 실행된다.
+<a href="config/coyote.html">Coyote HTTP/1.1 Connector</a>, 일반적인 요청으로 지정된 서버 이름 및 커넥터가 수신하는 포트 번호를 입력 받을 때 servlet API는 아래와 같은 목적을 위해 호출 된다.</p>
 <ul>
-<li><code>ServletRequest.getServerName()</code>: Returns the host name of the server to which the request was sent.</li>
-<li><code>ServletRequest.getServerPort()</code>: Returns the host name of the server to which the request was sent.</li>
-<li><code>ServletRequest.getLocalName()</code>: Returns the host name of the Internet Protocol (IP) interface on which the request was received.</li>
-<li><code>ServletRequest.getLocalPort()</code>:  Returns the Internet Protocol (IP) port number of the interface on which the request was received.</li>
+<li><code>ServletRequest.getServerName()</code>: 서버의 호스트 네임을 반환.</li>
+<li><code>ServletRequest.getServerPort()</code>: 서버의 호스트 네임을 반환.</li>
+<li><code>ServletRequest.getLocalName()</code>: 수신 된 IP의 인터페이스를 반환.</li>
+<li><code>ServletRequest.getLocalPort()</code>: 수신 된 IP의 인터페이스를 반환.</li>
 </ul>
 
-<p>When you are running behind a proxy server (or a web server that is
-configured to behave like a proxy server), you will sometimes prefer to
-manage the values returned by these calls.  In particular, you will
-generally want the port number to reflect that specified in the original
-request, not the one on which the <strong>Connector</strong> itself is
-listening.  You can use the <code>proxyName</code> and <code>proxyPort</code>
-attributes on the <code>&lt;Connector&gt;</code> element to configure
-these values.</p>
+<p> 당신이 프록시 서버 뒤에 실행하는 경우(또는 프록시 서버처럼 동작되는 웹 서버), 이러한 호출에 의해 반환 된 값을 관리하는 것을 수월하게 할 수 있다.  특히, 커넥터 자체의 것이 아닌 일반적인 요청에 반영할 수 있도록 포트 번호를 얻을 수 있다. ProxyName와 ProxyPort 속성을 사용할 수 있다.</p>
 
-<p>Proxy support can take many forms.  The following sections describe
-proxy configurations for several common cases.</p>
+<p>Proxy는 다양한 형태를 제공한다.  몇가지 일반적인 프록시 구성을 다음 섹션에서 설명하도록 한다.</p>
 
 </section>
 
 <section name="Apache 1.3 Proxy Support">
 
-<p>Apache 1.3 supports an optional module (<code>mod_proxy</code>) that
-configures the web server to act as a proxy server.  This can be used to
-forward requests for a particular web application to a Tomcat instance,
-without having to configure a web connector such as <code>mod_jk</code>.
-To accomplish this, you need to perform the following tasks:</p>
+<p>Apache 1.3는 웹 서버가 프록시 서버로 작동하도록 옵션 모듈을 제공한다. 톰캣 함수에 특정 웹 응용 프로그램에 대해 같은 웹 커넥터를 구성할 필요없이, 이 요청을 전달하는데 사용할 수 있다. 
+이 작업을 수행하려면 다음과 같은 작업을 수행하여야 한다.</p>
 <ol>
-<li>Configure your copy of Apache so that it includes the
-    <code>mod_proxy</code> module.  If you are building from source,
-    the easiest way to do this is to include the
-    <code>--enable-module=proxy</code> directive on the
-    <code>./configure</code> command line.</li>
-<li>If not already added for you, make sure that you are loading the
-    <code>mod_proxy</code> module at Apache startup time, by using the
-    following directives in your <code>httpd.conf</code> file:
+<li>모듈을 포함할 수 있도록 아파치의 복사본을 구성한다.  소스를 만들 경우 가장 쉬운 방법은 지시문을 포함하는 것이다.</li>
+<li>추가하지 않을 경우, 다음과 같은 소스를 사용하여 아파치 시작 모듈을 로드되어 있는지 확인하여야 한다.<code>httpd.conf</code> file:
 <source>
 LoadModule proxy_module  {path-to-modules}/mod_proxy.so
 AddModule  mod_proxy.c
 </source></li>
-<li>Include two directives in your <code>httpd.conf</code> file for
-    each web application that you wish to forward to Tomcat.  For
-    example, to forward an application at context path <code>/myapp</code>:
+<li>  예를 들어 문맥 경로에 응용프로그램을 전달하는 경우에는 Tomcat에 전달하고자 하는 각 응용 프로그램의 파일에서 두 개의 지시문을 더한다. <code>/myapp</code>:
 <source>
 ProxyPass         /myapp  http://localhost:8081/myapp
 ProxyPassReverse  /myapp  http://localhost:8081/myapp
 </source>
-    which tells Apache to forward URLs of the form
-    <code>http://localhost/myapp/*</code> to the Tomcat connector
-    listening on port 8081.</li>
-<li>Configure your copy of Tomcat to include a special
-    <code>&lt;Connector&gt;</code> element, with appropriate
-    proxy settings, for example:
+    Tomcat 커넥터가 포트 8081에서 수신할 수 있도록 아파치에 다가 URL을 알려준다 .</li>
+<li>적절한 프록시 설정을 통해 특별한 속성을 같는 Tomcat의 복사본을 구성한다. 예를 들어:
 <source>
 &lt;Connector port="8081" ...
-              proxyName="www.mycompany.com"
-              proxyPort="80"/&gt;
+              proxyName="www.mycompany.com"
+              proxyPort="80"/&gt;
 </source>
-    which will cause servlets inside this web application to think that
-    all proxied requests were directed to <code>www.mycompany.com</code>
-    on port 80.</li>
-<li>It is legal to omit the <code>proxyName</code> attribute from the
-    <code>&lt;Connector&gt;</code> element.  If you do so, the value
-    returned by <code>request.getServerName()</code> will by the host
-    name on which Tomcat is running.  In the example above, it would be
-    <code>localhost</code>.</li>
-<li>If you also have a <code>&lt;Connector&gt;</code> listening on port
-    8080 (nested within the same <a href="config/service.html">Service</a>
-    element), the requests to either port will share the same set of
-    virtual hosts and web applications.</li>
-<li>You might wish to use the IP filtering features of your operating
-    system to restrict connections to port 8081 (in this example) to
-    be allowed <strong>only</strong> from the server that is running
-    Apache.</li>
-<li>Alternatively, you can set up a series of web applications that are
-    only available via proxying, as follows:
-    <ul>
-    <li>Configure another <code>&lt;Service&gt;</code> that contains
-        only a <code>&lt;Connector&gt;</code> for the proxy port.</li>
-    <li>Configure appropriate <a href="config/engine.html">Engine</a>,
-        <a href="config/host.html">Host</a>, and
-        <a href="config/context.html">Context</a> elements for the virtual hosts
-        and web applications accessible via proxying.</li>
-    <li>Optionally, protect port 8081 with IP filters as described
-        earlier.</li>
-    </ul></li>
-<li>When requests are proxied by Apache, the web server will be recording
-    these requests in its access log.  Therefore, you will generally want to
-    disable any access logging performed by Tomcat itself.</li>
+    이 어플리캐이션 내에서 서블릿은 포트 80에 모든 프록시 요청을 한다.</li>
+<li> proxyName 속성을 생략할 수 있다.  만약 Tomcat이 실행되고 있으면 주소는 반환될 수 있다.  위의 예시는 로컬 호스트를 나타낸다.</code>.</li>
+<li>포트 8080에서 수신 커넥터가 있는 경우 (중첩되는 속성), 포트에 가상 주소 및 어플리케이션을 공유한다.</li>
+<li>포트 8081에 연결을 제한하는 운영체제 IP필터링 기능을 사용하려면  오직 아파치 서버에서만 실행하여야 한다.</li>
+<li>다음과 같이, 프록시를 통해서 에플리케이션 종류를 설정할 수 있다  
+    <ul>
+    <li> 프록시 포트를 위한 전용 커넥터를 포함하는 다른 종류로 구성된다.</li>
+    <li>적절한 주소 구성<a href="config/engine.html">Engine</a>,
+        <a href="config/host.html"></a>, 그리고
+        <a href="config/context.html">문맥</a> 프록시를 통해 액세스 할 수 있는 가상 주소 및 어플리케이션을 구성해야 한다.</li>
+    <li>앞에서 설명한대로 IP필터와 포트8081을 선택하라.</li>
+    </ul></li>
+<li>아파치에서 프록시를 요청할 경우, 웹 서버는 액세스 로그에 이 요청을 기록한다.  따라서 Tomcat이 자체적으로 액세스를 해제한다.</li>
 </ol>
 
-<p>When requests are proxied in this manner, <strong>all</strong> requests
-for the configured web applications will be processed by Tomcat (including
-requests for static content).  You can improve performance by using the
-<code>mod_jk</code> web connector instead of <code>mod_proxy</code>.
-<code>mod_jk</code> can be configured so that the web server serves static
-content that is not processed by filters or security constraints defined
-within the web application's deployment descriptor
+<p>프록시 방법이 요청이 있을 경우, <strong>all</strong> 구성된 어플리케이션에 대한 요청은 Tomcat에서 처리된다. (정적 콘텐츠에 대한 요청 포함).  아래와 같은 것을 사용하여 성능을 향상시킬 수 있다.
+<code>mod_jk</code> 웹 커넥터 대신 proxy 모드를 통해, 웹 서버가 어플리케이션의 배포자를 통해 구성된 정적 콘텐츠를 처리할 수 있도록 제공해 준다.
 (<code>/WEB-INF/web.xml</code>).</p>
 
 </section>
 
 <section name="Apache 2.0 Proxy Support">
-The same instructions hold true as for 1.3. (Except in Apache 2.0,
-you may omit <code>AddModule  mod_proxy.c</code>)
+같은 방법을 쓸 수 있는 1.3이 있다. (Apache 2.0에서 생략할 수 있다.<code>AddModule  mod_proxy.c</code>)
 </section>
 
 </body>
 
 </document>
+
