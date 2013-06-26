@@ -35,78 +35,65 @@
 
 <section name="Introduction">
 
-<p>SSI (Server Side Includes) are directives that are placed in HTML pages,
-and evaluated on the server while the pages are being served. They let you
-add dynamically generated content to an existing HTML page, without having
-to serve the entire page via a CGI program, or other dynamic technology.
-</p>
+<p>SSI 는 HTML 페이지에서 위치해 페이지가 제공되는 동안 서버가 평가되는 지침입니다.
+이것은 당신이 CGI 프로그램이나 혹은 다른 동적 기술을 통해 전체적인 페이지를 제공할 필요 없이
+동적으로 발생된 내용들을 존재하는 HTML 페이지에 첨가할 수 있도록 합니다.</p>
 
-<p>Within Tomcat SSI support can be added when using Tomcat as your
-HTTP server and you require SSI support.  Typically this is done
-during development when you don't want to run a web server like Apache.</p>
-
-<p>Tomcat SSI support implements the same SSI directives as Apache.  See the
+<p>당신이 톰캣 SSI지원에서 추가를 한다면, 당신은 톰캣을 SSI 지원을 이용할 수 있고,
+HTTP 서버로서도 사용할 수 있습니다.
+전형적으로 이것은 개발하는 동안, 당신이 아파치와 같은 웹 서버가 작동하지 않기를 원할 때 이루어집니다.</p>
+<p>톰캣 SSI 지원은 아파치와 같은 동일한 SSI 지침을 구현합니다. 다음의 사이트를 보십시오.
 <a href="http://httpd.apache.org/docs/howto/ssi.html#basicssidirectives">
-Apache Introduction to SSI</a> for information on using SSI directives.</p>
+SSI에대한 아파치 소개</a> SSI 지침을 이용하는 것에 대한 소개</p>
 
-<p>SSI support is available as a servlet and as a filter. You should use one
-or the other to provide SSI support but not both.</p>
+<p>SSI 지원은 서블릿으로 및 필터로 사용할 수 있습니다.
+당신은 SSI 지원을 위해 둘 중 하나를 사용할 수는 있지만 둘 다 사용할 수는 없습니다.</p>
 
-<p>Servlet based SSI support is implemented using the class
-<code>org.apache.catalina.ssi.SSIServlet</code>.  Traditionally, this servlet
-is mapped to the URL pattern "*.shtml".</p>
+<p>SSI지원에 기초한 서블릿은 클래스
+<code>org.apache.catalina.ssi.SSIServlet</code>을 이용함으로써 구현이 가능합니다.
+관습적으로, 이 서블릿은 “*.shtiml”이라는 URL 형태로 연결됩니다.</p>
 
-<p>Filter based SSI support is implemented using the class
-<code>org.apache.catalina.ssi.SSIFilter</code>.  Traditionally, this filter
-is mapped to the URL pattern "*.shtml", though it can be mapped to "*" as
-it will selectively enable/disable SSI processing based on mime types.  The
-contentType init param allows you to apply SSI processing to JSP pages,
-javascript, or any other content you wish.</p>
-<p>By default SSI support is disabled in Tomcat.</p>
+<p>SSI 지원에 기초한 필터는 클래스
+<code>org.apache.catalina.ssi.SSIFilter</code>를 이용함으로서 구현이 가능합니다.
+관습적으로, 이 필터는 "*.shtml" 이라는 URL 형태로 연결됩니다.
+하지만 그것은 "*"로 연결될 수도 있습니다.
+그것은 선택적으로 MIME 유형에 따라 SSI처리를 사용 가능하게 할 수도, 무능하게 할 수도 있게 합니다.
+콘텐츠 형식 초기화 매개변수는 당신이 SSI 처리를 자바 스크립트라는 JSP 페이지나,
+당신이 원하는 다른 콘텐츠에 적용할 수 있도록 합니다. </p>
+<p>기본적으로 SSI 지원은 톰캣에서 비활성화됩니다.</p>
 </section>
 
 <section name="Installation">
 
-<p><strong>CAUTION</strong> - SSI directives can be used to execute programs
-external to the Tomcat JVM. If you are using the Java SecurityManager this
-will bypass your security policy configuration in <code>catalina.policy.</code>
+<p><strong>CAUTION</strong> - SSI 지시어는 톰캣 JVM외부에서 프로그램을 실행하는 데 사용할 수 있습니다. 당신이 만약 자바 보안관리자를 사용한다면 다음의 보안 정책 구성을 생략합니다.<code>catalina.policy.</code>
 </p>
 
-<p>To use the SSI servlet, remove the XML comments from around the SSI servlet
-and servlet-mapping configuration in
-<code>$CATALINA_BASE/conf/web.xml</code>.</p>
+<p>SSI 서블릿을 사용하기 위해, SSI 시블릿 그리고 시블릿과 연결된 구성
+<code>$CATALINA_BASE/conf/web.xml</code>으로부터 XML 주석들을 삭제하십시오. </p>
 
-<p>To use the SSI filter, remove the XML comments from around the SSI filter
-and filter-mapping configuration in
-<code>$CATALINA_BASE/conf/web.xml</code>.</p>
+<p>SSI 필터를 사용하기 위해, SSI 필터 그리고 필터와 연결된 구성
+<code>$CATALINA_BASE/conf/web.xml</code>으로부터 XML 주석들을 삭제하십시오..</p>
 
-<p>Only Contexts which are marked as privileged may use SSI features (see the
-privileged property of the Context element).</p>
+<P>특별한 권한이 있음으로 표시된 컨텍스트만 SSI 기능을 사용할 수 있습니다.
+(컨텍스트 요소의 특별한 거권한이 있는지 보세요.) </ P>
 
-</section>
+</ section>
 
 <section name="Servlet Configuration">
 
-<p>There are several servlet init parameters which can be used to
-configure the behaviour of the SSI servlet.
-<ul>
-<li><strong>buffered</strong> - Should output from this servlet be buffered?
-(0=false, 1=true) Default 0 (false).</li>
-<li><strong>debug</strong> - Debugging detail level for messages logged
-by this servlet. Default 0.</li>
-<li><strong>expires</strong> - The number of seconds before a page with SSI
-directives will expire. Default behaviour is for all SSI directives to be
-evaluated for every request.</li>
-<li><strong>isVirtualWebappRelative</strong> - Should "virtual" SSI directive
-paths be interpreted as relative to the context root, instead of the server
-root? (0=false, 1=true) Default 0 (false).</li>
+<P>SSI 시블릿의 동작을 구성할 수 있는데 사용될 수 있는 몇몇의 시블릿 초기화 매개변수가 있습니다.
+
+<UL>
+<li><strong>buffered</ strong>-이 시블릿의 결과값이 버퍼에 저장되어야 하는 것인가?
+(0 = 거짓, 1 = True) 기본값 0 (FALSE) </li>
+<li><strong>debug</strong> - 이 시블릿에 의해 기록된 메세지의 디버깅 상세 수치. 기본값  0.</li>
+<li><strong>expires</strong> - 페이지의 SSI 지시어가 만료되기 전 초 수. 기본 동작은 모든 SSI 지시어들이 모든 요구에 대해 평가되는 것이다. </li>
+<li><strong>isVirtualWebappRelative</strong> - “virtual”SSI 지시경로는  서버루트가 아닌 컨텍스트 루트와 연관된 것으로 해석될 수 있을 것인가? (0=false, 1=true) 기본값  0 (false).</li>
 <li><strong>inputEncoding</strong> - The encoding to be assumed for SSI
-resources if one cannot be determined from the resource itself. Default is
-the default platform encoding.</li>
+resources if one cannot be determined from the resource itself. 기본값은 기본 플랫폼 암호화이다.</li>
 <li><strong>outputEncoding</strong> - The encoding to be used for the result
-of the SSI processing. Default is UTF-8.</li>
-<li><strong>allowExec</strong> - Is the exec command enabled? Default is
-false.</li>
+of the SSI processing.기본값은 UTF-8이다.</li>
+<li><strong>allowExec</strong> - exec command가 가능한가? 기본값은 false이다.</li>
 </ul>
 </p>
 
