@@ -76,17 +76,17 @@ SSI에대한 아파치 소개</a> SSI 지침을 이용하는 것에 대한 소�
 <p>SSI 필터를 사용하기 위해, SSI 필터 그리고 필터와 연결된 구성
 <code>$CATALINA_BASE/conf/web.xml</code>으로부터 XML 주석들을 삭제하십시오..</p>
 
-<P>특별한 권한이 있음으로 표시된 컨텍스트만 SSI 기능을 사용할 수 있습니다.
-(컨텍스트 요소의 특별한 거권한이 있는지 보세요.) </ P>
+<p>특별한 권한이 있음으로 표시된 컨텍스트만 SSI 기능을 사용할 수 있습니다.
+(컨텍스트 요소의 특별한 거권한이 있는지 보세요.) </p>
 
-</ section>
+</section>
 
 <section name="Servlet Configuration">
 
-<P>SSI 시블릿의 동작을 구성할 수 있는데 사용될 수 있는 몇몇의 시블릿 초기화 매개변수가 있습니다.
+<p>SSI 시블릿의 동작을 구성할 수 있는데 사용될 수 있는 몇몇의 시블릿 초기화 매개변수가 있습니다.
 
-<UL>
-<li><strong>buffered</ strong>-이 시블릿의 결과값이 버퍼에 저장되어야 하는 것인가?
+<ul>
+<li><strong>buffered</strong>-이 시블릿의 결과값이 버퍼에 저장되어야 하는 것인가?
 (0 = 거짓, 1 = True) 기본값 0 (FALSE) </li>
 <li><strong>debug</strong> - 이 시블릿에 의해 기록된 메세지의 디버깅 상세 수치. 기본값  0.</li>
 <li><strong>expires</strong> - 페이지의 SSI 지시어가 만료되기 전 초 수. 기본 동작은 모든 SSI 지시어들이 모든 요구에 대해 평가되는 것이다. </li>

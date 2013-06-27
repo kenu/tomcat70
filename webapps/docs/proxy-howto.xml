@@ -15,6 +15,10 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
+<!DOCTYPE document [
+  <!ENTITY project SYSTEM "project.xml">
+]>
+
 <document url="proxy-howto.html">
 
     &project;
@@ -71,7 +75,7 @@ ProxyPassReverse  /myapp  http://localhost:8081/myapp
               proxyPort="80"/&gt;
 </source>
     이 어플리캐이션 내에서 서블릿은 포트 80에 모든 프록시 요청을 한다.</li>
-<li> proxyName 속성을 생략할 수 있다.  만약 Tomcat이 실행되고 있으면 주소는 반환될 수 있다.  위의 예시는 로컬 호스트를 나타낸다.</code>.</li>
+<li> proxyName 속성을 생략할 수 있다.  만약 Tomcat이 실행되고 있으면 주소는 반환될 수 있다.  위의 예시는 로컬 호스트를 나타낸다.</li>
 <li>포트 8080에서 수신 커넥터가 있는 경우 (중첩되는 속성), 포트에 가상 주소 및 어플리케이션을 공유한다.</li>
 <li>포트 8081에 연결을 제한하는 운영체제 IP필터링 기능을 사용하려면  오직 아파치 서버에서만 실행하여야 한다.</li>
 <li>다음과 같이, 프록시를 통해서 에플리케이션 종류를 설정할 수 있다  
