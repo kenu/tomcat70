@@ -284,30 +284,27 @@
 </section>
 <section name="서비스 설치">
 <p>
-The safest way to manually install the service is to use the provided
-<b>service.bat</b> script. Administrator privileges are required to run this
-script. If necessary, you can use the <code>/user</code> switch to specify
-a user to use for the installation of the service.
+서비스를 수동으로 설치하는 가장 안전한 방법은 제공
+<b>service.bat</b> 스크립트를 사용하는 것입니다. 관리자 권한이 스크립트를 실행하는 데 필요합니다.
+필요한 경우, 당신은 서비스의 설치에 사용할 사용자를 지정하려면 <code>/user</code> 전환을 사용할 수 있습니다.
 </p>
 <p>
-<strong>NOTE:</strong> On Windows Vista or any other operating system with User
-Account Control (UAC) you must either disable UAC or right-click on cmd.exe and
-select "Run as administrator" in order to run this script. If UAC is enabled
-neither being logged on with an Administrator account, nor using the
-<code>/user</code> switch is sufficient.
+<strong>NOTE:</strong> Windows Vista 또는 사용자 계정 컨트롤 (UAC)와 다른 운영 체제에는 UAC를 비활성화해야합니다.
+또는 cmd.exe를 마우스 오른쪽 버튼으로 클릭하고이 스크립트를 실행하려면 "관리자 권한으로 실행"을 선택합니다.
+UAC를 사용하는 경우 것이며 관리자 계정으로 로그온하지 않으며, 사용되는 <code>/user</code> 스위치는 충분합니다.
 </p>
 <p>
 <source>
-Install the service named 'Tomcat7'
+'Tomcat7'라는 서비스 설치
 C:\> service.bat install
 </source>
 </p>
 <p>
-If using tomcat7.exe, you need to use the <b>//IS//</b> parameter.
+tomcat7.exe를 사용하는 경우, 당신은 <b>//IS//</b> 매개 변수를 사용해야합니다.
 </p>
 <p>
 <source>
-Install the service named 'Tomcat7'
+'Tomcat7'라는 서비스 설치
 C:\> tomcat7 //IS//Tomcat7 --DisplayName="Apache Tomcat 7" \
 C:\> --Install="C:\Program Files\Tomcat\bin\tomcat7.exe" --Jvm=auto \
 C:\> --StartMode=jvm --StopMode=jvm \
@@ -316,31 +313,32 @@ C:\> --StopClass=org.apache.catalina.startup.Bootstrap --StopParams=stop
 </source>
 </p>
 </section>
-<section name="Updating services">
+<section name="서비스 업데이트">
 <p>
-To update the service parameters, you need to use the <b>//US//</b> parameter.
+서비스 매개 변수를 갱신하려면, 당신은 <b>//US//</b> 매개 변수를 사용합니다.
 </p>
 <p>
 <source>
-Update the service named 'Tomcat7'
+'Tomcat7'라는 이름의 서비스 업데이트
 C:\> tomcat7 //US//Tomcat7 --Description="Apache Tomcat Server - http://tomcat.apache.org/ " \
 C:\> --Startup=auto --Classpath=%JAVA_HOME%\lib\tools.jar;%CATALINA_HOME%\bin\bootstrap.jar
 </source>
 </p>
 </section>
-<section name="Removing services">
+<section name="서비스 제거">
 <p>
-To remove the service, you need to use the <b>//DS//</b> parameter.<br/>
-If the service is running it will be stopped and then deleted.
+서비스를 제거하려면 당신은 <b>//DS//</b>  매개 변수를 사용해야 합니다.<br/>
+서비스가 실행중인 경우에는 중지된 다음에 삭제됩니다.
 </p>
 <p>
 <source>
-Remove the service named 'Tomcat7'
+'Tomcat7'라는 이름의 서비스 제거
 C:\> tomcat7 //DS//Tomcat7
 </source>
 </p>
 </section>
-<section name="Debugging services">
+<section name="디버깅 서비스">
+
 <p>
 콘솔 모드에서 서비스를 실행하려면, 당신은 매개변수 <b>//TS//</b>를 사용해야 합니다.
 서비스의 종료는<b>CTRL+C</b> or <b>CTRL+BREAK</b> 키를 눌러 시작할 수 있습니다.
