@@ -34,79 +34,45 @@
 
   <section name="Introduction">
     <p>
-톰캣은 기본적으로 대부분의 사용 사례에 대해 합리적으로 안전한 것으로 구성되어 있습니다. 
-일부 환경은 더 또는 더 적은, 보안 구성이 필요할 수 있습니다. 이 페이지는 보안에 영향을 미칠 수 있으며,
-이러한 옵션을 변경의 예상 영향에 대한 몇 가지 논평을 제공하는 구성 옵션에 대한 참조의 단일 지점을 제공하는 것입니다.
-의도는 톰캣 설치의 보안을 평가할 때 고려해야 할 구성 옵션 목록을 제공하는 것입니다.
+    톰캣은 기본적으로 대부분의 사용 사례에 대해 합리적으로 안전한 것으로 구성되어 있습니다. 
+    일부 환경은 더 또는 더 적은, 보안 구성이 필요할 수 있습니다. 이 페이지는 보안에 영향을 미칠 수 있으며,
+    이러한 옵션을 변경의 예상 영향에 대한 몇 가지 논평을 제공하는 구성 옵션에 대한 참조의 단일 지점을 제공하는 것입니다.
+    의도는 톰캣 설치의 보안을 평가할 때 고려해야 할 구성 옵션 목록을 제공하는 것입니다.</p>
 
-
-
-
-
-
-.</p>
-
-    <p><strong>Note</strong>: Reading this page is not a substitute for reading
-    and understanding the detailed configuration documentation. Fuller
-    descriptions of these attributes may be found in the relevant documentation
-    pages.</p>
+    <p><strong>Note</strong>: 이 페이지를 읽는 것은 독서와 자세한 구성 설명서를 이해하기위한 대체하지 않습니다. 
+    이러한 특성 풀러 설명은 관련 문서 페이지에서 찾을 수 있습니다.</p>
   </section>
 
   <section name="Non-Tomcat settings">
-    <p>Tomcat configuration should not be the only line of defense. The other
-    components in the system (operating system, network, database, etc.) should
-    also be secured.</p>
-    <p>Tomcat should not be run under the root user. Create a dedicated user for
-    the Tomcat process and provide that user with the minimum necessary
-    permissions for the operating system. For example, it should not be possible
-    to log on remotely using the Tomcat user.</p>
-    <p>File permissions should also be suitable restricted. Taking the Tomcat
-    instances at the ASF as an example (where auto-deployment is disabled and
-    web applications are deployed as exploded directories), the standard
-    configuration is to have all Tomcat files owned by root with group Tomcat
-    and whilst owner has read/write priviliges, group only has read and world
-    has no permissions. The exceptions are the logs, temp and work directory
-    that are owned by the Tomcat user rather than root. This means that even if
-    an attacker compromises the Tomcat process, they can&apos;t change the
-    Tomcat configuration, deploy new web applications or modify existing web
-    applications. The Tomcat process runs with a umask of 007 to maintain these
-    permissions.</p>
-    <p>At the network level, consider using a firewall to limit both incoming
-    and outgoing connections to only those connections you  expect to be
-    present.</p>
+    <p>Tomcat 구성 방어의 유일한 라인해서는 안됩니다.시스템의 다른 구성 요소 
+    (운영 체제, 네트워크, 데이터베이스 등)도 보호해야합니다</p>
+    <p>바람둥이는 루트 사용자로 실행할 수 없습니다.톰캣 프로세스를위한 전용 사용자를 생성하고 
+    운영 체제에 필요한 최소한의 권한으로 해당 사용자를 제공합니다.
+    예를 들어, 원격으로 톰캣 사용자를 사용하여 로그온 할 수 없을 것이다.</p>
+    <p>파일 사용 권한도 제한 적합해야합니다.예 (자동 배포가 비활성화되고 웹 응용 프로그램은 폭발 디렉토리로 배포되는)와 같은 ASF에서 톰캣 인스턴스를 가지고, 
+    표준 구성 그룹 톰캣 동안 소유자와 루트가 소유 한 모든 톰캣 파일이 읽기가 / priviliges를 작성하는 것입니다 , 그룹은 읽기와 세상은 아무 권한이 없습니다.예외가 아닌 루트가 아닌 톰캣 사용자가 소유하는 
+    로그, 임시 및 작업 디렉토리입니다. 이것은 공격자가 톰캣 프로세스를 타협하더라도, 그들은 기존 웹 응용 프로그램을 Tomcat이 설정을 변경 새로운 웹 응용 프로그램을 배포하거나 수정할 수 없음을 의미합니다.
+    톰캣 프로세스가 이러한 권한을 유지하기 위해 007의 umask를 함께 실행합니다.</p>
+    <p>네트워크 수준에서, 당신이 존재하는 것으로 예상 만 연결 들어오는 연결과 나가는 연결을 모두 제한하는 방화벽을 사용하는 것이 좋습니다.</p>
   </section>
 
   <section name="Default web applications">
-    <p>Tomcat ships with a number of web applications by default.
-    Vulnerabilities have been discovered in these applications in the past.
-    Applications that are not required should be removed so the system will not
-    be at risk if another vulnerability is discovered.</p>
+    <p>기본적으로 웹 응용 프로그램의 번호와 배송 바람둥이. 취약점은 과거에 이러한 응용 프로그램에서 발견되었다. 
+    또 다른 취약점이 발견 될 경우 시스템이 위험에 노출되지 않도록 필요하지 않은 응용 프로그램을 제거해야합니다..</p>
   </section>
 
   <section name="Security manager">
-    <p>Enabling the security manager causes web applications to be run in a
-    sandbox, significantly limiting a web application's ability to perform
-    malicious actions such as calling System.exit(), establishing network
-    connections or accessing the file system outside of the web application's
-    root and temporary directories. However, it should be noted that there are
-    some malicious actions, such as triggering high CPU consumption via an
-    infinite loop, that the security manager cannot prevent.</p>
+    <p>보안 관리자를 활성화하면 상당히 같은 System.exit와 ()를 호출 네트워크 연결을 설정하거나 웹 응용 프로그램의 루트 및 임시 디렉터리 외부의 파일 시스템에 
+    액세스하는 등의 악의적 인 작업을 수행 할 웹 응용 프로그램의 능력을 제한하는 웹 응용 프로그램 샌드 박스에서 실행되도록 . 그러나, 이러한 보안 관리자를 방지 할 수있는, 
+    무한 루프를 통해 높은 CPU 소비를 트리거링 같은 악의적 인 동작이 있다는 것을 주목해야한다.</p>
 
-    <p>Enabling the security manager is usually done to limit the potential
-    impact, should an attacker find a way to compromise a trusted web
-    application . A security manager may also be used to reduce the risks of
-    running untrusted web applications (e.g. in hosting environments) but it
-    should be noted that the security manager only reduces the risks of
-    running untrusted web applications, it does not eliminate them. If running
-    multiple untrusted web applications, it is recommended that each web
-    application is deployed to a separate Tomcat instance (and ideally separate
-    hosts) to reduce the ability of a malicious web application impacting the
-    availability of other applications.</p>
+    <p>보안 관리자는 일반적으로 잠재적 인 영향을 제한하기 위해 수행됩니다 사용하면, 공격자는 신뢰할 수있는 웹 응용 프로그램을 손상 할 수있는 방법을 찾아야한다.
+    보안 관리자가 신뢰할 수없는 웹 응용 프로그램 (호스팅 환경에서 예) 실행의 위험을 줄이기 위해 사용할 수 있지만 보안 관리자는 신뢰할 수없는 웹 응용 프로그램을 실행하는 위험을 감소 시킨다는 것을 주목해야한다, 
+    그것은 그들을 제거하지 않습니다. 여러 개의 신뢰할 수없는 웹 응용 프로그램을 실행하는 경우, 각 웹 응용 프로그램이 다른 응용 프로그램의 가용성에 영향을 미치는 악의적 인 웹 응용 프로그램의 능력을 줄이기 위해 
+    별도의 톰캣 인스턴스 (이상적으로 분리 된 호스트)에 배치하는 것이 좋습니다.</p>
 
-    <p>Tomcat is tested with the security manager enabled; but the majority of
-    Tomcat users do not run with a security manager, so Tomcat is not as well
-    user-tested in this configuration. There have been, and continue to be,
-    bugs reported that are triggered by running under a security manager.</p>
+    <p>톰캣은 보안 관리자가 활성화 된 테스트 만 톰캣 사용자의 대부분이 보안 관리자와 실행되지 않기 때문에 Tomcat은이 구성에서 잘 사용자 테스트​​로하지 않습니다.
+    거기, 그리고 것을 계속했다, 버그는 보안 관리자에서 실행에 의해 트리거되는 보도했다.</p>
 
     <p>The restrictions imposed by a security manager are likely to break most
     applications if the security manager is enabled. The security manager should
