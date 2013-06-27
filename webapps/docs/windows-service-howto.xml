@@ -8,7 +8,7 @@
  보증이나 조건도없이 "있는 그대로"배포하거나 암시하는 것은 아닙니다.
  라이센스의 허가 및 제한 사항에 관한 특정 언어에 대한 라이센스를 참조하십시오.
 -->
-<!DOCTYPE 문서 [
+<!DOCTYPE document [
   <!ENTITY project SYSTEM "project.xml">
 ]>
 <document url="windows-service-howto.html">
@@ -40,7 +40,7 @@
     <table>
     <tr><th>//ES//</th>
         <td>편집 서비스 구성</td>
-        <td>이것은 기본 작업입니다. 옵션이 제공되지 않을 경우 호출되지만 실행은 servicenameW.exe로 변경됩니다</b></td>
+        <td>이것은 기본 작업입니다. 옵션이 제공되지 않을 경우 호출되지만 실행은 <b>servicenameW.exe</b>로 변경됩니다</td>
     </tr>
     <tr><th>//MS//</th>
         <td>Monitor service</td>
@@ -179,7 +179,7 @@
     <tr>
     <td>--JvmMx</td>
     <td></td>
-    <tdMB의 최대 메모리 풀 크기</td>
+    <td>MB의 최대 메모리 풀 크기</td>
     </tr>
     <tr>
     <td>--JvmSs</td>
