@@ -117,7 +117,7 @@ ProxyPassReverse  /myapp  http://localhost:8081/myapp
     <ul>
     <li>또 다른 프록시 포트를 위한 하나의 <code>&lt;Connector&gt;</code>만을 포함하고 있는 
     <code>&lt;Service&gt;</code>를 설정할 수 있다.</li>
-    <li>적절한 <a href="config/engine.html">Engine <a href="config/host.html">Host</a>, 
+    <li>적절한 <a href="config/engine.html">Engine</a>, <a href="config/host.html">Host</a>, 
     그리고 프록싱을 통해 가상 호스트와 웹 응용 프로그램에 접근할 수 있는
     <a href="config/context.html">Context</a>요소를 설정할 수 있다.</li>
     <li>원하는대로, 앞서 설명한 IP필터와 포트 8081는 보호 할 수 있다. </li>
