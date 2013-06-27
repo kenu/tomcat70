@@ -1,4 +1,4 @@
-<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Apache Tomcat 7 (7.0.28-dev) - SSI How To</title><meta name="author" content="Glenn L. Nielsen"><style type="text/css" media="print">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Apache Tomcat 7 (7.0.28-dev) - SSI 이용 방법</title><meta name="author" content="Glenn L. Nielsen"><style type="text/css" media="print">
             .noPrint {display: none;}
             td#mainBody {width: 100%;}
         </style><style type="text/css">
@@ -6,145 +6,132 @@
             code.attributeName, code.propertyName {background-color:transparent;}
         </style></head><body bgcolor="#ffffff" text="#000000" link="#525D76" alink="#525D76" vlink="#525D76"><table border="0" width="100%" cellspacing="0"><!--PAGE HEADER--><tr><td><!--PROJECT LOGO--><a href="http://tomcat.apache.org/"><img src="./images/tomcat.gif" align="right" alt="
       The Apache Tomcat Servlet/JSP Container
-    " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">Apache Tomcat 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, Jun 24 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="./images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="index.html">Docs Home</a></li><li><a href="http://wiki.apache.org/tomcat/FAQ">FAQ</a></li></ul><p><strong>User Guide</strong></p><ul><li><a href="introduction.html">1) Introduction</a></li><li><a href="setup.html">2) Setup</a></li><li><a href="appdev/index.html">3) First webapp</a></li><li><a href="deployer-howto.html">4) Deployer</a></li><li><a href="manager-howto.html">5) Manager</a></li><li><a href="realm-howto.html">6) Realms and AAA</a></li><li><a href="security-manager-howto.html">7) Security Manager</a></li><li><a href="jndi-resources-howto.html">8) JNDI Resources</a></li><li><a href="jndi-datasource-examples-howto.html">9) JDBC DataSources</a></li><li><a href="class-loader-howto.html">10) Classloading</a></li><li><a href="jasper-howto.html">11) JSPs</a></li><li><a href="ssl-howto.html">12) SSL</a></li><li><a href="ssi-howto.html">13) SSI</a></li><li><a href="cgi-howto.html">14) CGI</a></li><li><a href="proxy-howto.html">15) Proxy Support</a></li><li><a href="mbeans-descriptor-howto.html">16) MBean Descriptor</a></li><li><a href="default-servlet.html">17) Default Servlet</a></li><li><a href="cluster-howto.html">18) Clustering</a></li><li><a href="balancer-howto.html">19) Load Balancer</a></li><li><a href="connectors.html">20) Connectors</a></li><li><a href="monitoring.html">21) Monitoring and Management</a></li><li><a href="logging.html">22) Logging</a></li><li><a href="apr.html">23) APR/Native</a></li><li><a href="virtual-hosting-howto.html">24) Virtual Hosting</a></li><li><a href="aio.html">25) Advanced IO</a></li><li><a href="extras.html">26) Additional Components</a></li><li><a href="maven-jars.html">27) Mavenized</a></li><li><a href="security-howto.html">28) Security Considerations</a></li><li><a href="windows-service-howto.html">29) Windows Service</a></li><li><a href="windows-auth-howto.html">30) Windows Authentication</a></li><li><a href="jdbc-pool.html">31) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">32) WebSocket</a></li></ul><p><strong>Reference</strong></p><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">Configuration</a></li><li><a href="api/index.html">Tomcat Javadocs</a></li><li><a href="servletapi/index.html">Servlet Javadocs</a></li><li><a href="jspapi/index.html">JSP 2.2 Javadocs</a></li><li><a href="elapi/index.html">EL 2.2 Javadocs</a></li><li><a href="http://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul><p><strong>Apache Tomcat Development</strong></p><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="http://wiki.apache.org/tomcat/TomcatVersions">Status</a></li><li><a href="developers.html">Developers</a></li><li><a href="architecture/index.html">Architecture</a></li><li><a href="funcspecs/index.html">Functional Specs.</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>SSI How To</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Table of Contents"><!--()--></a><a name="Table_of_Contents"><strong>Table of Contents</strong></a></font></td></tr><tr><td><blockquote>
+    " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">Apache Tomcat 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, Jun 27 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="./images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="index.html">Docs Home</a></li><li><a href="http://wiki.apache.org/tomcat/FAQ">FAQ</a></li></ul><p><strong>User Guide</strong></p><ul><li><a href="introduction.html">1) Introduction</a></li><li><a href="setup.html">2) Setup</a></li><li><a href="appdev/index.html">3) First webapp</a></li><li><a href="deployer-howto.html">4) Deployer</a></li><li><a href="manager-howto.html">5) Manager</a></li><li><a href="realm-howto.html">6) Realms and AAA</a></li><li><a href="security-manager-howto.html">7) Security Manager</a></li><li><a href="jndi-resources-howto.html">8) JNDI Resources</a></li><li><a href="jndi-datasource-examples-howto.html">9) JDBC DataSources</a></li><li><a href="class-loader-howto.html">10) Classloading</a></li><li><a href="jasper-howto.html">11) JSPs</a></li><li><a href="ssl-howto.html">12) SSL</a></li><li><a href="ssi-howto.html">13) SSI</a></li><li><a href="cgi-howto.html">14) CGI</a></li><li><a href="proxy-howto.html">15) Proxy Support</a></li><li><a href="mbeans-descriptor-howto.html">16) MBean Descriptor</a></li><li><a href="default-servlet.html">17) Default Servlet</a></li><li><a href="cluster-howto.html">18) Clustering</a></li><li><a href="balancer-howto.html">19) Load Balancer</a></li><li><a href="connectors.html">20) Connectors</a></li><li><a href="monitoring.html">21) Monitoring and Management</a></li><li><a href="logging.html">22) Logging</a></li><li><a href="apr.html">23) APR/Native</a></li><li><a href="virtual-hosting-howto.html">24) Virtual Hosting</a></li><li><a href="aio.html">25) Advanced IO</a></li><li><a href="extras.html">26) Additional Components</a></li><li><a href="maven-jars.html">27) Mavenized</a></li><li><a href="security-howto.html">28) Security Considerations</a></li><li><a href="windows-service-howto.html">29) Windows Service</a></li><li><a href="windows-auth-howto.html">30) Windows Authentication</a></li><li><a href="jdbc-pool.html">31) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">32) WebSocket</a></li></ul><p><strong>Reference</strong></p><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">Configuration</a></li><li><a href="api/index.html">Tomcat Javadocs</a></li><li><a href="servletapi/index.html">Servlet Javadocs</a></li><li><a href="jspapi/index.html">JSP 2.2 Javadocs</a></li><li><a href="elapi/index.html">EL 2.2 Javadocs</a></li><li><a href="http://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul><p><strong>Apache Tomcat Development</strong></p><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="http://wiki.apache.org/tomcat/TomcatVersions">Status</a></li><li><a href="developers.html">Developers</a></li><li><a href="architecture/index.html">Architecture</a></li><li><a href="funcspecs/index.html">Functional Specs.</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>SSI 이용 방법</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Table of Contents"><!--()--></a><a name="Table_of_Contents"><strong>Table of Contents</strong></a></font></td></tr><tr><td><blockquote>
 <ul><li><a href="#Introduction">Introduction</a></li><li><a href="#Installation">Installation</a></li><li><a href="#Servlet_Configuration">Servlet Configuration</a></li><li><a href="#Filter_Configuration">Filter Configuration</a></li><li><a href="#Directives">Directives</a></li><li><a href="#Variables">Variables</a></li></ul>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Introduction"><strong>Introduction</strong></a></font></td></tr><tr><td><blockquote>
 
-<p>SSI (Server Side Includes) are directives that are placed in HTML pages,
-and evaluated on the server while the pages are being served. They let you
-add dynamically generated content to an existing HTML page, without having
-to serve the entire page via a CGI program, or other dynamic technology.
-</p>
+<p>SSI 는 HTML 페이지에서 위치해 페이지가 제공되는 동안 서버가 평가되는 지침입니다.
+이것은 당신이 CGI 프로그램이나 혹은 다른 동적 기술을 통해 전체적인 페이지를 제공할 필요 없이
+동적으로 발생된 내용들을 존재하는 HTML 페이지에 첨가할 수 있도록 합니다.</p>
 
-<p>Within Tomcat SSI support can be added when using Tomcat as your
-HTTP server and you require SSI support.  Typically this is done
-during development when you don't want to run a web server like Apache.</p>
-
-<p>Tomcat SSI support implements the same SSI directives as Apache.  See the
+<p>당신이 톰캣 SSI지원에서 추가를 한다면, 당신은 톰캣을 SSI 지원을 이용할 수 있고,
+HTTP 서버로서도 사용할 수 있습니다.
+전형적으로 이것은 개발하는 동안, 당신이 아파치와 같은 웹 서버가 작동하지 않기를 원할 때 이루어집니다.</p>
+<p>톰캣 SSI 지원은 아파치와 같은 동일한 SSI 지침을 구현합니다. 다음의 사이트를 보십시오.
 <a href="http://httpd.apache.org/docs/howto/ssi.html#basicssidirectives">
-Apache Introduction to SSI</a> for information on using SSI directives.</p>
+SSI에대한 아파치 소개</a> SSI 지침을 이용하는 것에 대한 소개</p>
 
-<p>SSI support is available as a servlet and as a filter. You should use one
-or the other to provide SSI support but not both.</p>
+<p>SSI 지원은 서블릿으로 및 필터로 사용할 수 있습니다.
+당신은 SSI 지원을 위해 둘 중 하나를 사용할 수는 있지만 둘 다 사용할 수는 없습니다.</p>
 
-<p>Servlet based SSI support is implemented using the class
-<code>org.apache.catalina.ssi.SSIServlet</code>.  Traditionally, this servlet
-is mapped to the URL pattern "*.shtml".</p>
+<p>SSI지원에 기초한 서블릿은 클래스
+<code>org.apache.catalina.ssi.SSIServlet</code>을 이용함으로써 구현이 가능합니다.
+관습적으로, 이 서블릿은 &ldquo;*.shtiml&rdquo;이라는 URL 형태로 연결됩니다.</p>
 
-<p>Filter based SSI support is implemented using the class
-<code>org.apache.catalina.ssi.SSIFilter</code>.  Traditionally, this filter
-is mapped to the URL pattern "*.shtml", though it can be mapped to "*" as
-it will selectively enable/disable SSI processing based on mime types.  The
-contentType init param allows you to apply SSI processing to JSP pages,
-javascript, or any other content you wish.</p>
-<p>By default SSI support is disabled in Tomcat.</p>
+<p>SSI 지원에 기초한 필터는 클래스
+<code>org.apache.catalina.ssi.SSIFilter</code>를 이용함으로서 구현이 가능합니다.
+관습적으로, 이 필터는 "*.shtml" 이라는 URL 형태로 연결됩니다.
+하지만 그것은 "*"로 연결될 수도 있습니다.
+그것은 선택적으로 MIME 유형에 따라 SSI처리를 사용 가능하게 할 수도, 무능하게 할 수도 있게 합니다.
+콘텐츠 형식 초기화 매개변수는 당신이 SSI 처리를 자바 스크립트라는 JSP 페이지나,
+당신이 원하는 다른 콘텐츠에 적용할 수 있도록 합니다. </p>
+<p>기본적으로 SSI 지원은 톰캣에서 비활성화됩니다.</p>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Installation"><strong>Installation</strong></a></font></td></tr><tr><td><blockquote>
 
-<p><strong>CAUTION</strong> - SSI directives can be used to execute programs
-external to the Tomcat JVM. If you are using the Java SecurityManager this
-will bypass your security policy configuration in <code>catalina.policy.</code>
+<p><strong>CAUTION</strong> - SSI 지시어는 톰캣 JVM외부에서 프로그램을 실행하는 데 사용할 수 있습니다.
+당신이 만약 자바 보안관리자를 사용한다면 다음의 보안 정책 구성을 생략합니다.
+<code>catalina.policy.</code>
 </p>
 
-<p>To use the SSI servlet, remove the XML comments from around the SSI servlet
-and servlet-mapping configuration in
-<code>$CATALINA_BASE/conf/web.xml</code>.</p>
+<p>SSI 서블릿을 사용하기 위해, SSI 시블릿 그리고 시블릿과 연결된 구성
+<code>$CATALINA_BASE/conf/web.xml</code>으로부터 XML 주석들을 삭제하십시오. </p>
 
-<p>To use the SSI filter, remove the XML comments from around the SSI filter
-and filter-mapping configuration in
-<code>$CATALINA_BASE/conf/web.xml</code>.</p>
+<p>SSI 필터를 사용하기 위해, SSI 필터 그리고 필터와 연결된 구성
+<code>$CATALINA_BASE/conf/web.xml</code>으로부터 XML 주석들을 삭제하십시오..</p>
 
-<p>Only Contexts which are marked as privileged may use SSI features (see the
-privileged property of the Context element).</p>
+<p>특별한 권한이 있음으로 표시된 컨텍스트만 SSI 기능을 사용할 수 있습니다.
+(컨텍스트 요소의 특별한 거권한이 있는지 보세요.) </p>
 
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Servlet Configuration"><!--()--></a><a name="Servlet_Configuration"><strong>Servlet Configuration</strong></a></font></td></tr><tr><td><blockquote>
 
-<p>There are several servlet init parameters which can be used to
-configure the behaviour of the SSI servlet.
+<p>SSI 시블릿의 동작을 구성할 수 있는데 사용될 수 있는 몇몇의 시블릿 초기화 매개변수가 있습니다.
+
 <ul>
-<li><strong>buffered</strong> - Should output from this servlet be buffered?
-(0=false, 1=true) Default 0 (false).</li>
-<li><strong>debug</strong> - Debugging detail level for messages logged
-by this servlet. Default 0.</li>
-<li><strong>expires</strong> - The number of seconds before a page with SSI
-directives will expire. Default behaviour is for all SSI directives to be
-evaluated for every request.</li>
-<li><strong>isVirtualWebappRelative</strong> - Should "virtual" SSI directive
-paths be interpreted as relative to the context root, instead of the server
-root? (0=false, 1=true) Default 0 (false).</li>
+<li><strong>buffered</strong>-이 시블릿의 결과값이 버퍼에 저장되어야 하는 것인가?
+(0 = 거짓, 1 = True) 기본값 0 (FALSE) </li>
+<li><strong>debug</strong> - 이 시블릿에 의해 기록된 메세지의 디버깅 상세 수치. 기본값  0.</li>
+<li><strong>expires</strong> - 페이지의 SSI 지시어가 만료되기 전 초 수. 기본 동작은 모든 SSI 지시어들이 모든 요구에 대해 평가되는 것이다. </li>
+<li><strong>isVirtualWebappRelative</strong> - &ldquo;virtual&rdquo;SSI 지시경로는  서버루트가 아닌 컨텍스트 루트와 연관된 것으로 해석될 수 있을 것인가? (0=false, 1=true) 기본값  0 (false).</li>
 <li><strong>inputEncoding</strong> - The encoding to be assumed for SSI
-resources if one cannot be determined from the resource itself. Default is
-the default platform encoding.</li>
+resources if one cannot be determined from the resource itself. 기본값은 기본 플랫폼 암호화이다.</li>
 <li><strong>outputEncoding</strong> - The encoding to be used for the result
-of the SSI processing. Default is UTF-8.</li>
-<li><strong>allowExec</strong> - Is the exec command enabled? Default is
-false.</li>
+of the SSI processing.기본값은 UTF-8이다.</li>
+<li><strong>allowExec</strong> - exec command가 가능한가? 기본값은 false이다.</li>
 </ul>
 </p>
 
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Filter Configuration"><!--()--></a><a name="Filter_Configuration"><strong>Filter Configuration</strong></a></font></td></tr><tr><td><blockquote>
 
-<p>There are several filter init parameters which can be used to
-configure the behaviour of the SSI filter.
+<p>SSI 필터의 동작을 구성할 수 있는 필터 초기화 매개 변수들이 있습니다.
 <ul>
-<li><strong>contentType</strong> - A regex pattern that must be matched before
-SSI processing is applied. When crafting your own pattern, don't forget that a
+<li><strong>contentType</strong> - SSI 처리 이전에 반드시 일치되어야 하는정규 표현 형식이 적용됩니다.
+당신만의 형식을 만들 때, don't forget that a
 mime content type may be followed by an optional character set in the form
-"mime/type; charset=set" that you must take into account.  Default is
-"text/x-server-parsed-html(;.*)?".</li>
-<li><strong>debug</strong> - Debugging detail level for messages logged
-by this servlet. Default 0.</li>
-<li><strong>expires</strong> - The number of seconds before a page with SSI
-directives will expire. Default behaviour is for all SSI directives to be
-evaluated for every request.</li>
+"mime/type; charset=set" that you must take into account. 기본값은
+"text/x-server-parsed-html(;.*)?"입니다.</li>
+<li><strong>debug</strong> - 메세지에 대한 오류검출 세부 수치가 이 서블릿에 의해 기록됩니다.
+기본값은 0입니다.</li>
+<li><strong>expires</strong> - SSI 지시자가 있는 페이지가 만료되기까지 걸리는 초.
+default behavior is for all SSI directives to be evaluated for every request.</li>
 <li><strong>isVirtualWebappRelative</strong> - Should "virtual" SSI directive
 paths be interpreted as relative to the context root, instead of the server
 root? (0=false, 1=true) Default 0 (false).</li>
-<li><strong>allowExec</strong> - Is the exec command enabled? Default is
-false.</li>
+<li><strong>allowExec</strong> - exec command가 가능합니까?
+기본값은 false 입니다.</li>
 </ul>
 </p>
 
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Directives"><strong>Directives</strong></a></font></td></tr><tr><td><blockquote>
-<p>Server Side Includes are invoked by embedding SSI directives in an HTML document
- whose type will be processed by the SSI servlet. The directives take the form of an HTML
- comment. The directive is replaced by the results of interpreting it before sending the
- page to the client. The general form of a directive is: </p>
+<p>SSI는 타입이 SSI 서블릿에 의해 처리되는 HTML 문서에 SSI 지시자를 내장시킴으로써 적용됩니다.
+ 이 지시자는 클라이언트에 페이지를 보내기 전 이것을 해석한 결과로부터 대체됩니다.
+ 지시자의 일반적인 형식은 다음과 같습니다.</p>
 <p> <code>&lt;!--#directive [parm=value] --&gt;</code></p>
-<p>The directives are:
+<p>지시자들은 다음과 같습니다.
 <ul>
 <li>
 <strong>config</strong> - <code>&lt;!--#config timefmt="%B %Y" --&gt;</code>
-Used to set the format of dates and other items processed by SSI
+SSI에 의해 처리된 날짜 형식과 다른 항목들이 사용됩니다.
 </li>
 <li>
 <strong>echo</strong> -   <code>&lt;!--#echo var="VARIABLE_NAME" --&gt;</code>
-will be replaced by the value of the variable.
-</li>
+변수값에 의해 대체될 것입니다.
+</li>The revision of the Common Gateway Interface that the
+  server uses if enabled
 <li>
-<strong>exec</strong> -  Used to run commands on the host system.
+<strong>exec</strong> -  호스트 시스템의 런 코멘드에 의해사용됩니다.
 </li>
 <li>
 <strong>include</strong> -  <code>&lt;!--#include virtual="file-name" --&gt;</code>
-inserts the contents
+컨텐츠를 삽입합니다.
 </li>
 <li>
 <strong>flastmod</strong> - <code>&lt;!--#flastmod file="filename.shtml" --&gt;</code>
-Returns the time that a file was lost modified.
+파일이 수정 손실된 시간을 반환합니다.
 </li>
 <li>
 <strong>fsize</strong> - <code>&lt;!--#fsize file="filename.shtml" --&gt;</code>
-Returns the size of a file.
+파일의 크기를 반환합니다.
 </li>
 <li>
 <strong>printenv</strong> - <code>&lt;!--#printenv --&gt;</code>
-Returns the list of all the defined variables.
+정의된 모든 변수의 목록을 반환합니다.
 </li>
 <li>
 <strong>set</strong> - <code>&lt;!--#set var="foo" value="Bar" --&gt;</code>
-is used to assign a value to a user-defind variable.
+사용자 정의 변수로 변수를 배정할 때 사용됩니다.
 </li>
 <li>
-<strong>if elif endif else</strong> - Used to create conditional sections. For example:</li>
+<strong>if elif endif else</strong> - 조건부 섹션을 만드는 데 사용됩니다. 예를들자면,</li>
 <code>&lt;!--#config timefmt="%A" --&gt;<br>
   &lt;!--#if expr="$DATE_LOCAL = /Monday/" --&gt;<br>
   &lt;p&gt;Meeting at 10:00 on Mondays&lt;/p&gt;<br>
@@ -157,9 +144,9 @@ is used to assign a value to a user-defind variable.
 </p>
 See the
 <p> <a href="http://httpd.apache.org/docs/howto/ssi.html#basicssidirectives">
-Apache Introduction to SSI</a> for more information on using SSI directives.</p>
+SSI에 대한 아파치 소개</a> SSI지시자의 더많은 사용을 위한</p>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Variables"><strong>Variables</strong></a></font></td></tr><tr><td><blockquote>
-<p>The SSI servlet currently implements the following variables:
+<p>SSI 시블릿은 현재 뒤에오는 변수들을 시행합니다.
 </p>
 <table border="1">
 <tr>
@@ -170,104 +157,102 @@ Apache Introduction to SSI</a> for more information on using SSI directives.</p>
 <tr>
 <td>AUTH_TYPE</td>
 <td>
-  The type of authentication used for this user: BASIC, FORM, etc.</td>
+  이 사용자들에 대해 사용되는 인증유형: BASIC, FORM, etc.</td>
 </tr>
 
 <tr>
 <td>CONTENT_LENGTH</td>
 <td>
-  The length of the data (in bytes or the number of
-  characters) passed from a form.</td>
+  형식으로부터 전달되는 데이타의 길이 (바이트 혹은 문자의 수).</td>
 </tr>
 
 <tr>
 <td>CONTENT_TYPE</td>
 <td>
-  The MIME type of the query data, such as "text/html".</td>
+  "text/html"와 같은 질의 데이타의 MIME 형식.</td>
 </tr>
 
 <tr>
 <td>DATE_GMT</td>
 <td>
-Current date and time in GMT</td>
+현재의 데이타와 그리니치 표준 시간(GMT)</td>
 </tr>
 
 <tr>
 <td>DATE_LOCAL</td>
 <td>
-Current date and time in the local time zone</td>
+현재 데이타와 지역시간</td>
 </tr>
 <tr>
 <td>DOCUMENT_NAME</td>
 <td>
-The current file</td>
+현재 파일</td>
 </tr>
 <tr>
 <td>DOCUMENT_URI</td>
 <td>
-Virtual path to the file</td>
+파일로 가는 가상경로</td>
 </tr>
 
 <tr>
 <td>GATEWAY_INTERFACE</td>
 <td>
-  The revision of the Common Gateway Interface that the
-  server uses if enabled: "CGI/1.1".</td>
+ The revision of the Common Gateway Interface that the
+  server uses if enabled : "CGI/1.1".</td>
 </tr>
 
 <tr>
 <td>HTTP_ACCEPT</td>
 <td>
-  A list of the MIME types that the client can accept.</td>
+  클라이언트가 수용 가능한는 MIME 타입의 리스트.</td>
 </tr>
 
 <tr>
 <td>HTTP_ACCEPT_ENCODING</td>
 <td>
-  A list of the compression types that the client can accept.</td>
+  클라이언트가 수용 가능한 압축 타입의 리스트.</td>
 </tr>
 
 <tr>
 <td>HTTP_ACCEPT_LANGUAGE</td>
 <td>
-  A list of the languages that the client can accept.</td>
+  클라이언트가 수용가능한 언어의 리스트.</td>
 </tr>
 <tr>
 <td>HTTP_CONNECTION</td>
 <td>
-  The way that the connection from the client is being managed:
+  클라이언트에서 연결이 관리되고있는 방법 :
   "Close" or "Keep-Alive".</td>
 </tr>
 <tr>
 <td>HTTP_HOST</td>
 <td>
-  The web site that the client requested.</td>
+  클라이언트가 요청하는 웹 사이트.</td>
 </tr>
 <tr>
 <td>HTTP_REFERER</td>
 <td>
-  The URL of the document that the client linked from.</td>
+  클라이언트에서 링크 된 문서의 URL.</td>
 </tr>
 <tr>
 <td>HTTP_USER_AGENT</td>
 <td>
-  The browser the client is using to issue the request.</td>
+ 클라이언트가 요청을 실행하기 위해 사용하는 브라우저.</td>
 </tr>
 <tr>
 <td>LAST_MODIFIED</td>
 <td>
-Last modification date and time for current file</td>
+현재 파일의 마지막 수정 날짜와 시간.</td>
 </tr>
 <tr>
 <td>PATH_INFO</td>
 <td>
-  Extra path information passed to a servlet.</td>
+  서블릿에 전달된 추가 경로 정보.</td>
 </tr>
 <tr>
 <td>PATH_TRANSLATED</td>
 <td>
-  The translated version of the path given by the
-  variable PATH_INFO.</td>
+  변수 PATH_INFO에게 받은 경로의 번역된 버전.</td>
 </tr>
 <tr>
 <td>QUERY_STRING</td>
@@ -284,22 +269,22 @@ with "\"</td>
 <tr>
 <td>REMOTE_ADDR</td>
 <td>
-  The remote IP address of the user making the request.</td>
+  요청을 하는 유저의 원격 IP 주소.</td>
 </tr>
 <tr>
 <td>REMOTE_HOST</td>
 <td>
-  The remote hostname of the user making the request.</td>
+  요청하는 유저의 원격 호스트네임.</td>
 </tr>
 <tr>
 <td>REMOTE_PORT</td>
 <td>
-  The port number at remote IP address of the user making the request.</td>
+  요청하는 유저의 원격 IP 주소에서의 포트넘버.</td>
 </tr>
 <tr>
 <td>REMOTE_USER</td>
 <td>
-  The authenticated name of the user.</td>
+  유저의 진짜임이 입증된 이름.</td>
 </tr>
 <tr>
 <td>REQUEST_METHOD</td>
@@ -310,43 +295,42 @@ with "\"</td>
 <tr>
 <td>REQUEST_URI</td>
 <td>
-  The web page originally requested by the client.</td>
+  클라이언트가 본래 요청한 웹 페이지.</td>
 </tr>
 <tr>
 <td>SCRIPT_FILENAME</td>
 <td>
-  The location of the current web page on the server.</td>
+  서버의 최근 웹 페이지의 위치.</td>
 </tr>
 <tr>
 <td>SCRIPT_NAME</td>
 <td>
-  The name of the web page.</td>
+  웹 페이지의 이름.</td>
 </tr>
 <tr>
 <td>SERVER_ADDR</td>
 <td>
-  The server's IP address.</td>
+  서버의 IP 주소.</td>
 </tr>
 <tr>
 <td>SERVER_NAME</td>
 <td>
-  The server's hostname or IP address.</td>
+  서버의 호스트네임이나 IP 주소.</td>
 </tr>
 <tr>
 <td>SERVER_PORT</td>
 <td>
-  The port on which the server received the request.</td>
+  서버가 요청받은 포트.</td>
 </tr>
 <tr>
 <td>SERVER_PROTOCOL</td>
 <td>
-  The protocol used by the server. E.g. "HTTP/1.1".</td>
+  서버가 사용하는 프로토콜. E.g. "HTTP/1.1".</td>
 </tr>
 <tr>
 <td>SERVER_SOFTWARE</td>
 <td>
-  The name and version of the server software that is
-  answering the client request.</td>
+  클라이언트의 요청에 응답하는 서버 소프트웨어의 정보</td>
 </tr>
 <tr>
 <td>UNIQUE_ID</td>
