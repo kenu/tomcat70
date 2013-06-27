@@ -13,14 +13,14 @@ ASF는 아파치 라이선스 버전 2.0 ( "라이선스")에 따라 귀하에�
 
 -->
 
-<프로젝트 이름은 = "아파치 톰캣 (Apache Tomcat) 설명서"
+<project name="아파치 톰캣 (Apache Tomcat) 설명서"
               href="http://tomcat.apache.org/">
 
   
-    <TITLE> 아파치 톰캣 7 </ TITLE>
+    <title>아파치 톰캣 7</title>
 
     <logo href="/images/tomcat.gif">
-        아파치 톰캣 서블릿 / JSP 컨테이너
+        아파치 톰캣 서블릿/JSP 컨테이너
     </logo>
 
   
@@ -28,7 +28,7 @@ ASF는 아파치 라이선스 버전 2.0 ( "라이선스")에 따라 귀하에�
 <body>
 
 
-<menu 이름=“Links">
+<menu name="Links">
   <item name="Docs Home"              href="index.html"/>
   <item name="FAQ"                    href="http://wiki.apache.org/tomcat/FAQ" />
 </menu>
@@ -36,52 +36,53 @@ ASF는 아파치 라이선스 버전 2.0 ( "라이선스")에 따라 귀하에�
   
 
 <menu name="User Guide">
-<item name="1) 소개"                  href="소개.html"/>
-<item name="2) 설정"                  href="설정.html"/>
-<item name="3) 첫 번째 웹 애플리케이션" href="AppDev (영문) / 인덱스.html"/>
-<item name="4) 전개"                  href="전개 - 하우투.html"/>
-<item name="5) 매니저"                href="매니저 - 하우투.html"/>
-<item name="6) 영역 및 AAA"           href="영역 - 하우투.html"/>
+<item name="1) 소개"                  href="introduction.html"/>
+<item name="2) 설정"                  href="setup.html"/>
+<item name="3) 첫 번째 웹 애플리케이션" href="appdev/index.html"/>
+<item name="4) 디플로이어"                  href="deployer-howto.html"/>
+<item name="5) 매니저"                href="manager-howto.html"/>
+<item name="6) 영역 및 AAA"           href="realm-howto.html"/>
 <item name="7) 보안 관리자"
-      href="보안 관리자 - 하우투.html"/>
-<item name="8) JNDI 자원"             href="JNDI 자원 - 하우투.html"/>
-<item name="9) JDBC 데이터 소스" 
-      href="JDBC 데이터 소스 - 하우투.html"/>
-<item name="10) 클래스 로딩"           href="클래스 로더 하우투.html"/> 
+      href="security-manager-howto.html"/>
+<item name="8) JNDI 자원"             href="jndi-resources-howto.html"/>
+<item name="9) JDBC 데이터소스" 
+      href="jndi-datasource-examples-howto.html"/>
+<item name="10) 클래스 로딩"           href="class-loader-howto.html"/> 
 <item name="11) JSPs"                 href="jasper-howto.html"/>
 <item name="12) SSL"                  href="ssl-howto.html"/>
 <item name="13) SSI"                  href="ssi-howto.html"/>
 <item name="14) CGI"                  href="cgi-howto.html"/>
-<item name="15) 프록시 지원"          href="프록시-howto.html"/>
-<item name="16) MBean 설명"
-      href="mbeans-설명-howto.html"/>
-<item name="17) 기본 서블릿"          href="기본_서블릿.html"/>
-<item name="18) 클러스터링"           href="클러스터-howto.html"/>
+<item name="15) 프록시 지원"          href="proxy-howto.html"/>
+<item name="16) MBean 디스크립터"
+      href="mbeans-descriptor-howto.html"/>
+<item name="17) 기본 서블릿"          href="default-servlet.html"/>
+<item name="18) 클러스터링"           href="cluster-howto.html"/>
 <item name="19) Load Balancer"        href="balancer-howto.html"/>
 <item name="20) Connectors"           href="connectors.html"/>
 <item name="21) 모니터링 및 관리"
-      href="모니터링.html"/>
+      href="monitoring.html"/>
 <item name="22) Logging"              href="logging.html"/>
 <item name="23) APR/Native"           href="apr.html"/>
-<item name="24) 가상 호스팅"          href="가상호스팅-howto.html"/>
+<item name="24) 가상 호스팅"          href="virtual-hosting-howto.html"/>
 <item name="25) 고급 IO"              href="aio.html"/>
 <item name="26) 추가 구성 요소"
-      href="추가_구성_요소.html"/>
+      href="extras.html"/>
 <item name="27) Mavenized"            href="maven-jars.html"/>
 <item name="28) 보안 고려 사항"
 href="security-howto.html"/>
 <item name="29) Windows Service"      href="windows-service-howto.html"/>
-<item name="30) Windows 입증"
+<item name="30) Windows 인증"
       href="windows-auth-howto.html"/>
-<item name="31) Tomcat's JDBC Pool"   href="jdbc-pool.html"/>
-<item name="32) 웹 소켓"              href="web-socket-howto.html"/>
+<item name="31) Tomcat's JDBC Pool"
+      href="jdbc-pool.html"/>
+<item name="32) 웹소켓"              href="web-socket-howto.html"/>
 
 </menu>
 
 
 <menu name="참고">
 <item name="Release Notes"            href="RELEASE-NOTES.txt"/>
-<item name="구성"                     href="config/index.html"/>
+<item name="환경설정"                     href="config/index.html"/>
 <item name="톰캣 Javadocs"            href="api/index.html"/>
 <item name="서블릿 Javadocs"          href="servletapi/index.html"/>
 <item name="JSP 2.2 Javadocs"         href="jspapi/index.html"/>
@@ -95,10 +96,9 @@ href="security-howto.html"/>
 <menu name="Apache Tomcat Development">
 <item name="Building"                 href="building.html"/>
 <item name="Changelog"                href="changelog.html"/>
-<item name="위치"
-href="http://wiki.apache.org/tomcat/TomcatVersions"/>
-<item name="개발자"                   href="developers.html"/>
-<item name="구조"                     href="architecture/index.html" />
+<item name="현황"                      href="http://wiki.apache.org/tomcat/TomcatVersions"/>
+<item name="개발자"                    href="developers.html"/>
+<item name="아키텍처"                     href="architecture/index.html" />
 <item name="기능 사양."               href="funcspecs/index.html"/>  
   </menu>
 
