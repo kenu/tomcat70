@@ -286,7 +286,7 @@
     </p>
   </section>
 
-  <section name="web.xml">
+ <section name="web.xml">
     <p>이 기본 적용 <code>conf/web.xml</code>파일 and
     <code>WEB-INF/web.xml</code> 웹 응용 프로그램의 파일들은 구성 요소를 정의하는 경우 여기에 언급.</p>
 
@@ -298,7 +298,7 @@
     <p>The DefaultServlet은 <strong>listings</strong>로 구성되어 있고 
     <code>false</code>로 설정되어 있습니다. 수있는 디렉토리 목록이 안전하지 않은 것으로 간주되어 있기 때문에 
     수천 개의 파일이있는 디렉토리의 목록을 생성하는 DOS 공격으로 이어지는 
-    중요한 CPU를 소비 할 수 있기 때문이 아닙니다.
+    중요한 CPU를 소비할 수 있기 때문이 아닙니다.</p>
 
     <p><a href="config/filter.html">FailedRequestFilter</a>
     구성 요청 매개 변수를 구문 분석하는 동안 오류가있었습니다 요청을 거부 할 수 있습니다. 
