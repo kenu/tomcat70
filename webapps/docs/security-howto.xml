@@ -33,13 +33,18 @@
 </section>
 
   <section name="Introduction">
-    <p>Tomcat is configured to be reasonably secure for most use cases by
-    default. Some environments may require more, or less, secure configurations.
-    This page is to provide a single point of reference for configuration
-    options that may impact security and to offer some commentary on the
-    expected impact of changing those options. The intention is to provide a
-    list of configuration options that should be considered when assessing the
-    security of a Tomcat installation.</p>
+    <p>
+톰캣은 기본적으로 대부분의 사용 사례에 대해 합리적으로 안전한 것으로 구성되어 있습니다. 
+일부 환경은 더 또는 더 적은, 보안 구성이 필요할 수 있습니다. 이 페이지는 보안에 영향을 미칠 수 있으며,
+이러한 옵션을 변경의 예상 영향에 대한 몇 가지 논평을 제공하는 구성 옵션에 대한 참조의 단일 지점을 제공하는 것입니다.
+의도는 톰캣 설치의 보안을 평가할 때 고려해야 할 구성 옵션 목록을 제공하는 것입니다.
+
+
+
+
+
+
+.</p>
 
     <p><strong>Note</strong>: Reading this page is not a substitute for reading
     and understanding the detailed configuration documentation. Fuller
