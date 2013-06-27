@@ -23,7 +23,7 @@
     &project;
 
     <properties>
-      <title>Windows Authentication How-To</title>
+      <title>Windows 인증 방법</title>
     </properties>
 
 <body>
@@ -33,92 +33,92 @@
 </section>
 
 <section name="Overview">
-<p>Integrated Windows authentication is most frequently used within intranet
-environments since it requires that the server performing the authentication and
-the user being authenticated are part of the same domain. For the user to be
-authenticated automatically, the client machine used by the user must also be
-part of the domain.</p>
-<p>There are several options for implementing integrated Windows authentication
-with Apache Tomcat. They are:
+<p>Windows 통합 인증은 가장 자주 인트라넷 내에서 사용
+그것은 서버가 인증을 수행하고 있어야 환경 때문에
+인증 된 사용자는 동일한 도메인의 일부입니다.사용자가 될 때까지
+자동 인증, 사용자가 사용하는 클라이언트 컴퓨터도 있어야합니다
+도메인의 일부입니다.</p>
+<p>Windows 통합 인증을 구현하기위한 몇 가지 옵션이 있습니다
+아파치 톰캣과 함께. 그들은 다음과 같습니다 :
 <ul>
-<li>Built-in Tomcat support.</li>
-<li>Use a third party library such as Waffle.</li>
-<li>Use a reverse proxy that supports Windows authentication to perform the
-authentication step such as IIS or httpd.</li>
+<li>내장 된 톰캣를 지원합니다.</li>
+<li>같은 와플과 같은 타사 라이브러리를 사용합니다.</li>
+<li>수행하는 Windows 인증을 지원하는 역방향 프록시를 사용
+같은 IIS 나 아파치와 같은 인증 단계.</li>
 </ul>
-The configuration of each of these options is discussed in the following
-sections.</p>
+이러한 옵션의 각각의 구성은 다음에 설명되어 있습니다
+섹션.</p>
 </section>
 
 <section name="Built-in Tomcat support">
-<p><strong>This is a work in progress. There are a number of outstanding
-questions that require further testing.</strong> These include:
+<p><strong>그의 진행중인 작품입니다. 뛰어난의 숫자가 있습니다
+추가 테스트가 필요 질문.</strong> These include:
 </p>
 <ul>
-<li>Does the domain name have to be in upper case?</li>
-<li>Does the SPN have to start with HTTP/...?</li>
-<li>Can a port number be appended to the end of the host in the SPN?</li>
-<li>Can the domain be left off the user in the ktpass command?</li>
-<li>What are the limitations on the account that Tomcat can run as? SPN
-    associated account works, domain admin works, local admin doesn't
-    work</li>
+<li>도메인 이름은 대문자로해야합니까?</li>
+<li>SPN은 HTTP /로 시작해야합니까 ...?</li>
+<li>포트 번호 SPN의 호스트의 끝에 추가 할 수 있습니까?</li>
+<li>도메인 ktpass 명령에 사용자 중단 할 수 있습니까?</li>
+<li>톰캣으로 실행할 수있는 계정의 제한은 무엇입니까? SPN
+     관련 계정 작품, 도메인 관리자 작업, 로컬 관리자는하지 않습니다
+     법과k</li>
 </ul>
-<p>There are four components to the configuration of the built-in Tomcat
-support for Windows authentication. The domain controller, the server hosting
-Tomcat, the web application wishing to use Windows authentication and the client
-machine. The following sections describe the configuration required for each
-component.</p>
-<p>The names of the three machines used in the configuration examples below are
-win-dc01.dev.local (the domain controller), win-tc01.dev.local (the Tomcat
-instance) and win-pc01.dev.local (client). All are members of the DEV.LOCAL
-domain.</p>
-<p>Note: In order to use the passwords in the steps below, the domain password
-policy had to be relaxed. This is not recommended for production environments.
+<p>내장 된 톰캣의 구성을 네 가지 구성 요소가 있습니다
+Windows 인증을 지원합니다.도메인 컨트롤러를 호스팅하는 서버
+톰캣, Windows 인증을 사용하고자하는 웹 응용 프로그램과 클라이언트
+기계.다음 섹션에서는 각에 필요한 구성을 설명
+구성 요소입니다.</p>
+<p>아래의 구성 예에서 사용 된 세 가지 기계의 이름은
+윈 - dc01.dev.local (도메인 컨트롤러), 윈 - tc01.dev.local (톰캣
+예)와 윈 - pc01.dev.local (클라이언트). 모든 DEV.LOCAL의 구성원
+도메인을 입력합니다.</p>
+<p>참고 : 아래의 단계에서 암호를 사용하려면 도메인 암호
+정책을 완화 할 수 있었다. 이 프로덕션 환경에는 권장되지 않습니다.
 </p>
 
   <subsection name="Domain Controller">
-  <p>These steps assume that the server has already been configured to act as a
-  domain controller. Configuration of a Windows server as a domain controller is
-  outside the scope of this how-to. The steps to configure the domain controller
-  to enable Tomcat to support Windows authentication are as follows:
+  <p>이 단계에서는 서버가 이미 역할을하도록 구성되어 있다고 가정
+   도메인 컨트롤러입니다.Windows 서버의 구성 도메인 컨트롤러이기 때문에
+   이 방법의 범위를 벗어난.도메인 컨트롤러를 구성하는 단계
+   Tomcat이 Windows 인증을 지원할 수 있도록하는 것은 다음과 같습니다 :
   </p>
   <ul>
-  <li>Create a domain user that will be mapped to the service name used by the
-  Tomcat server. In this how-to, this user is called <code>tc01</code> and has a
-  password of <code>tc01pass</code>.</li>
-  <li>Map the service principal name (SPN) to the user account. SPNs take the
-  form <code>
+  <li>에서 사용하는 서비스 이름에 매핑 될 도메인 사용자를 생성
+   Tomcat 서 v를. 이 방법이 사용자가 <CODE> TC01 </ code>를 호출하고있다에
+   의 비밀 <code>tc01pass</code>.</li>
+  <li>사용자 계정에 서비스 주체 이름 (SPN)을 매핑합니다. SPN이가을
+   형태 <code>
   &lt;service class&gt;/&lt;host&gt;:&lt;port&gt;/&lt;service name&gt;</code>.
-  The SPN used in this how-to is <code>HTTP/win-tc01.dev.local</code>. To
-  map the user to the SPN, run the following:
+ 이에 사용되는 SPN 방법 <CODE> HTTP/win-tc01.dev.local입니다 </ code>를. 에
+  SPN에 사용자를 매핑하려면 다음을 실행합니다 :
   <source>setspn -A HTTP/win-tc01.dev.local tc01</source>
   </li>
-  <li>Generate the keytab file that the Tomcat server will use to authenticate
-  itself to the domain controller. This file contains the Tomcat private key for
-  the service provider account and should be protected accordingly. To generate
-  the file, run the following command (all on a single line):
-  <source>ktpass /out c:\tomcat.keytab /mapuser tc01@DEV.LOCAL
-          /princ HTTP/win-tc01.dev.local@DEV.LOCAL
-          /pass tc01pass /kvno 0</source></li>
-  <li>Create a domain user to be used on the client. In this how-to the domain
-  user is <code>test</code> with a password of <code>testpass</code>.</li>
+  <li>Tomcat 서버가 인증하는 데 사용하는 키탭 파일을 생성
+   자체 도메인 컨트롤러에. 이 파일의 톰캣 개인 키를 포함
+  서비스 제공자의 계정과 그에 따라 보호해야합니다. 생성하려면
+  파일, 다음 명령 (모두 한 줄에)을 실행 :
+   <source>의의 ktpass / 아웃 C : \ tomcat.keytab / mapuser tc01@DEV.LOCAL
+           / 공주 역 HTTP/win-tc01.dev.local @ DEV.LOCAL
+           / tc01pass / kvno와 0을 전달</source></li>
+  <li>클라이언트에서 사용하는 도메인 사용자를 작성하십시오. 이있는 도메인의 사용 방법
+   사용자는 <code>test</code> 의 암호 <code>testpass</code>.</li>
   </ul>
-  <p>The above steps have been tested on a domain controller running Windows
-  Server 2008 R2 64-bit Standard using the Windows Server 2003 functional level
-  for both the forest and the domain.
+  <p>위의 단계는 Windows를 실행하는 도메인 컨트롤러에서 테스트되었습니다
+   Windows Server 2003 기능 수준을 사용하여 서버 2008 R2 64 비트 표준
+  숲과 도메인 모두.
   </p>
   </subsection>
 
   <subsection name="Tomcat instance">
-  <p>These steps assume that Tomcat and a Java 6 JDK/JRE have already been
-  installed and configured and that Tomcat is running as the tc01@DEV.LOCAL
-  user. The steps to configure the Tomcat instance for Windows authentication
-  are as follows:
+  <p>이 단계는 톰캣과 자바 6 JDK / JRE가 이미했다고 가정
+   설치 및 구성하고 Tomcat은 tc01@DEV.LOCAL으로 실행됩니다
+   사용자. 윈도우 인증 톰캣 인스턴스를 구성하는 단계
+   다음과 같습니다 :
   </p>
   <ul>
   <li>Copy the <code>tomcat.keytab</code> file created on the domain controller
   to <code>$CATALINA_BASE/conf/tomcat.keytab</code>.</li>
-  <li>Create the kerberos configuration file
+  <li>Kerberos 구성 파일을 만듭니다
   <code>$CATALINA_BASE/conf/krb5.ini</code>. The file used in this how-to
   contained:<source>[libdefaults]
 default_realm = DEV.LOCAL
@@ -135,7 +135,7 @@ DEV.LOCAL = {
 [domain_realm]
 dev.local= DEV.LOCAL
 .dev.local= DEV.LOCAL</source>
-  The location of this file can be changed by setting the
+  이 파일의 위치를 설정하여 변경할 수 있습니다
   <code>java.security.krb5.conf</code> systm property.</li>
   <li>Create the JAAS login configuration file
   <code>$CATALINA_BASE/conf/jaas.conf</code>. The file used in this how-to
@@ -156,45 +156,45 @@ com.sun.security.jgss.krb5.accept {
     keyTab="c:/apache-tomcat-7.0.x/conf/tomcat.keytab"
     storeKey=true;
 };</source>
-  The location of this file can be changed by setting the
-  <code>java.security.auth.login.config</code> system property. The LoginModule
-  used is a JVM specific one so ensure that the LoginModule specified matches
-  the JVM being used. The name of the login configuration must match the
-  value used by the <a href="config/valve.html#SPNEGO_Valve">authentication
+  이 파일의 위치를 설정하여 변경할 수 있습니다
+  <code>java.security.auth.login.config</code> system property.로그인 모듈
+   입니다 사용하는 JVM 특정 하나 때문에 로그인 모듈이 일치에게 지정했는지 확인
+  JVM이 사용되고있다.로그인 구성의 이름이 일치해야합니다
+  만약 당신이 좋아하면 것인지의 href="config/valve.html#SPNEGO_Valve"> 인증에 사용되는 값
   valve</a>.</li>
-  <li>The system property <code>javax.security.auth.useSubjectCredsOnly</code>
-  is automatically set to the required value of false if a web application is
-  configured to use the SPNEGO authentication method.</li>
+  <li>시스템 속성 <code>javax.security.auth.useSubjectCredsOnly</code>
+ 웹 응용 프로그램이있는 경우 자동으로 false를 필요한 값으로 설정됩니다
+  SPNEGO 인증 방법을 사용하도록 구성.</li>
   </ul>
-  <p>The SPNEGO authenticator will work with any <a href="config/realm.html">
-  Realm</a> but if used with the JNDI Realm, by default the JNDI Realm will use
-  the user&apos;s delegated credentials to connect to the Active Directory.
+  <p>SPNEGO의 인증은 만약 당신이 좋아하면 것인지의 href="config/realm.html"> 함께 작동합니다
+  JNDI 영역과 함께 사용하는 경우 영역은 </a>하지만, 기본적으로 JNDI 영역을 사용합니다
+  사용자의 위임 된 자격 증명을 Active Directory에 연결합니다.
   </p>
-  <p>The above steps have been tested on a Tomcat server running Windows Server
-  2008 R2 64-bit Standard with an Oracle 1.6.0_24 64-bit JDK.</p>
+  <p>위의 단계는 Windows Server를 실행하는 Tomcat 서버에서 테스트되었습니다
+   64 비트 JDK 1.6.0_24 오라클과 함께 2008 R2는 64 비트 표준.</p>
   </subsection>
 
   <subsection name="Web application">
-  <p>The web application needs to be configured to the use Tomcat specific
-  authentication method of <code>SPNEGO</code> (rather than BASIC etc.) in
-  web.xml. As with the other authenticators, behaviour can be customised by
-  explicitly configuring the <a href="config/valve.html#SPNEGO_Valve">
-  authentication valve</a> and setting attributes on the Valve.</p>
+  <p>웹 응용 프로그램을 사용 톰캣 특정을 구성해야
+   <CODE> SPNEGO </ code>를 (대신 등 BASIC 이상)에서의 인증 방법
+   web.xml에.다른 인증 자와 같이 동작하여 사용자 정의 할 수 있습니다
+   명시 적으로 만약 당신이 좋아하면 것인지의 </a href="config/valve.html#SPNEGO_Valve">을 구성
+   인증 밸브</a> 및 밸브의 속성을 설정.</p>
   </subsection>
 
   <subsection name="Client">
-  <p>The client must be configured to use Kerberos authentication. For Internet
-  Explorer this means making sure that the Tomcat instance is in the &quot;Local
-  intranet&quot; security domain and that it is configured (Tools > Internet
-  Options > Advanced) with integrated Windows authentication enabled. Note that
-  this <strong>will not</strong> work if you use the same machine for the client
-  and the Tomcat instance as Internet Explorer will use the unsupported NTLM
-  protocol.</p>
+  <p>클라이언트가 Kerberos 인증을 사용하도록 구성해야합니다. 인터넷
+   탐색기이 톰캣 인스턴스가 "로컬에 있는지 확인하는 방법
+   인트라넷 "보안 도메인과 그는 그것을 구성되어 있습니다 (도구> 인터넷
+   옵션> 고급) Windows 통합 인증을 사용하도록 설정. 참고
+   당신은 클라이언트의 동일한 시스템을 사용하는 경우이의 <strong>하지 않습니다 </ strong>을 작업
+   및 Internet Explorer와 같은 톰캣 인스턴스가 지원되지 않는 NTLM을 사용합니다
+   프로토콜입니다.</p>
   </subsection>
 
   <subsection name="References">
-  <p>Correctly configuring Kerberos authentication can be tricky. The following
-  references may prove helpful. Advice is also always available from the
+  <p>제대로 Kerberos 인증을 구성하는 까다로운 수 있습니다.다음
+   참조가 도움이 될 수 있습니다. 조언도에서 항상 사용할 수 있습니다
   <a href="http://tomcat.apache.org/lists.html#tomcat-users">Tomcat users
   mailing list</a>.</p>
   <ol>
@@ -218,34 +218,34 @@ com.sun.security.jgss.krb5.accept {
 <section name="Third party libraries">
 
   <subsection name="Waffle">
-  <p>Full details of this solution can be found through the
+  <p>이 솔루션의 전체 세부 사항을 찾을 수 있습니다
   <a href="http://waffle.codeplex.com/">Waffle site</a>. The key features are:</p>
   <ul>
   <li>Drop-in solution</li>
-  <li>Simple configuration (no JAAS or Kerberos keytab configuration required)
+  <li>간단한 구성 (아무 JAAS 또는 Kerberos 키탭 구성 필요)
   </li>
   <li>Uses a native library</li>
   </ul>
   </subsection>
 
   <subsection name="Spring Security - Kerberos Extension">
-  <p>Full details of this solution can be found through the
+  <p>이 솔루션의 전체 세부 사항을 찾을 수 있습니다
   <a href="http://static.springsource.org/spring-security/site/extensions/krb/index.html">
-  Kerberos extension site</a>. The key features are:</p>
+  Kerberos를 확장 사이트</a>. 주요 기능은 다음과 같습니다 :</p>
   <ul>
-  <li>Extension to Spring Security</li>
-  <li>Requires a Kerberos keytab file to be generated</li>
-  <li>Pure Java solution</li>
+  <li>Spring Security을 확장 </li>
+  <li>커버 로스 키 탭 파일을 생성해야합니다</li>
+  <li>순수 자바 솔루션</li>
   </ul>
   </subsection>
 
   <subsection name="SPNEGO project at SourceForge">
-  <p>Full details of this solution can be found through the
+  <p>이 솔루션의 전체 세부 사항을 찾을 수 있습니다
   <a href="http://spnego.sourceforge.net/index.html/">project site</a>. The key
   features are:</p>
   <ul>
-  <li>Uses Kerberos</li>
-  <li>Pure Java solution</li>
+  <li></li>Kerberos를 사용</li>
+  <li>순수 자바 솔루션</li>
   </ul>
   </subsection>
 </section>
@@ -253,39 +253,39 @@ com.sun.security.jgss.krb5.accept {
 <section name="Reverse proxies">
 
   <subsection name="Microsoft IIS">
-  <p>There are three steps to configuring IIS to provide Windows authentication.
-  They are:</p>
+  <p>Windows 인증을 제공하기 위해 IIS를 구성하는 세 가지 단계가 있습니다.
+   그들은 다음과 같습니다 :</p>
   <ol>
-  <li>Configure IIS as a reverse proxy for Tomcat (see the
-  <a href="http://tomcat.apache.org/connectors-doc/webserver_howto/iis.html">
-  IIS Web Server How-To)</a>.</li>
-  <li>Configure IIS to use Windows authentication</li>
-  <li>Configure Tomcat to use the authentication user information from IIS by
-  setting the tomcatAuthentication attribute on the <a href="config/ajp.html">
+  <li>톰캣 역방향 프록시로 IIS를 구성 (참조
+   만약 당신이 좋아하면 것인지의 <a href="http://tomcat.apache.org/connectors-doc/webserver_howto/iis.html">
+   IIS 웹 서버 사용 방법까지)</a>.</li>
+  <li>IIS Windows 인증을 사용하도록 구성</li>
+  <li>톰캣으로 IIS에서 인증 사용자 정보를 사용하도록 구성
+  에 tomcatAuthentication 속성을 설정 <a href="config/ajp.html">
   AJP connector</a> to <code>false</code>.</li>
   </ol>
   </subsection>
 
   <subsection name="Apache httpd">
-  <p>Apache httpd does not support Windows authentication out of the box but
-  there are a number of third-party modules that can be used. These include:</p>
+  <p>Apache의 아파치는 상자에서 Windows 인증을 지원하지 않지만
+   사용할 수있는 타사 모듈은 여러 가지가있을 수 있습니다. 이들은 다음과 같습니다 :</p>
   <ol>
   <li><a href="http://sourceforge.net/projects/mod-auth-sspi/">mod_auth_sspi</a>
-  for use on Windows platforms.</li>
+  윈도우 플랫폼에서 사용.</li>
   <li><a href="http://adldap.sourceforge.net/wiki/doku.php?id=mod_auth_ntlm_winbind">
-  mod_auth_ntlm_winbind</a> for non-Windows platforms. Known to work with httpd
-  2.0.x on 32-bit platforms. Some users have reported stability issues with both
-  httpd 2.2.x builds and 64-bit Linux builds.</li>
+  mod_auth_ntlm_winbind</a> 비 Windows 플랫폼을위한. 아파치와 함께 작동하는 것으로 알려져
+   32 비트 플랫폼에서의 2.0.x. 일부 사용자는 모두 안정성 문제를보고있다
+   아파치 2.2.x의 빌드 및 64 비트 Linux 빌드.</li>
   </ol>
-  <p>There are three steps to configuring httpd to provide Windows
-  authentication. They are:</p>
+  <p>윈도우에게 제공하도록 구성 아파치 세 가지 단계가 있습니다
+   인증. 그들은 다음과 같습니다 :</p>
   <ol>
-  <li>Configure httpd as a reverse proxy for Tomcat (see the
-  <a href="http://tomcat.apache.org/connectors-doc/webserver_howto/apache.html">
-  Apache httpd Web Server How-To)</a>.</li>
-  <li>Configure httpd to use Windows authentication</li>
-  <li>Configure Tomcat to use the authentication user information from httpd by
-  setting the tomcatAuthentication attribute on the <a href="config/ajp.html">
+  <li>톰캣 역방향 프록시로 아파치를 구성 (참조
+   만약 당신이 좋아하면 것인지의<a href="http://tomcat.apache.org/connectors-doc/webserver_howto/apache.html">
+   아파치 웹 서버 사용 방법까지)</a>.</li>
+  <li>윈도우 authenticatio를 사용하도록 아파치를 구성n</li>
+  <li>톰캣에 의해 아파치에서 인증 사용자 정보를 사용하도록 구성
+  에 tomcatAuthentication 속성을 설정 <a href="config/ajp.html">
   AJP connector</a> to <code>false</code>.</li>
   </ol>
   </subsection>
