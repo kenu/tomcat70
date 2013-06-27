@@ -12,7 +12,8 @@
     <p>
     톰캣은 기본적으로 대부분의 사용 사례에 대해 합리적으로 안전한 것으로 구성되어 있습니다. 
     일부 환경은 더 또는 더 적은, 보안 구성이 필요할 수 있습니다. 이 페이지는 보안에 영향을 미칠 수 있으며,
-    이러한 옵션을 변경의 예상 영향에 대한 몇 가지 논평을 제공하는 구성 옵션에 대한 참조의 단일 지점을 제공하는 것입니다.
+    이러한 옵션을 변경의 예상 영향에 대한 몇 가지 논평을 제공하는 
+    구성 옵션에 대한 참조의 단일 지점을 제공하는 것입니다.
     의도는 톰캣 설치의 보안을 평가할 때 고려해야 할 구성 옵션 목록을 제공하는 것입니다.</p>
 
     <p><strong>Note</strong>: 이 페이지를 읽는 것은 독서와 자세한 구성 설명서를 이해하기위한 대체하지 않습니다. 
@@ -23,303 +24,256 @@
     <p>바람둥이는 루트 사용자로 실행할 수 없습니다.톰캣 프로세스를위한 전용 사용자를 생성하고 
     운영 체제에 필요한 최소한의 권한으로 해당 사용자를 제공합니다.
     예를 들어, 원격으로 톰캣 사용자를 사용하여 로그온 할 수 없을 것이다.</p>
-    <p>파일 사용 권한도 제한 적합해야합니다.예 (자동 배포가 비활성화되고 웹 응용 프로그램은 폭발 디렉토리로 배포되는)와 같은 ASF에서 톰캣 인스턴스를 가지고, 
-    표준 구성 그룹 톰캣 동안 소유자와 루트가 소유 한 모든 톰캣 파일이 읽기가 / priviliges를 작성하는 것입니다 , 그룹은 읽기와 세상은 아무 권한이 없습니다.예외가 아닌 루트가 아닌 톰캣 사용자가 소유하는 
-    로그, 임시 및 작업 디렉토리입니다. 이것은 공격자가 톰캣 프로세스를 타협하더라도, 그들은 기존 웹 응용 프로그램을 Tomcat이 설정을 변경 새로운 웹 응용 프로그램을 배포하거나 수정할 수 없음을 의미합니다.
+    <p>파일 사용 권한도 제한 적합해야합니다.예 (자동 배포가 비활성화되고 웹 응용 프로그램은 
+    폭발 디렉토리로 배포되는)와 같은 ASF에서 톰캣 인스턴스를 가지고, 표준 구성 그룹 톰캣 동안 소유자와 루트가 
+    소유 한 모든 톰캣 파일이 읽기가 / priviliges를 작성하는 것입니다 , 그룹은 읽기와 세상은 아무 권한이 없습니다.
+    예외가 아닌 루트가 아닌 톰캣 사용자가 소유하는 로그, 임시 및 작업 디렉토리입니다.
+    이것은 공격자가 톰캣 프로세스를 타협하더라도, 그들은 기존 웹 응용 프로그램을 Tomcat이 
+    설정을 변경 새로운 웹 응용 프로그램을 배포하거나 수정할 수 없음을 의미합니다.
     톰캣 프로세스가 이러한 권한을 유지하기 위해 007의 umask를 함께 실행합니다.</p>
-    <p>네트워크 수준에서, 당신이 존재하는 것으로 예상 만 연결 들어오는 연결과 나가는 연결을 모두 제한하는 방화벽을 사용하는 것이 좋습니다.</p>
+    <p>네트워크 수준에서, 당신이 존재하는 것으로 예상 만 연결 들어오는 
+    연결과 나가는 연결을 모두 제한하는 방화벽을 사용하는 것이 좋습니다.</p>
   </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Default web applications"><!--()--></a><a name="Default_web_applications"><strong>Default web applications</strong></a></font></td></tr><tr><td><blockquote>
     <p>기본적으로 웹 응용 프로그램의 번호와 배송 바람둥이. 취약점은 과거에 이러한 응용 프로그램에서 발견되었다. 
     또 다른 취약점이 발견 될 경우 시스템이 위험에 노출되지 않도록 필요하지 않은 응용 프로그램을 제거해야합니다..</p>
   </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Security manager"><!--()--></a><a name="Security_manager"><strong>Security manager</strong></a></font></td></tr><tr><td><blockquote>
-    <p>보안 관리자를 활성화하면 상당히 같은 System.exit와 ()를 호출 네트워크 연결을 설정하거나 웹 응용 프로그램의 루트 및 임시 디렉터리 외부의 파일 시스템에 
-    액세스하는 등의 악의적 인 작업을 수행 할 웹 응용 프로그램의 능력을 제한하는 웹 응용 프로그램 샌드 박스에서 실행되도록 . 그러나, 이러한 보안 관리자를 방지 할 수있는, 
+    <p>보안 관리자를 활성화하면 상당히 같은 System.exit와 ()를 호출 네트워크 연결을 설정하거나 웹 응용 프로그램의 
+    루트 및 임시 디렉터리 외부의 파일 시스템에 액세스하는 등의 악의적 인 작업을 수행 할 웹 응용 프로그램의 
+    능력을 제한하는 웹 응용 프로그램 샌드 박스에서 실행되도록 . 그러나, 이러한 보안 관리자를 방지 할 수있는, 
     무한 루프를 통해 높은 CPU 소비를 트리거링 같은 악의적 인 동작이 있다는 것을 주목해야한다.</p>
 
-    <p>보안 관리자는 일반적으로 잠재적 인 영향을 제한하기 위해 수행됩니다 사용하면, 공격자는 신뢰할 수있는 웹 응용 프로그램을 손상 할 수있는 방법을 찾아야한다.
-    보안 관리자가 신뢰할 수없는 웹 응용 프로그램 (호스팅 환경에서 예) 실행의 위험을 줄이기 위해 사용할 수 있지만 보안 관리자는 신뢰할 수없는 웹 응용 프로그램을 실행하는 위험을 감소 시킨다는 것을 주목해야한다, 
-    그것은 그들을 제거하지 않습니다. 여러 개의 신뢰할 수없는 웹 응용 프로그램을 실행하는 경우, 각 웹 응용 프로그램이 다른 응용 프로그램의 가용성에 영향을 미치는 악의적 인 웹 응용 프로그램의 능력을 줄이기 위해 
-    별도의 톰캣 인스턴스 (이상적으로 분리 된 호스트)에 배치하는 것이 좋습니다.</p>
+    <p>보안 관리자는 일반적으로 잠재적 인 영향을 제한하기 위해 수행됩니다 사용하면, 공격자는 신뢰할 수있는
+    웹 응용 프로그램을 손상 할 수있는 방법을 찾아야한다. 보안 관리자가 신뢰할 수없는 웹 응용 프로그램 
+    (호스팅 환경에서 예) 실행의 위험을 줄이기 위해 사용할 수 있지만 보안 관리자는 신뢰할 수없는 
+    웹 응용 프로그램을 실행하는 위험을 감소 시킨다는 것을 주목해야한다, 
+    그것은 그들을 제거하지 않습니다. 여러 개의 신뢰할 수없는 웹 응용 프로그램을 실행하는 경우, 
+    각 웹 응용 프로그램이 다른 응용 프로그램의 가용성에 영향을 미치는 악의적 인 웹 응용 프로그램의 능력을 
+    줄이기 위해 별도의 톰캣 인스턴스 (이상적으로 분리 된 호스트)에 배치하는 것이 좋습니다.</p>
 
-    <p>톰캣은 보안 관리자가 활성화 된 테스트 만 톰캣 사용자의 대부분이 보안 관리자와 실행되지 않기 때문에 Tomcat은이 구성에서 잘 사용자 테스트​​로하지 않습니다.
-    거기, 그리고 것을 계속했다, 버그는 보안 관리자에서 실행에 의해 트리거되는 보도했다.</p>
+    <p>Tomcat이 보안 관리자를 사용하여 테스트하지만, Tomcat 사용자의 대부분은 보안 관리자는 실행되지 않으므로
+    Tomcat이 구성에서 잘 사용자 테스트​​로하지 않습니다. 이 있었고, 계속되고있는 버그는 보안 관리자에서 
+    실행함으로써 발생하는 것을보고했다..</p>
 
-    <p>The restrictions imposed by a security manager are likely to break most
-    applications if the security manager is enabled. The security manager should
-    not be used without extensive testing. Ideally, the use of a security
-    manager should be introduced at the start of the development cycle as it can
-    be time-consuming to track down and fix issues caused by enabling a security
-    manager for a mature application.</p>
+    <p>보안 관리자가 활성화 된 경우 보안 관리자에 의해 부과 된 제한은 대부분의 응용 프로그램을 깰 가능성이 있습니다.
+    보안 관리자는 광범위한 테스트를하지 않고 사용하지 않아야합니다. 
+    그것은 아래로 추적하고 성숙 응용 프로그램에 대한 보안 관리자를 사용하여 발생하는 문제를 해결하기 위해 많은 
+    시간이 소요될 수 있습니다 이상적으로, 보안 매니저의 사용은 개발주기의 시작에 소개해야한다.</p>
   </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="server.xml"><strong>server.xml</strong></a></font></td></tr><tr><td><blockquote>
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="server.xml/General"><strong>General</strong></a></font></td></tr><tr><td><blockquote>
-      <p>The default server.xml contains a large number of comments, including
-      some example component definitions that are commented out. Removing these
-      comments makes it considerably easier to read and comprehend
-      server.xml.</p>
-      <p>If a component type is not listed, then there are no settings for that
-      type that directly impact security.</p>
+      <p>기본 server.xml 주석 몇 가지 예를 들어 구성 요소 정의와 주석의 큰 숫자를 포함합니다. 
+      이러한 주석을 제거하면 상당히 쉽게 server.xml 파일을 읽고 이해 할 수 있습니다.</p>
+      <p>구성 요소 유형이 목록에없는 경우 해당 유형 직접적으로 영향을 미치는 보안에 대한 설정이 없습니다.</p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Server"><strong>Server</strong></a></font></td></tr><tr><td><blockquote>
-      <p>Setting the <strong>port</strong> attribute to <code>-1</code> disables
-      the shutdown port.</p>
-      <p>If the shutdown port is not disabled, a strong password should be
-      configured for <strong>shutdown</strong>.</p>
+      <p>설정 <strong>포트</strong>속성에 <code>-1</code> 종료 포트를 비활성화합니다.</p>
+      <p>종료 포트가 비활성화되지 않은 경우, 강력한 암호가 구성되야한다 <strong>shutdown</strong>.</p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Listeners"><strong>Listeners</strong></a></font></td></tr><tr><td><blockquote>
-      <p>The APR Lifecycle Listener is not stable if compiled on Solaris using
-      gcc. If using the APR/native connector on Solaris, compile it with the
-      Sun Studio compiler.</p>
+      <p>GCC를 사용하여 Solaris에서 컴파일하면 APR이 라이프 사이클 리스너가 안정되지 않습니다. Solaris에서 APR에 / 
+      기본 커넥터를 사용하는 경우, 썬 스튜디오 컴파일러로 컴파일합니다.</p>
 
-      <p>The Security Listener should be enabled and configured as appropriate.
+      <p>보안 리스너가 적절하게 설정하고 구성해야한다.
       </p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Connectors"><strong>Connectors</strong></a></font></td></tr><tr><td><blockquote>
-      <p>By default, an HTTP and an AJP connector are configured. Connectors
-      that will not be used should be removed from server.xml.</p>
+      <p>기본적으로 HTTP와 AJP 커넥터가 구성됩니다. 사용하지 않는 커넥터가 server.xml 파일에서 제거해야합니다.</p>
 
-      <p>The <strong>address</strong> attribute may be used to control which IP
-      address the connector listens on for connections. By default, the
-      connector listens on all configured IP addresses.</p>
+      <p>The <strong>주소</strong> 속성은 커넥터가 연결을 수신 대기하는 IP 주소를 제어하는 데 사용할 수 있습니다. 
+      기본적으로, 커넥터는 구성된 모든 IP 주소에서 수신 대기합니다.</p>
 
-      <p>The <strong>allowTrace</strong> attribute may be used to enable TRACE
-      requests which can be useful for debugging. Due to the way some browsers
-      handle the response from a TRACE request (which exposes the browser to an
-      XSS attack), support for TRACE requests is disabled by default.</p>
+      <p>The <strong>allowTrace</strong> 속성은 디버깅에 유용 할 수 있습니다 TRACE 요청을 활성화하는 데 
+      사용할 수 있습니다. 일부 브라우저에서는 TRACE 요청 (XSS 공격은 브라우저를 노출하는), 
+      TRACE 요청에 대한 지원의 응답을 처리하는 방식으로 인해 기본적으로 비활성화되어 있습니다.</p>
 
-      <p>The <strong>maxPostSize</strong> attribute controls the maximum size
-      of a POST request that will be parsed for parameters. The parameters are
-      cached for the duration of the request so this is limited to 2MB by
-      default to reduce exposure to a DOS attack.</p>
+      <p>The <strong>maxPostSize</strong>속성은 매개 변수에 대한 구문 분석되는 POST 요청의 최대 크기를 제어합니다. 
+      이 DOS 공격에 대한 노출을 줄이기 위해 기본적으로는 2MB 제한되어 있으므로 
+      매개 변수는 요청의 기간 동안 캐시됩니다..</p>
 
-      <p>The <strong>maxSavePostSize</strong> attribute controls the saving of
-      POST requests during FORM and CLIENT-CERT authentication. The parameters
-      are cached for the duration of the authentication (which may be many
-      minutes) so this is limited to 4KB by default to reduce exposure to a DOS
-      attack.</p>
+      <p>The <strong>maxSavePostSize</strong> 속성은 FORM 및 클라이언트 CERT 인증 과정에서 POST 요청의 저장을 
+      제어합니다. 이것은 DOS 공격에 대한 노출을 줄이기 위해 기본적으로 4킬로바이트로 제한되도록 매개 변수는 인증 
+      (많은 분 일 수 있음)의 기간 동안 캐시됩니다.</p>
 
-      <p>The <strong>maxParameterCount</strong> attribute controls the
-      maximum number of parameter and value pairs (GET plus POST) that can
-      be parsed and stored in the request. Excessive parameters are ignored.
-      If you want to reject such requests, configure a
+      <p>The <strong>maxParameterCount</strong> 속성을 구문 분석하고 요청에 저장할 수있는 매개 변수와 값 쌍의 
+      최대 수 (GET 플러스 POST)을 제어합니다. 과도한 매개 변수는 무시됩니다. 당신이 그런 요청을 거부 할 경우
       <a href="config/filter.html">FailedRequestFilter</a>.</p>
 
-      <p>The <strong>xpoweredBy</strong> attribute controls whether or not the
-      X-Powered-By HTTP header is sent with each request. If sent, the value of
-      the header contains the Servlet and JSP specification versions, the full
-      Tomcat version (e.g. Apache Tomcat/7.0.0), the name of the JVM vendor and
-      the version of the JVM. This header is disabled by default. This header
-      can provide useful information to both legitimate clients and attackers.
+      <p>The <strong>xpoweredBy</strong> 속성 컨트롤이 있는지 여부를 X-Powered-By에 HTTP 헤더 각 요청과 함께 
+      전송됩니다. 보낸 경우, 헤더의 값은 서블릿과 JSP 스펙 버전, 전체 톰캣 버전 
+      (예 : 아파치 Tomcat/7.0.0), JVM 공급 업체의 이름과 JVM의 버전이 포함되어 있습니다. 
+      이 헤더는 기본적으로 비활성화되어 있습니다. 이 헤더는 합법적 인 클라이언트와 공격자 모두에게 
+      유용한 정보를 제공 할 수 있습니다.
       </p>
 
-      <p>The <strong>server</strong> attribute controls the value of the Server
-      HTTP header. The default value of this header for Tomcat 4.1.x, 5.0.x,
-      5.5.x, 6.0.x and 7.0.x is Apache-Coyote/1.1. This header can provide
-      limited information to both legitimate clients and attackers.</p>
+      <p>The <strong>server</strong>속성은 서버에서 HTTP 헤더의 값을 제어합니다. 
+      톰캣 4.1.x를, 5.0.x의이 헤더의 기본 값은 ​​5.5.x 전 6.0.x 및 7.0.x가 Apache-Coyote/1.1입니다.
+      이 헤더는 합법적 인 클라이언트와 공격자 모두 제한된 정보를 제공 할 수 있습니다.</p>
 
-      <p>The <strong>SSLEnabled</strong>, <strong>scheme</strong> and
-      <strong>secure</strong> attributes may all be independently set. These are
-      normally used when Tomcat is located behind a reverse proxy and the proxy
-      is connecting to Tomcat via HTTP or HTTPS. They allow Tomcat to see the
-      SSL attributes of the connections between the client and the proxy rather
-      than the proxy and Tomcat. For example, the client may connect to the
-      proxy over HTTPS but the proxy connects to Tomcat using HTTP. If it is
-      necessary for Tomcat to be able to distinguish between secure and
-      non-secure connections received by a proxy, the proxy must use separate
-      connectors to pass secure and non-secure requests to Tomcat. If the
-      proxy uses AJP then the SSL attributes of the client connection are
-      passed via the AJP protocol and separate connectors are not needed.</p>
+      <p>The <strong>SSLEnabled</strong>, <strong>계획</strong> 그리고
+      <strong>보안</strong> 
+      속성은 모두 독립적으로 설정할 수 있습니다. 톰캣은 역방향 프록시 뒤에 위치하고 있으며 프록시가
+      HTTP 또는 HTTPS를 통해 톰캣에 연결하는 경우 다음은 일반적으로 사용됩니다. 그들은 클라이언트와 
+      오히려 프록시와 톰캣보다 프록시 사이의 연결의 SSL 특성을 볼 톰캣 수 있습니다. 
+      예를 들어, 클라이언트가 HTTPS를 통해 프록시에 연결할 수 있지만 프록시는 HTTP를 사용하여 Tomcat에 연결합니다. 
+      톰캣 프록시가 수신 보안 및 비보안 연결을 구별 할 수 있어야하는 것이 필요한 경우 프록시는 Tomcat에게
+      보안 및 비보안 요청을 전달하기 위해 별도의 커넥터를 사용합니다.프록시 다음 AJP를 사용하는 경우 
+      클라이언트 연결의 SSL 속성은 AJP 프로토콜과 별도의 커넥터가 필요하지 않습니다를 통해 전달됩니다.
+      </p>
 
-      <p>The <strong>ciphers</strong> attribute controls the ciphers used for
-      SSL connections. By default, the default ciphers for the JVM will be used.
-      This usually means that the weak export grade ciphers will be included in
-      the list of available ciphers. Secure environments will normally want to
-      configure a more limited set of ciphers.</p>
+      <p>The <strong>ciphers</strong> 특성은 SSL 연결에 사용되는 암호를 제어합니다. 
+      기본적으로 JVM의 기본 암호가 사용됩니다. 이것은 일반적으로 약한 수출 급 암호가 가능한 암호 목록에 
+      포함된다는 것을 의미합니다. 보안 환경은 일반적으로 암호의 더 제한된 집합을 구성 할 것입니다.</p>
 
-      <p>The <strong>tomcatAuthentication</strong> attribute is used with the
-      AJP connectors to determine if Tomcat should authenticate the user or if
-      authentication can be delegated to the reverse proxy that will then pass
-      the authenticated username to Tomcat as part of the AJP protocol.</p>
+      <p>The <strong>tomcatAuthentication</strong> 속성은 인증 후 AJP 프로토콜의 일부로서 Tomcat에게 
+      인증 된 사용자 이름을 전달합니다 역방향 프록시에 위임 할 수있는 경우 Tomcat이 사용자를 인증하거나 
+      여부를 결정하는 AJP 커넥터가 사용됩니다.</p>
 
-      <p>The <strong>allowUnsafeLegacyRenegotiation</strong> attribute provides
-      a workaround for
+      <p>The <strong>allowUnsafeLegacyRenegotiation</strong> 속성은 CVE-2009-3555 해결 방법을 제공합니다
       <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555">
-      CVE-2009-3555</a>, a TLS man in the middle attack. This workaround applies
-      to the BIO connector. It is only necessary if the underlying SSL
-      implementation is vulnerable to CVE-2009-3555. For more information on the
-      current state of this vulnerability and the work-arounds available see the
-      <a href="http://tomcat.apache.org/security-7.html">Tomcat 7 security
-      page</a>.</p>
+     </a>,중앙 공격 TLS 남자. 이 해결 방법은 BIO 커넥터에 적용됩니다.기본 SSL 구현 CVE-2009-3555에 
+     취약한 경우에만 필요합니다. 더이 취약점의 현재 상태에 대한 정보 및 작업 차선책을 사용할 
+     톰캣 7의 보안 페이지를 참조하십시오
+      <a href="http://tomcat.apache.org/security-7.html"></a>.</p>
 
-      <p>The <strong>requiredSecret</strong> attribute in AJP connectors
-      configures shared secret between Tomcat and reverse proxy in front of
-      Tomcat. It is used to prevent unauthorized connections over AJP protocol.</p>
+      <p>The <strong>requiredSecret</strong>AJP 커넥터의 속성은 톰캣 톰캣 앞에 역방향 프록시 사이의 
+      공유 비밀 키를 구성합니다. 그것은 AJP 프로토콜을 통해 인증되지 않은 연결을 방지하는 데 사용됩니다</p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Host"><strong>Host</strong></a></font></td></tr><tr><td><blockquote>
-      <p>The host element controls deployment. Automatic deployment allows for
-      simpler management but also makes it easier for an attacker to deploy a
-      malicious application. Automatic deployment is controlled by the
-      <strong>autoDeploy</strong> and <strong>deployOnStartup</strong>
-      attributes. If both are <code>false</code>, only Contexts defined in
-      server.xml will be deployed and any changes will require a Tomcat restart.
+      <p>호스트 요소 배치를 제어합니다. 자동 배포는 간단하게 관리 할 수 있습니다뿐만 아니라, 
+      악의적 인 응용 프로그램을 배포하는 공격자가 쉬워집니다.  자동 배포는 자동배포에 의해 제어됩니다
+      <strong>자동배포</strong> 그리고 <strong>배포를 시작합니다</strong>
+      attributes. 모두 <code>false</code>, 인경우 server.xml에 정의 된 유일한 컨텍스트는 배포 할 
+      어떤 변화가 Tomcat을 다시 시작해야합니다
       </p>
 
-      <p>In a hosted environment where web applications may not be trusted, set
-      the <strong>deployXml</strong> attribute to false to ignore any
-      context.xml packaged with the web application that may try to assign
-      increased privileges to the web application. </p>
+      <p>호스팅 된 환경에서 웹 응용 프로그램은 신뢰되지 않을 수 있습니다,설정 
+      <strong>deployXml</strong>어느 context.xml Web 응용 프로그램에 증가 권한을 할당하려고 할지도 모른다, 
+      Web 응용 프로그램과 함께 패키지를 무시하도록 false로 속성을정해야한다. </p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Context"><strong>Context</strong></a></font></td></tr><tr><td><blockquote>
-      <p>This applies to <a href="config/context.html">Context</a>
-      elements in all places where they can be defined:
+      <p>이런 적용대상은 <a href="config/context.html">문맥</a>이
+     정의 할 수있는 모든 장소의 요소:
       <code>server.xml</code> file,
       default <code>context.xml</code> file,
       per-host <code>context.xml.default</code> file,
-      web application context file in per-host configuration directory
-      or inside the web application.</p>
+      호스트 구성 디렉토리 또는 웹 응용 프로그램 내에서 웹 응용 프로그램 컨텍스트 파일입니다.</p>
 
-      <p>The <strong>crossContext</strong> attribute controls if a context is
-      allowed to access the resources of another context. It is
-      <code>false</code> by default and should only be changed for trusted web
-      applications.</p>
+      <p>The <strong>crossContext</strong>컨텍스트가 다른 컨텍스트의 리소스에 액세스 할 수 있는지 특성을 제어합니다.
+      이것은 <code>false</code> 기본적으로 만 신뢰할 수있는 웹 응용 프로그램으로 변경해야합니다.</p>
 
-      <p>The <strong>privileged</strong> attribute controls if a context is
-      allowed to use container provided servlets like the Manager servlet. It is
-      <code>false</code> by default and should only be changed for trusted web
-      applications.</p>
+      <p>The <strong>특권</strong> 컨텍스트 컨테이너를 사용하도록 허용하는 경우 속성 컨트롤은 
+      관리자 서블릿과 같은 서블릿을 제공한다. 이것은
+      <code>false</code> 기본적으로만 신뢰할 수있는 웹 응용 프로그램을 변경해야합니다.</p>
 
-      <p>The <strong>allowLinking</strong> attribute controls if a context is
-      allowed to use linked files. If enabled and the context is undeployed, the
-      links will be followed when deleting the context resources. To avoid this
-      behaviour, use the <strong>aliases</strong> attribute. Changing this
-      setting from the default of <code>false</code> on case insensitive
-      operating systems (this includes Windows) will disable a number of
-      security measures and allow, among other things, direct access to the
-      WEB-INF directory.</p>
+      <p>The <strong>링크허용</strong>컨텍스트가 링크 된 파일을 사용할 수 있도록 허용하는 경우 속성을 제어합니다.
+      활성화 컨텍스트가 배포 취소의 경우 상황에 맞는 자원을 삭제하는 경우, 링크가 따라야 할 것입니다. 
+      이 문제를 방지하려면, 사용합니다 <strong>별명</strong> 속성을명. 기본값이 설정을 변경
+      <code>false</code> 경우에 구분 운영 체제 (이 Windows를 포함한다), 다른 것들 중, WEB-INF 디렉토리에 
+      직접 액세스를 다수의 보안 조치를 해제하고 수 있습니다.</p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Valves"><strong>Valves</strong></a></font></td></tr><tr><td><blockquote>
-      <p>It is strongly recommended that an AccessLogValve is configured. The
-      default Tomcat configuration includes an AccessLogValve. These are
-      normally configured per host but may also be configured per engine or per
-      context as required.</p>
+      <p>그것은 강력 AccessLogValve을 구성하는 것이 좋습니다.기본 Tomcat 구성은 AccessLogValve가 포함되어 있습니다.
+      이들은 일반적으로 호스트별로 구성되어 있지만 필요한 경우에는 엔진 당 또는 상황별로 구성 할 수 있습니다.</p>
 
-      <p>Any administrative application should be protected by a
-      RemoteAddrValve. (Note that this Valve is also available as a Filter.)
-      The <strong>allow</strong> attribute should be used to limit access to a
-      set of known trusted hosts.</p>
+      <p>모든 관리 응용 프로그램은 RemoteAddrValve에 의해 보호되어야한다. 
+     (이 밸브는 필터로 사용할 수 있습니다.)
+      The <strong>allow</strong> 속성은 알려진 신뢰할 수있는 호스트 집합에 대한 액세스를 제한하는 데 사용되어야한다.
+      </p>
 
-      <p>The default ErrorReportValve includes the Tomcat version number in the
-      response sent to clients. To avoid this, custom error handling can be
-      configured within each web application. Alternatively, the version number
-      can be changed by creating the file
-      CATALINA_BASE/lib/org/apache/catalina/util/ServerInfo.properties with
-      content as follows:</p>
+      <p>기본 ErrorReportValve 클라이언트에 전송되는 응답의 톰캣 버전 번호가 포함되어 있습니다. 
+      이 문제를 방지하려면 사용자 지정 오류 처리는 각 웹 응용 프로그램에서 구성 할 수 있습니다. 
+      또한, 버전 번호가 파일 CATALINA_BASE / lib 디렉토리 / 조직 / 아파치 / 다음과 같은 내용을 가진 카타리나
+      / UTIL / ServerInfo.properties을 작성하여 변경할 수 있습니다 :</p>
       <div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>
-server.info=Apache Tomcat/7.0.x
+      server.info=Apache Tomcat/7.0.x
       </pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
-      <p>Modify the values as required. Note that this will also change the version
-      number reported in some of the management tools and may make it harder to
-      determine the real version installed. The CATALINA_HOME/bin/version.bat|sh
-      script will still report the version number.</p>
+      <p>필요에 따라 값을 수정합니다. 이것은 또한 관리 도구의 일부에서보고 된 버전 번호를 변경하고 
+      설치 실제 버전을 확인하는 것이 어렵게 만들 수도 있습니다.CATALINA_HOME / bin / version.bat | sh 스크립트는 
+      여전히 버전 번호를보고합니다.</p>
 
-      <p>The default ErrorReportValve can display stack traces and/or JSP
-      source code to clients when an error occurs. To avoid this, custom error
-      handling can be configured within each web application.</p>
+      <p>오류가 발생하면 기본 ErrorReportValve 스택 추적 및 / 또는 클라이언트에 JSP 소스 코드를 표시 할 수 있습니다.
+      이 문제를 방지하려면 사용자 지정 오류 처리는 각 웹 응용 프로그램에서 구성 할 수 있습니다.</p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Realms"><strong>Realms</strong></a></font></td></tr><tr><td><blockquote>
-      <p>The MemoryRealm is not intended for production use as any changes to
-      tomcat-users.xml require a restart of Tomcat to take effect.</p>
+      <p>톰캣-users.xml에 어떤 변화가 톰캣의 재시작을 적용하려면 필요로 MemoryRealm은 프로덕션 환경에서 
+      사용하기위한 것이 아닙니다.</p>
 
-      <p>The JDBCRealm is not recommended for production use as it is single
-      threaded for all authentication and authorization options. Use the
-      DataSourceRealm instead.</p>
+      <p>그것은 하나의 모든 인증 및 권한 부여 옵션에 대한 스레드되는 JDBCRealm은 실제 사용하지 않는 것이 좋습니다. 
+      대신 DataSourceRealm를 사용합니다.</p>
 
-      <p>The UserDatabaseRealm is not intended for large-scale installations. It
-      is intended for small-scale, relatively static environments.</p>
+      <p>UserDatabaseRealm은 대규모 설치하기위한 것이 아닙니다. 그것은 작은 규모, 
+      상대적으로 정적인 환경을위한 것입니다.</p>
 
-      <p>The JAASRealm is not widely used and therefore the code is not as
-      mature as the other realms. Additional testing is recommended before using
-      this realm.</p>
+      <p>JAASRealm은 널리 사용되지 않으며 따라서 코드는 다른 영역만큼 성숙되지 않습니다. 
+      추가 테스트는이 영역을 사용하기 전에 권장합니다.</p>
 
-      <p>By default, the realms do not implement any form of account lock-out.
-      This means that brute force attacks can be successful. To prevent a brute
-      force attack, the chosen realm should be wrapped in a LockOutRealm.</p>
+      <p>기본적으로 영역은 계정의 모든 형태를 잠글 아웃 구현하지 않습니다. 
+      이 무력 공격이 성공할 수 있다는 것을 의미합니다.무력 공격을 방지하기 위해, 선택한 영역이 LockOutRealm에 
+      래핑되어야한다.</p>
     </blockquote></td></tr></table>
 
     <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Manager"><strong>Manager</strong></a></font></td></tr><tr><td><blockquote>
-      <p>The manager component is used to generate session IDs.</p>
+      <p>관리자 구성 요소는 세션 ID를 생성하는 데 사용됩니다.</p>
 
-      <p>The default <strong>entropy</strong> value has been shown to generate predictable values
-      under certain conditions. For more secure session generation, this should
-      be set to a long string. This is done automatically if the APR/native
-      library is installed; a random value will be obtained from the APR/native
-      library.</p>
+      <p>기본 <strong>엔트로피</strong>값이 특정 조건에서 예측 가능한 값을 생성하기 위해 표시되었습니다.
+      보다 안전한 세션 생성을 위해, 이것은 긴 문자열로 설정해야합니다.APR / 네이티브 라이브러리가 설치되어있는 
+      경우이 작업은 자동으로 수행됩니다 임의의 값은 APR / 네이티브 라이브러리로부터 얻은 것입니다.</p>
 
-      <p>The class used to generate random session IDs may be changed with
-      the <strong>randomClass</strong> attribute.</p>
+      <p>임의의 세션 ID를 생성하는 데 사용되는 클래스로 변경 될 수 있습니다
+      <strong>임의클래스</strong>속성.</p>
 
-      <p>The length of the session ID may be changed with the
-      <strong>sessionIdLength</strong> attribute.</p>
+      <p>세션 ID의 길이로 변경 될 수 있습니다
+      <strong>세션 ID 길이</strong>속성.</p>
     </blockquote></td></tr></table>
   </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="System Properties"><!--()--></a><a name="System_Properties"><strong>System Properties</strong></a></font></td></tr><tr><td><blockquote>
-    <p>Setting <strong>org.apache.catalina.connector.RECYCLE_FACADES</strong>
-    system property to <code>true</code> will cause a new facade object to be
-    created for each request. This reduces the chances of a bug in an
-    application exposing data from one request to another.</p>
+    <p>설정 <strong>org.apache.catalina.connector.RECYCLE_FACADES</strong>
+    시스템 속성에 <code>true</code> 각 요청에 대해 생성 할 수있는 새로운 외관 객체의 원인이됩니다. 
+    이것은 또 다른 하나의 요청에서 데이터를 노출하는 응용 프로그램에서 버그의 가능성을 줄일 수 있습니다.</p>
 
     <p>The <strong>
     org.apache.catalina.connector.CoyoteAdapter.ALLOW_BACKSLASH</strong> and
     <strong>org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH</strong>
-    system properties allow non-standard parsing of the request URI. Using
-    these options when behind a reverse proxy may enable an attacker to bypass
-    any security constraints enforced by the proxy.</p>
+   시스템 속성은 요청 URI의 비표준 구문 분석 할 수 있습니다. 때 역방향 프록시 뒤에이 옵션을 사용하면 
+   공격자가 프록시에 의해 적용하는 보안 제한을 우회 할 수 있습니다.</p>
 
     <p>The <strong>
     org.apache.catalina.connector.Response.ENFORCE_ENCODING_IN_GET_WRITER
-    </strong> system property has security implications if disabled. Many user
-    agents, in breach of RFC2616, try to guess the character encoding of text
-    media types when the specification-mandated default of ISO-8859-1 should be
-    used. Some browsers will interpret as UTF-7 a response containing characters
-    that are safe for ISO-8859-1 but trigger an XSS vulnerability if interpreted
-    as UTF-7.</p>
-  </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="web.xml"><strong>web.xml</strong></a></font></td></tr><tr><td><blockquote>
-    <p>This applies to the default <code>conf/web.xml</code> file and
-    <code>WEB-INF/web.xml</code> files in web applications if they define
-    the components mentioned here.</p>
-
-    <p>The <a href="default-servlet.html">DefaultServlet</a> is configured
-    with <strong>readonly</strong> set to
-    <code>true</code>. Changing this to <code>false</code> allows clients to
-    delete or modify static resources on the server and to upload new
-    resources. This should not normally be changed without requiring
-    authentication.</p>
-
-    <p>The DefaultServlet is configured with <strong>listings</strong> set to
-    <code>false</code>. This isn't because allowing directory listings is
-    considered unsafe but because generating listings of directories with
-    thousands of files can consume significant CPU leading to a DOS attack.
+    </strong> 
+    비활성화 된 경우, 시스템 속성은 보안에 영향을 미칠 수 있습니다. 많은 사용자 에이전트는 RFC2616의 위반,
+    ISO-8859-1의 명세 의무 기본값을 사용해야 할 때 텍스트 미디어 타입의 문자 인코딩을 추측하려고합니다. 
+    일부 브라우저는 UTF-7 ISO-8859-1 안전하지만 UTF-7로 해석하면 XSS 취약점을 악용 문자가 포함 된 
+    응답으로 해석됩니다.
     </p>
+  </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="web.xml"><strong>web.xml</strong></a></font></td></tr><tr><td><blockquote>
+    <p>이 기본 적용 <code>conf/web.xml</code>파일 and
+    <code>WEB-INF/web.xml</code> 웹 응용 프로그램의 파일들은 구성 요소를 정의하는 경우 여기에 언급.</p>
+
+    <p>The <a href="default-servlet.html">DefaultServlet</a>  <strong>읽기전용</strong>으로 구성되어
+    <code>true</code>로 설정된다.이 변경은 <code>false</code> 클라이언트가 삭제하거나 수정 서버에서 
+    정적 리소스를 새로운 자원을 업로드 할 수 있습니다. 
+    이것은 일반적으로 인증을 요구하지 않고 변경 될 수 없습니다.</p>
+
+    <p>The DefaultServlet은 <strong>listings</strong>로 구성되어 있고 
+    <code>false</code>로 설정되어 있습니다. 수있는 디렉토리 목록이 안전하지 않은 것으로 간주되어 있기 때문에 
+    수천 개의 파일이있는 디렉토리의 목록을 생성하는 DOS 공격으로 이어지는 
+    중요한 CPU를 소비할 수 있기 때문이 아닙니다.</p>
 
     <p><a href="config/filter.html">FailedRequestFilter</a>
-    can be configured and used to reject requests that had errors during
-    request parameter parsing. Without the filter the default behaviour is
-    to ignore invalid or excessive parameters.</p>
+    구성 요청 매개 변수를 구문 분석하는 동안 오류가있었습니다 요청을 거부 할 수 있습니다. 
+    필터를 사용하지 않고 기본 동작이 잘못되었거나 매개 변수를 너무 무시하는 것입니다.</p>
   </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="General"><strong>General</strong></a></font></td></tr><tr><td><blockquote>
-    <p>BASIC and FORM authentication pass user names and passwords in clear
-    text. Web applications using these authentication mechanisms with clients
-    connecting over untrusted networks should use SSL.</p>
+    <p>일반 텍스트 BASIC과 FORM 인증 통과 사용자 이름과 암호. 신뢰할 수없는 네트워크를 통해 연결하는 
+    클라이언트에 이러한 인증 메커니즘을 사용하여 웹 응용 프로그램은 SSL을 사용합니다.</p>
 
-    <p>The session cookie for a session with an authenticated user are nearly
-    as useful as the user's password to an attacker and in nearly all
-    circumstances should be afforded the same level of protection as the
-    password itself. This usually means authenticating over SSL and continuing
-    to use SSL until the session ends.</p>
+    <p>인증 된 사용자와 세션에 대한 세션 쿠키는 공격자가 사용자의 암호만큼이나 유용하고 거의 모든 환경에서 
+    암호 자체 보호의 동일한 수준을 주어져야한다. 이것은 일반적으로 SSL을 통해 인증하고 세션이 종료 할 때까지 
+    SSL을 계속 사용하는 것을 의미합니다.</p>
   </blockquote></td></tr></table></td></tr><!--FOOTER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><!--PAGE FOOTER--><tr><td colspan="2"><div align="center"><font color="#525D76" size="-1"><em>
         Copyright &copy; 1999-2013, Apache Software Foundation
         </em></font></div></td></tr></table></body></html>
