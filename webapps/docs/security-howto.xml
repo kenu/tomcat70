@@ -36,7 +36,8 @@
     <p>
     톰캣은 기본적으로 대부분의 사용 사례에 대해 합리적으로 안전한 것으로 구성되어 있습니다. 
     일부 환경은 더 또는 더 적은, 보안 구성이 필요할 수 있습니다. 이 페이지는 보안에 영향을 미칠 수 있으며,
-    이러한 옵션을 변경의 예상 영향에 대한 몇 가지 논평을 제공하는 구성 옵션에 대한 참조의 단일 지점을 제공하는 것입니다.
+    이러한 옵션을 변경의 예상 영향에 대한 몇 가지 논평을 제공하는 
+    구성 옵션에 대한 참조의 단일 지점을 제공하는 것입니다.
     의도는 톰캣 설치의 보안을 평가할 때 고려해야 할 구성 옵션 목록을 제공하는 것입니다.</p>
 
     <p><strong>Note</strong>: 이 페이지를 읽는 것은 독서와 자세한 구성 설명서를 이해하기위한 대체하지 않습니다. 
@@ -49,11 +50,15 @@
     <p>바람둥이는 루트 사용자로 실행할 수 없습니다.톰캣 프로세스를위한 전용 사용자를 생성하고 
     운영 체제에 필요한 최소한의 권한으로 해당 사용자를 제공합니다.
     예를 들어, 원격으로 톰캣 사용자를 사용하여 로그온 할 수 없을 것이다.</p>
-    <p>파일 사용 권한도 제한 적합해야합니다.예 (자동 배포가 비활성화되고 웹 응용 프로그램은 폭발 디렉토리로 배포되는)와 같은 ASF에서 톰캣 인스턴스를 가지고, 
-    표준 구성 그룹 톰캣 동안 소유자와 루트가 소유 한 모든 톰캣 파일이 읽기가 / priviliges를 작성하는 것입니다 , 그룹은 읽기와 세상은 아무 권한이 없습니다.예외가 아닌 루트가 아닌 톰캣 사용자가 소유하는 
-    로그, 임시 및 작업 디렉토리입니다. 이것은 공격자가 톰캣 프로세스를 타협하더라도, 그들은 기존 웹 응용 프로그램을 Tomcat이 설정을 변경 새로운 웹 응용 프로그램을 배포하거나 수정할 수 없음을 의미합니다.
+    <p>파일 사용 권한도 제한 적합해야합니다.예 (자동 배포가 비활성화되고 웹 응용 프로그램은 
+    폭발 디렉토리로 배포되는)와 같은 ASF에서 톰캣 인스턴스를 가지고, 표준 구성 그룹 톰캣 동안 소유자와 루트가 
+    소유 한 모든 톰캣 파일이 읽기가 / priviliges를 작성하는 것입니다 , 그룹은 읽기와 세상은 아무 권한이 없습니다.
+    예외가 아닌 루트가 아닌 톰캣 사용자가 소유하는 로그, 임시 및 작업 디렉토리입니다.
+    이것은 공격자가 톰캣 프로세스를 타협하더라도, 그들은 기존 웹 응용 프로그램을 Tomcat이 
+    설정을 변경 새로운 웹 응용 프로그램을 배포하거나 수정할 수 없음을 의미합니다.
     톰캣 프로세스가 이러한 권한을 유지하기 위해 007의 umask를 함께 실행합니다.</p>
-    <p>네트워크 수준에서, 당신이 존재하는 것으로 예상 만 연결 들어오는 연결과 나가는 연결을 모두 제한하는 방화벽을 사용하는 것이 좋습니다.</p>
+    <p>네트워크 수준에서, 당신이 존재하는 것으로 예상 만 연결 들어오는 
+    연결과 나가는 연결을 모두 제한하는 방화벽을 사용하는 것이 좋습니다.</p>
   </section>
 
   <section name="Default web applications">
@@ -62,157 +67,132 @@
   </section>
 
   <section name="Security manager">
-    <p>보안 관리자를 활성화하면 상당히 같은 System.exit와 ()를 호출 네트워크 연결을 설정하거나 웹 응용 프로그램의 루트 및 임시 디렉터리 외부의 파일 시스템에 
-    액세스하는 등의 악의적 인 작업을 수행 할 웹 응용 프로그램의 능력을 제한하는 웹 응용 프로그램 샌드 박스에서 실행되도록 . 그러나, 이러한 보안 관리자를 방지 할 수있는, 
+    <p>보안 관리자를 활성화하면 상당히 같은 System.exit와 ()를 호출 네트워크 연결을 설정하거나 웹 응용 프로그램의 
+    루트 및 임시 디렉터리 외부의 파일 시스템에 액세스하는 등의 악의적 인 작업을 수행 할 웹 응용 프로그램의 
+    능력을 제한하는 웹 응용 프로그램 샌드 박스에서 실행되도록 . 그러나, 이러한 보안 관리자를 방지 할 수있는, 
     무한 루프를 통해 높은 CPU 소비를 트리거링 같은 악의적 인 동작이 있다는 것을 주목해야한다.</p>
 
-    <p>보안 관리자는 일반적으로 잠재적 인 영향을 제한하기 위해 수행됩니다 사용하면, 공격자는 신뢰할 수있는 웹 응용 프로그램을 손상 할 수있는 방법을 찾아야한다.
-    보안 관리자가 신뢰할 수없는 웹 응용 프로그램 (호스팅 환경에서 예) 실행의 위험을 줄이기 위해 사용할 수 있지만 보안 관리자는 신뢰할 수없는 웹 응용 프로그램을 실행하는 위험을 감소 시킨다는 것을 주목해야한다, 
-    그것은 그들을 제거하지 않습니다. 여러 개의 신뢰할 수없는 웹 응용 프로그램을 실행하는 경우, 각 웹 응용 프로그램이 다른 응용 프로그램의 가용성에 영향을 미치는 악의적 인 웹 응용 프로그램의 능력을 줄이기 위해 
-    별도의 톰캣 인스턴스 (이상적으로 분리 된 호스트)에 배치하는 것이 좋습니다.</p>
+    <p>보안 관리자는 일반적으로 잠재적 인 영향을 제한하기 위해 수행됩니다 사용하면, 공격자는 신뢰할 수있는
+    웹 응용 프로그램을 손상 할 수있는 방법을 찾아야한다. 보안 관리자가 신뢰할 수없는 웹 응용 프로그램 
+    (호스팅 환경에서 예) 실행의 위험을 줄이기 위해 사용할 수 있지만 보안 관리자는 신뢰할 수없는 
+    웹 응용 프로그램을 실행하는 위험을 감소 시킨다는 것을 주목해야한다, 
+    그것은 그들을 제거하지 않습니다. 여러 개의 신뢰할 수없는 웹 응용 프로그램을 실행하는 경우, 
+    각 웹 응용 프로그램이 다른 응용 프로그램의 가용성에 영향을 미치는 악의적 인 웹 응용 프로그램의 능력을 
+    줄이기 위해 별도의 톰캣 인스턴스 (이상적으로 분리 된 호스트)에 배치하는 것이 좋습니다.</p>
 
-    <p>톰캣은 보안 관리자가 활성화 된 테스트 만 톰캣 사용자의 대부분이 보안 관리자와 실행되지 않기 때문에 Tomcat은이 구성에서 잘 사용자 테스트​​로하지 않습니다.
-    거기, 그리고 것을 계속했다, 버그는 보안 관리자에서 실행에 의해 트리거되는 보도했다.</p>
+    <p>Tomcat이 보안 관리자를 사용하여 테스트하지만, Tomcat 사용자의 대부분은 보안 관리자는 실행되지 않으므로
+    Tomcat이 구성에서 잘 사용자 테스트​​로하지 않습니다. 이 있었고, 계속되고있는 버그는 보안 관리자에서 
+    실행함으로써 발생하는 것을보고했다..</p>
 
-    <p>The restrictions imposed by a security manager are likely to break most
-    applications if the security manager is enabled. The security manager should
-    not be used without extensive testing. Ideally, the use of a security
-    manager should be introduced at the start of the development cycle as it can
-    be time-consuming to track down and fix issues caused by enabling a security
-    manager for a mature application.</p>
+    <p>보안 관리자가 활성화 된 경우 보안 관리자에 의해 부과 된 제한은 대부분의 응용 프로그램을 깰 가능성이 있습니다.
+    보안 관리자는 광범위한 테스트를하지 않고 사용하지 않아야합니다. 
+    그것은 아래로 추적하고 성숙 응용 프로그램에 대한 보안 관리자를 사용하여 발생하는 문제를 해결하기 위해 많은 
+    시간이 소요될 수 있습니다 이상적으로, 보안 매니저의 사용은 개발주기의 시작에 소개해야한다.</p>
   </section>
 
   <section name="server.xml">
     <subsection name="General">
-      <p>The default server.xml contains a large number of comments, including
-      some example component definitions that are commented out. Removing these
-      comments makes it considerably easier to read and comprehend
-      server.xml.</p>
-      <p>If a component type is not listed, then there are no settings for that
-      type that directly impact security.</p>
+      <p>기본 server.xml 주석 몇 가지 예를 들어 구성 요소 정의와 주석의 큰 숫자를 포함합니다. 
+      이러한 주석을 제거하면 상당히 쉽게 server.xml 파일을 읽고 이해 할 수 있습니다.</p>
+      <p>구성 요소 유형이 목록에없는 경우 해당 유형 직접적으로 영향을 미치는 보안에 대한 설정이 없습니다.</p>
     </subsection>
 
     <subsection name="Server">
-      <p>Setting the <strong>port</strong> attribute to <code>-1</code> disables
-      the shutdown port.</p>
-      <p>If the shutdown port is not disabled, a strong password should be
-      configured for <strong>shutdown</strong>.</p>
+      <p>설정 <strong>포트</strong>속성에 <code>-1</code> 종료 포트를 비활성화합니다.</p>
+      <p>종료 포트가 비활성화되지 않은 경우, 강력한 암호가 구성되야한다 <strong>shutdown</strong>.</p>
     </subsection>
 
     <subsection name="Listeners">
-      <p>The APR Lifecycle Listener is not stable if compiled on Solaris using
-      gcc. If using the APR/native connector on Solaris, compile it with the
-      Sun Studio compiler.</p>
+      <p>GCC를 사용하여 Solaris에서 컴파일하면 APR이 라이프 사이클 리스너가 안정되지 않습니다. Solaris에서 APR에 / 
+      기본 커넥터를 사용하는 경우, 썬 스튜디오 컴파일러로 컴파일합니다.</p>
 
-      <p>The Security Listener should be enabled and configured as appropriate.
+      <p>보안 리스너가 적절하게 설정하고 구성해야한다.
       </p>
     </subsection>
 
     <subsection name="Connectors">
-      <p>By default, an HTTP and an AJP connector are configured. Connectors
-      that will not be used should be removed from server.xml.</p>
+      <p>기본적으로 HTTP와 AJP 커넥터가 구성됩니다. 사용하지 않는 커넥터가 server.xml 파일에서 제거해야합니다.</p>
 
-      <p>The <strong>address</strong> attribute may be used to control which IP
-      address the connector listens on for connections. By default, the
-      connector listens on all configured IP addresses.</p>
+      <p>The <strong>주소</strong> 속성은 커넥터가 연결을 수신 대기하는 IP 주소를 제어하는 데 사용할 수 있습니다. 
+      기본적으로, 커넥터는 구성된 모든 IP 주소에서 수신 대기합니다.</p>
 
-      <p>The <strong>allowTrace</strong> attribute may be used to enable TRACE
-      requests which can be useful for debugging. Due to the way some browsers
-      handle the response from a TRACE request (which exposes the browser to an
-      XSS attack), support for TRACE requests is disabled by default.</p>
+      <p>The <strong>allowTrace</strong> 속성은 디버깅에 유용 할 수 있습니다 TRACE 요청을 활성화하는 데 
+      사용할 수 있습니다. 일부 브라우저에서는 TRACE 요청 (XSS 공격은 브라우저를 노출하는), 
+      TRACE 요청에 대한 지원의 응답을 처리하는 방식으로 인해 기본적으로 비활성화되어 있습니다.</p>
 
-      <p>The <strong>maxPostSize</strong> attribute controls the maximum size
-      of a POST request that will be parsed for parameters. The parameters are
-      cached for the duration of the request so this is limited to 2MB by
-      default to reduce exposure to a DOS attack.</p>
+      <p>The <strong>maxPostSize</strong>속성은 매개 변수에 대한 구문 분석되는 POST 요청의 최대 크기를 제어합니다. 
+      이 DOS 공격에 대한 노출을 줄이기 위해 기본적으로는 2MB 제한되어 있으므로 
+      매개 변수는 요청의 기간 동안 캐시됩니다..</p>
 
-      <p>The <strong>maxSavePostSize</strong> attribute controls the saving of
-      POST requests during FORM and CLIENT-CERT authentication. The parameters
-      are cached for the duration of the authentication (which may be many
-      minutes) so this is limited to 4KB by default to reduce exposure to a DOS
-      attack.</p>
+      <p>The <strong>maxSavePostSize</strong> 속성은 FORM 및 클라이언트 CERT 인증 과정에서 POST 요청의 저장을 
+      제어합니다. 이것은 DOS 공격에 대한 노출을 줄이기 위해 기본적으로 4킬로바이트로 제한되도록 매개 변수는 인증 
+      (많은 분 일 수 있음)의 기간 동안 캐시됩니다.</p>
 
-      <p>The <strong>maxParameterCount</strong> attribute controls the
-      maximum number of parameter and value pairs (GET plus POST) that can
-      be parsed and stored in the request. Excessive parameters are ignored.
-      If you want to reject such requests, configure a
+      <p>The <strong>maxParameterCount</strong> 속성을 구문 분석하고 요청에 저장할 수있는 매개 변수와 값 쌍의 
+      최대 수 (GET 플러스 POST)을 제어합니다. 과도한 매개 변수는 무시됩니다. 당신이 그런 요청을 거부 할 경우
       <a href="config/filter.html">FailedRequestFilter</a>.</p>
 
-      <p>The <strong>xpoweredBy</strong> attribute controls whether or not the
-      X-Powered-By HTTP header is sent with each request. If sent, the value of
-      the header contains the Servlet and JSP specification versions, the full
-      Tomcat version (e.g. Apache Tomcat/7.0.0), the name of the JVM vendor and
-      the version of the JVM. This header is disabled by default. This header
-      can provide useful information to both legitimate clients and attackers.
+      <p>The <strong>xpoweredBy</strong> 속성 컨트롤이 있는지 여부를 X-Powered-By에 HTTP 헤더 각 요청과 함께 
+      전송됩니다. 보낸 경우, 헤더의 값은 서블릿과 JSP 스펙 버전, 전체 톰캣 버전 
+      (예 : 아파치 Tomcat/7.0.0), JVM 공급 업체의 이름과 JVM의 버전이 포함되어 있습니다. 
+      이 헤더는 기본적으로 비활성화되어 있습니다. 이 헤더는 합법적 인 클라이언트와 공격자 모두에게 
+      유용한 정보를 제공 할 수 있습니다.
       </p>
 
-      <p>The <strong>server</strong> attribute controls the value of the Server
-      HTTP header. The default value of this header for Tomcat 4.1.x, 5.0.x,
-      5.5.x, 6.0.x and 7.0.x is Apache-Coyote/1.1. This header can provide
-      limited information to both legitimate clients and attackers.</p>
+      <p>The <strong>server</strong>속성은 서버에서 HTTP 헤더의 값을 제어합니다. 
+      톰캣 4.1.x를, 5.0.x의이 헤더의 기본 값은 ​​5.5.x 전 6.0.x 및 7.0.x가 Apache-Coyote/1.1입니다.
+      이 헤더는 합법적 인 클라이언트와 공격자 모두 제한된 정보를 제공 할 수 있습니다.</p>
 
-      <p>The <strong>SSLEnabled</strong>, <strong>scheme</strong> and
-      <strong>secure</strong> attributes may all be independently set. These are
-      normally used when Tomcat is located behind a reverse proxy and the proxy
-      is connecting to Tomcat via HTTP or HTTPS. They allow Tomcat to see the
-      SSL attributes of the connections between the client and the proxy rather
-      than the proxy and Tomcat. For example, the client may connect to the
-      proxy over HTTPS but the proxy connects to Tomcat using HTTP. If it is
-      necessary for Tomcat to be able to distinguish between secure and
-      non-secure connections received by a proxy, the proxy must use separate
-      connectors to pass secure and non-secure requests to Tomcat. If the
-      proxy uses AJP then the SSL attributes of the client connection are
-      passed via the AJP protocol and separate connectors are not needed.</p>
+      <p>The <strong>SSLEnabled</strong>, <strong>계획</strong> 그리고
+      <strong>보안</strong> 
+      속성은 모두 독립적으로 설정할 수 있습니다. 톰캣은 역방향 프록시 뒤에 위치하고 있으며 프록시가
+      HTTP 또는 HTTPS를 통해 톰캣에 연결하는 경우 다음은 일반적으로 사용됩니다. 그들은 클라이언트와 
+      오히려 프록시와 톰캣보다 프록시 사이의 연결의 SSL 특성을 볼 톰캣 수 있습니다. 
+      예를 들어, 클라이언트가 HTTPS를 통해 프록시에 연결할 수 있지만 프록시는 HTTP를 사용하여 Tomcat에 연결합니다. 
+      톰캣 프록시가 수신 보안 및 비보안 연결을 구별 할 수 있어야하는 것이 필요한 경우 프록시는 Tomcat에게
+      보안 및 비보안 요청을 전달하기 위해 별도의 커넥터를 사용합니다.프록시 다음 AJP를 사용하는 경우 
+      클라이언트 연결의 SSL 속성은 AJP 프로토콜과 별도의 커넥터가 필요하지 않습니다를 통해 전달됩니다.
+      </p>
 
-      <p>The <strong>ciphers</strong> attribute controls the ciphers used for
-      SSL connections. By default, the default ciphers for the JVM will be used.
-      This usually means that the weak export grade ciphers will be included in
-      the list of available ciphers. Secure environments will normally want to
-      configure a more limited set of ciphers.</p>
+      <p>The <strong>ciphers</strong> 특성은 SSL 연결에 사용되는 암호를 제어합니다. 
+      기본적으로 JVM의 기본 암호가 사용됩니다. 이것은 일반적으로 약한 수출 급 암호가 가능한 암호 목록에 
+      포함된다는 것을 의미합니다. 보안 환경은 일반적으로 암호의 더 제한된 집합을 구성 할 것입니다.</p>
 
-      <p>The <strong>tomcatAuthentication</strong> attribute is used with the
-      AJP connectors to determine if Tomcat should authenticate the user or if
-      authentication can be delegated to the reverse proxy that will then pass
-      the authenticated username to Tomcat as part of the AJP protocol.</p>
+      <p>The <strong>tomcatAuthentication</strong> 속성은 인증 후 AJP 프로토콜의 일부로서 Tomcat에게 
+      인증 된 사용자 이름을 전달합니다 역방향 프록시에 위임 할 수있는 경우 Tomcat이 사용자를 인증하거나 
+      여부를 결정하는 AJP 커넥터가 사용됩니다.</p>
 
-      <p>The <strong>allowUnsafeLegacyRenegotiation</strong> attribute provides
-      a workaround for
+      <p>The <strong>allowUnsafeLegacyRenegotiation</strong> 속성은 CVE-2009-3555 해결 방법을 제공합니다
       <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3555">
-      CVE-2009-3555</a>, a TLS man in the middle attack. This workaround applies
-      to the BIO connector. It is only necessary if the underlying SSL
-      implementation is vulnerable to CVE-2009-3555. For more information on the
-      current state of this vulnerability and the work-arounds available see the
-      <a href="http://tomcat.apache.org/security-7.html">Tomcat 7 security
-      page</a>.</p>
+     </a>,중앙 공격 TLS 남자. 이 해결 방법은 BIO 커넥터에 적용됩니다.기본 SSL 구현 CVE-2009-3555에 
+     취약한 경우에만 필요합니다. 더이 취약점의 현재 상태에 대한 정보 및 작업 차선책을 사용할 
+     톰캣 7의 보안 페이지를 참조하십시오
+      <a href="http://tomcat.apache.org/security-7.html"></a>.</p>
 
-      <p>The <strong>requiredSecret</strong> attribute in AJP connectors
-      configures shared secret between Tomcat and reverse proxy in front of
-      Tomcat. It is used to prevent unauthorized connections over AJP protocol.</p>
+      <p>The <strong>requiredSecret</strong>AJP 커넥터의 속성은 톰캣 톰캣 앞에 역방향 프록시 사이의 
+      공유 비밀 키를 구성합니다. 그것은 AJP 프로토콜을 통해 인증되지 않은 연결을 방지하는 데 사용됩니다</p>
     </subsection>
 
     <subsection name="Host">
-      <p>The host element controls deployment. Automatic deployment allows for
-      simpler management but also makes it easier for an attacker to deploy a
-      malicious application. Automatic deployment is controlled by the
-      <strong>autoDeploy</strong> and <strong>deployOnStartup</strong>
-      attributes. If both are <code>false</code>, only Contexts defined in
-      server.xml will be deployed and any changes will require a Tomcat restart.
+      <p>호스트 요소 배치를 제어합니다. 자동 배포는 간단하게 관리 할 수 있습니다뿐만 아니라, 
+      악의적 인 응용 프로그램을 배포하는 공격자가 쉬워집니다.  자동 배포는 자동배포에 의해 제어됩니다
+      <strong>자동배포</strong> 그리고 <strong>배포를 시작합니다</strong>
+      attributes. 모두 <code>false</code>, 인경우 server.xml에 정의 된 유일한 컨텍스트는 배포 할 
+      어떤 변화가 Tomcat을 다시 시작해야합니다
       </p>
 
-      <p>In a hosted environment where web applications may not be trusted, set
-      the <strong>deployXml</strong> attribute to false to ignore any
-      context.xml packaged with the web application that may try to assign
-      increased privileges to the web application. </p>
+      <p>호스팅 된 환경에서 웹 응용 프로그램은 신뢰되지 않을 수 있습니다,설정 
+      <strong>deployXml</strong>어느 context.xml Web 응용 프로그램에 증가 권한을 할당하려고 할지도 모른다, 
+      Web 응용 프로그램과 함께 패키지를 무시하도록 false로 속성을정해야한다. </p>
     </subsection>
 
     <subsection name="Context">
-      <p>This applies to <a href="config/context.html">Context</a>
-      elements in all places where they can be defined:
+      <p>이런 적용대상은 <a href="config/context.html">문맥</a>이
+     정의 할 수있는 모든 장소의 요소:
       <code>server.xml</code> file,
       default <code>context.xml</code> file,
       per-host <code>context.xml.default</code> file,
-      web application context file in per-host configuration directory
-      or inside the web application.</p>
+      호스트 구성 디렉토리 또는 웹 응용 프로그램 내에서 웹 응용 프로그램 컨텍스트 파일입니다.</p>
 
       <p>The <strong>crossContext</strong> attribute controls if a context is
       allowed to access the resources of another context. It is
