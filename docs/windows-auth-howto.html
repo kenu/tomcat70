@@ -1,98 +1,98 @@
-<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Apache Tomcat 7 (7.0.28-dev) - Windows Authentication How-To</title><style type="text/css" media="print">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>&igrave;&#149;&#132;&iacute;&#140;&#140;&igrave;&sup1;&#152; &iacute;&#134;&deg;&igrave;&ordm;&pound; 7 (7.0.28-dev) - Windows 인증 방법</title><style type="text/css" media="print">
             .noPrint {display: none;}
             td#mainBody {width: 100%;}
         </style><style type="text/css">
             code {background-color:rgb(224,255,255);padding:0 0.1em;}
             code.attributeName, code.propertyName {background-color:transparent;}
         </style></head><body bgcolor="#ffffff" text="#000000" link="#525D76" alink="#525D76" vlink="#525D76"><table border="0" width="100%" cellspacing="0"><!--PAGE HEADER--><tr><td><!--PROJECT LOGO--><a href="http://tomcat.apache.org/"><img src="./images/tomcat.gif" align="right" alt="
-      The Apache Tomcat Servlet/JSP Container
-    " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">Apache Tomcat 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, Jun 27 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="./images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="index.html">Docs Home</a></li><li><a href="http://wiki.apache.org/tomcat/FAQ">FAQ</a></li></ul><p><strong>User Guide</strong></p><ul><li><a href="introduction.html">1) Introduction</a></li><li><a href="setup.html">2) Setup</a></li><li><a href="appdev/index.html">3) First webapp</a></li><li><a href="deployer-howto.html">4) Deployer</a></li><li><a href="manager-howto.html">5) Manager</a></li><li><a href="realm-howto.html">6) Realms and AAA</a></li><li><a href="security-manager-howto.html">7) Security Manager</a></li><li><a href="jndi-resources-howto.html">8) JNDI Resources</a></li><li><a href="jndi-datasource-examples-howto.html">9) JDBC DataSources</a></li><li><a href="class-loader-howto.html">10) Classloading</a></li><li><a href="jasper-howto.html">11) JSPs</a></li><li><a href="ssl-howto.html">12) SSL</a></li><li><a href="ssi-howto.html">13) SSI</a></li><li><a href="cgi-howto.html">14) CGI</a></li><li><a href="proxy-howto.html">15) Proxy Support</a></li><li><a href="mbeans-descriptor-howto.html">16) MBean Descriptor</a></li><li><a href="default-servlet.html">17) Default Servlet</a></li><li><a href="cluster-howto.html">18) Clustering</a></li><li><a href="balancer-howto.html">19) Load Balancer</a></li><li><a href="connectors.html">20) Connectors</a></li><li><a href="monitoring.html">21) Monitoring and Management</a></li><li><a href="logging.html">22) Logging</a></li><li><a href="apr.html">23) APR/Native</a></li><li><a href="virtual-hosting-howto.html">24) Virtual Hosting</a></li><li><a href="aio.html">25) Advanced IO</a></li><li><a href="extras.html">26) Additional Components</a></li><li><a href="maven-jars.html">27) Mavenized</a></li><li><a href="security-howto.html">28) Security Considerations</a></li><li><a href="windows-service-howto.html">29) Windows Service</a></li><li><a href="windows-auth-howto.html">30) Windows Authentication</a></li><li><a href="jdbc-pool.html">31) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">32) WebSocket</a></li></ul><p><strong>Reference</strong></p><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">Configuration</a></li><li><a href="api/index.html">Tomcat Javadocs</a></li><li><a href="servletapi/index.html">Servlet Javadocs</a></li><li><a href="jspapi/index.html">JSP 2.2 Javadocs</a></li><li><a href="elapi/index.html">EL 2.2 Javadocs</a></li><li><a href="http://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul><p><strong>Apache Tomcat Development</strong></p><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="http://wiki.apache.org/tomcat/TomcatVersions">Status</a></li><li><a href="developers.html">Developers</a></li><li><a href="architecture/index.html">Architecture</a></li><li><a href="funcspecs/index.html">Functional Specs.</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>Windows Authentication How-To</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Table of Contents"><!--()--></a><a name="Table_of_Contents"><strong>Table of Contents</strong></a></font></td></tr><tr><td><blockquote>
+        &igrave;&iacute;&igrave;&sup1; &iacute;&deg;&igrave;&ordm;&pound; &igrave;&euml;&cedil;&euml;&brvbar;&iquest;/JSP &igrave;&raquo;&uml;&iacute;&igrave;&acute;&euml;
+    " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">&igrave;&#149;&#132;&iacute;&#140;&#140;&igrave;&sup1;&#152; &iacute;&#134;&deg;&igrave;&ordm;&pound; 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, Jun 28 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="./images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="index.html">Docs Home</a></li><li><a href="http://wiki.apache.org/tomcat/FAQ">FAQ</a></li></ul><p><strong>User Guide</strong></p><ul><li><a href="introduction.html">1) &igrave;&#134;&#140;&ecirc;&deg;&#156;</a></li><li><a href="setup.html">2) &igrave;&#132;&curren;&igrave;&nbsp;&#149;</a></li><li><a href="appdev/index.html">3) &igrave;&sup2;&laquo; &euml;&sup2;&#136;&igrave;&sect;&cedil; &igrave;&#155;&sup1; &igrave;&#149;&nbsp;&iacute;&#148;&#140;&euml;&brvbar;&not;&igrave;&frac14;&#128;&igrave;&#157;&acute;&igrave;&#133;&#152;</a></li><li><a href="deployer-howto.html">4) &euml;&#148;&#148;&iacute;&#148;&#140;&euml;&iexcl;&#156;&igrave;&#157;&acute;&igrave;&#150;&acute;</a></li><li><a href="manager-howto.html">5) &euml;&sect;&curren;&euml;&#139;&#136;&igrave;&nbsp;&#128;</a></li><li><a href="realm-howto.html">6) &igrave;&#152;&#129;&igrave;&#151;&shy; &euml;&deg;&#143; AAA</a></li><li><a href="security-manager-howto.html">7) &euml;&sup3;&acute;&igrave;&#149;&#136; &ecirc;&acute;&#128;&euml;&brvbar;&not;&igrave;&#158;&#144;</a></li><li><a href="jndi-resources-howto.html">8) JNDI &igrave;&#158;&#144;&igrave;&#155;&#144;</a></li><li><a href="jndi-datasource-examples-howto.html">9) JDBC &euml;&#141;&deg;&igrave;&#157;&acute;&iacute;&#132;&deg;&igrave;&#134;&#140;&igrave;&#138;&curren;</a></li><li><a href="class-loader-howto.html">10) &iacute;&#129;&acute;&euml;&#158;&#152;&igrave;&#138;&curren; &euml;&iexcl;&#156;&euml;&#148;&copy;</a></li><li><a href="jasper-howto.html">11) JSPs</a></li><li><a href="ssl-howto.html">12) SSL</a></li><li><a href="ssi-howto.html">13) SSI</a></li><li><a href="cgi-howto.html">14) CGI</a></li><li><a href="proxy-howto.html">15) &iacute;&#148;&#132;&euml;&iexcl;&#157;&igrave;&#139;&#156; &igrave;&sect;&#128;&igrave;&#155;&#144;</a></li><li><a href="mbeans-descriptor-howto.html">16) MBean &euml;&#148;&#148;&igrave;&#138;&curren;&iacute;&#129;&not;&euml;&brvbar;&frac12;&iacute;&#132;&deg;</a></li><li><a href="default-servlet.html">17) &ecirc;&cedil;&deg;&euml;&sup3;&cedil; &igrave;&#132;&#156;&euml;&cedil;&#148;&euml;&brvbar;&iquest;</a></li><li><a href="cluster-howto.html">18) &iacute;&#129;&acute;&euml;&#159;&not;&igrave;&#138;&curren;&iacute;&#132;&deg;&euml;&sect;&#129;</a></li><li><a href="balancer-howto.html">19) Load Balancer</a></li><li><a href="connectors.html">20) Connectors</a></li><li><a href="monitoring.html">21) &euml;&ordf;&uml;&euml;&#139;&#136;&iacute;&#132;&deg;&euml;&sect;&#129; &euml;&deg;&#143; &ecirc;&acute;&#128;&euml;&brvbar;&not;</a></li><li><a href="logging.html">22) Logging</a></li><li><a href="apr.html">23) APR/Native</a></li><li><a href="virtual-hosting-howto.html">24) &ecirc;&deg;&#128;&igrave;&#131;&#129; &iacute;&#152;&cedil;&igrave;&#138;&curren;&iacute;&#140;&#133;</a></li><li><a href="aio.html">25) &ecirc;&sup3;&nbsp;&ecirc;&cedil;&#137; IO</a></li><li><a href="extras.html">26) &igrave;&para;&#148;&ecirc;&deg;&#128; &ecirc;&micro;&not;&igrave;&#132;&plusmn; &igrave;&#154;&#148;&igrave;&#134;&#140;</a></li><li><a href="maven-jars.html">27) Mavenized</a></li><li><a href="security-howto.html">28) &euml;&sup3;&acute;&igrave;&#149;&#136; &ecirc;&sup3;&nbsp;&euml;&nbsp;&curren; &igrave;&#130;&not;&iacute;&#149;&shy;</a></li><li><a href="windows-service-howto.html">29) Windows Service</a></li><li><a href="windows-auth-howto.html">30) Windows &igrave;&#157;&cedil;&igrave;&brvbar;&#157;</a></li><li><a href="jdbc-pool.html">31) Tomcat's JDBC Pool</a></li><li><a href="web-socket-howto.html">32) &igrave;&#155;&sup1;&igrave;&#134;&#140;&igrave;&frac14;&#147;</a></li></ul><p><strong>&igrave;&deg;&cedil;&ecirc;&sup3;&nbsp;</strong></p><ul><li><a href="RELEASE-NOTES.txt">Release Notes</a></li><li><a href="config/index.html">&iacute;&#153;&#152;&ecirc;&sup2;&frac12;&igrave;&#132;&curren;&igrave;&nbsp;&#149;</a></li><li><a href="api/index.html">&iacute;&#134;&deg;&igrave;&ordm;&pound; Javadocs</a></li><li><a href="servletapi/index.html">&igrave;&#132;&#156;&euml;&cedil;&#148;&euml;&brvbar;&iquest; Javadocs</a></li><li><a href="jspapi/index.html">JSP 2.2 Javadocs</a></li><li><a href="elapi/index.html">EL 2.2 Javadocs</a></li><li><a href="http://tomcat.apache.org/connectors-doc/">JK 1.2 Documentation</a></li></ul><p><strong>Apache Tomcat Development</strong></p><ul><li><a href="building.html">Building</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="http://wiki.apache.org/tomcat/TomcatVersions">&iacute;&#152;&#132;&iacute;&#153;&copy;</a></li><li><a href="developers.html">&ecirc;&deg;&#156;&euml;&deg;&#156;&igrave;&#158;&#144;</a></li><li><a href="architecture/index.html">&igrave;&#149;&#132;&iacute;&#130;&curren;&iacute;&#133;&#141;&igrave;&sup2;&#152;</a></li><li><a href="funcspecs/index.html">&ecirc;&cedil;&deg;&euml;&#138;&yen; &igrave;&#130;&not;&igrave;&#150;&#145;.</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>Windows 인증 방법</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Table of Contents"><!--()--></a><a name="Table_of_Contents"><strong>Table of Contents</strong></a></font></td></tr><tr><td><blockquote>
 <ul><li><a href="#Overview">Overview</a></li><li><a href="#Built-in_Tomcat_support">Built-in Tomcat support</a><ol><li><a href="#Domain_Controller">Domain Controller</a></li><li><a href="#Tomcat_instance">Tomcat instance</a></li><li><a href="#Web_application">Web application</a></li><li><a href="#Client">Client</a></li><li><a href="#References">References</a></li></ol></li><li><a href="#Third_party_libraries">Third party libraries</a><ol><li><a href="#Waffle">Waffle</a></li><li><a href="#Spring_Security_-_Kerberos_Extension">Spring Security - Kerberos Extension</a></li><li><a href="#SPNEGO_project_at_SourceForge">SPNEGO project at SourceForge</a></li></ol></li><li><a href="#Reverse_proxies">Reverse proxies</a><ol><li><a href="#Microsoft_IIS">Microsoft IIS</a></li><li><a href="#Apache_httpd">Apache httpd</a></li></ol></li></ul>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Overview"><strong>Overview</strong></a></font></td></tr><tr><td><blockquote>
-<p>Integrated Windows authentication is most frequently used within intranet
-environments since it requires that the server performing the authentication and
-the user being authenticated are part of the same domain. For the user to be
-authenticated automatically, the client machine used by the user must also be
-part of the domain.</p>
-<p>There are several options for implementing integrated Windows authentication
-with Apache Tomcat. They are:
+<p>Windows 통합 인증은 가장 자주 인트라넷 내에서 사용
+그것은 서버가 인증을 수행하고 있어야 환경 때문에
+인증 된 사용자는 동일한 도메인의 일부입니다.사용자가 될 때까지
+자동 인증, 사용자가 사용하는 클라이언트 컴퓨터도 있어야 합니다
+도메인의 일부입니다.</p>
+<p>Windows 통합 인증을 구현하기위한 몇 가지 옵션이 있습니다
+아파치 톰캣과 함께. 그들은 다음과 같습니다 :
 <ul>
-<li>Built-in Tomcat support.</li>
-<li>Use a third party library such as Waffle.</li>
-<li>Use a reverse proxy that supports Windows authentication to perform the
-authentication step such as IIS or httpd.</li>
+<li>내장 된 톰캣를 지원합니다.</li>
+<li>같은 와플과 같은 타사 라이브러리를 사용합니다.</li>
+<li>수행하는 Windows 인증을 지원하는 역방향 프록시를 사용
+같은 IIS 나 아파치와 같은 인증 단계.</li>
 </ul>
-The configuration of each of these options is discussed in the following
-sections.</p>
+이러한 옵션의 각각의 구성은 다음에 설명되어 있습니다
+섹션.</p>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Built-in Tomcat support"><!--()--></a><a name="Built-in_Tomcat_support"><strong>Built-in Tomcat support</strong></a></font></td></tr><tr><td><blockquote>
-<p><strong>This is a work in progress. There are a number of outstanding
-questions that require further testing.</strong> These include:
+<p><strong>그의 진행중인 작품입니다. 뛰어난의 숫자가 있습니다
+추가 테스트가 필요 질문.</strong> These include:
 </p>
 <ul>
-<li>Does the domain name have to be in upper case?</li>
-<li>Does the SPN have to start with HTTP/...?</li>
-<li>Can a port number be appended to the end of the host in the SPN?</li>
-<li>Can the domain be left off the user in the ktpass command?</li>
-<li>What are the limitations on the account that Tomcat can run as? SPN
-    associated account works, domain admin works, local admin doesn't
-    work</li>
+<li>도메인 이름은 대문자로해야합니까?</li>
+<li>SPN은 HTTP /로 시작해야합니까 ...?</li>
+<li>포트 번호 SPN의 호스트의 끝에 추가 할 수 있습니까?</li>
+<li>도메인 ktpass 명령에 사용자 중단 할 수 있습니까?</li>
+<li>톰캣으로 실행할 수있는 계정의 제한은 무엇입니까? SPN
+&nbsp;&nbsp;&nbsp;&nbsp; 관련 계정 작품, 도메인 관리자 작업, 로컬 관리자는하지 않습니다
+&nbsp;&nbsp;&nbsp;&nbsp; 법과k</li>
 </ul>
-<p>There are four components to the configuration of the built-in Tomcat
-support for Windows authentication. The domain controller, the server hosting
-Tomcat, the web application wishing to use Windows authentication and the client
-machine. The following sections describe the configuration required for each
-component.</p>
-<p>The names of the three machines used in the configuration examples below are
-win-dc01.dev.local (the domain controller), win-tc01.dev.local (the Tomcat
-instance) and win-pc01.dev.local (client). All are members of the DEV.LOCAL
-domain.</p>
-<p>Note: In order to use the passwords in the steps below, the domain password
-policy had to be relaxed. This is not recommended for production environments.
+<p>내장 된 톰캣의 구성을 네 가지 구성 요소가 있습니다
+Windows 인증을 지원합니다.도메인 컨트롤러를 호스팅하는 서버
+톰캣, Windows 인증을 사용하고자하는 웹 응용 프로그램과 클라이언트
+기계.다음 섹션에서는 각에 필요한 구성을 설명
+구성 요소입니다.</p>
+<p>아래의 구성 예에서 사용 된 세 가지 기계의 이름은
+윈 - dc01.dev.local (도메인 컨트롤러), 윈 - tc01.dev.local (톰캣
+예)와 윈 - pc01.dev.local (클라이언트). 모든 DEV.LOCAL의 구성원
+도메인을 입력합니다.</p>
+<p>참고 : 아래의 단계에서 암호를 사용하려면 도메인 암호
+정책을 완화 할 수 있었다. 이 프로덕션 환경에는 권장되지 않습니다.
 </p>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Domain Controller"><!--()--></a><a name="Domain_Controller"><strong>Domain Controller</strong></a></font></td></tr><tr><td><blockquote>
-  <p>These steps assume that the server has already been configured to act as a
-  domain controller. Configuration of a Windows server as a domain controller is
-  outside the scope of this how-to. The steps to configure the domain controller
-  to enable Tomcat to support Windows authentication are as follows:
+  <p>이 단계에서는 서버가 이미 역할을하도록 구성되어 있다고 가정
+&nbsp;&nbsp; 도메인 컨트롤러입니다.Windows 서버의 구성 도메인 컨트롤러이기 때문에
+&nbsp;&nbsp; 이 방법의 범위를 벗어난.도메인 컨트롤러를 구성하는 단계
+&nbsp;&nbsp; Tomcat이 Windows 인증을 지원할 수 있도록하는 것은 다음과 같습니다 :
   </p>
   <ul>
-  <li>Create a domain user that will be mapped to the service name used by the
-  Tomcat server. In this how-to, this user is called <code>tc01</code> and has a
-  password of <code>tc01pass</code>.</li>
-  <li>Map the service principal name (SPN) to the user account. SPNs take the
-  form <code>
+  <li>에서 사용하는 서비스 이름에 매핑될 도메인 사용자를 생성
+&nbsp;&nbsp; Tomcat 서 v를. 이 방법이 사용자가 <code>TC01</code>를 호출하고 있다에
+&nbsp;&nbsp; 의 비밀 <code>tc01pass</code>.</li>
+  <li>사용자 계정에 서비스 주체 이름 (SPN)을 매핑합니다. SPN이가을
+&nbsp;&nbsp; 형태 <code>
   &lt;service class&gt;/&lt;host&gt;:&lt;port&gt;/&lt;service name&gt;</code>.
-  The SPN used in this how-to is <code>HTTP/win-tc01.dev.local</code>. To
-  map the user to the SPN, run the following:
+ 이에 사용되는 SPN 방법 <code> HTTP/win-tc01.dev.local입니다 </code>를. 에
+&nbsp;&nbsp;SPN에 사용자를 매핑하려면 다음을 실행합니다 :
   <div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>setspn -A HTTP/win-tc01.dev.local tc01</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
   </li>
-  <li>Generate the keytab file that the Tomcat server will use to authenticate
-  itself to the domain controller. This file contains the Tomcat private key for
-  the service provider account and should be protected accordingly. To generate
-  the file, run the following command (all on a single line):
-  <div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>ktpass /out c:\tomcat.keytab /mapuser tc01@DEV.LOCAL
-          /princ HTTP/win-tc01.dev.local@DEV.LOCAL
-          /pass tc01pass /kvno 0</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div></li>
-  <li>Create a domain user to be used on the client. In this how-to the domain
-  user is <code>test</code> with a password of <code>testpass</code>.</li>
+  <li>Tomcat 서버가 인증하는 데 사용하는 키탭 파일을 생성
+&nbsp;&nbsp; 자체 도메인 컨트롤러에. 이 파일의 톰캣 개인 키를 포함
+&nbsp;&nbsp;서비스 제공자의 계정과 그에 따라 보호해야합니다. 생성하려면
+&nbsp;&nbsp;파일, 다음 명령 (모두 한 줄에)을 실행 :
+&nbsp;&nbsp; <div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>의의 ktpass / 아웃 C : \ tomcat.keytab / mapuser tc01@DEV.LOCAL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; / 공주 역 HTTP/win-tc01.dev.local @ DEV.LOCAL
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; / tc01pass / kvno와 0을 전달</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div></li>
+  <li>클라이언트에서 사용하는 도메인 사용자를 작성하십시오. 이있는 도메인의 사용 방법
+&nbsp;&nbsp; 사용자는 <code>test</code> 의 암호 <code>testpass</code>.</li>
   </ul>
-  <p>The above steps have been tested on a domain controller running Windows
-  Server 2008 R2 64-bit Standard using the Windows Server 2003 functional level
-  for both the forest and the domain.
+  <p>위의 단계는 Windows를 실행하는 도메인 컨트롤러에서 테스트되었습니다
+&nbsp;&nbsp; Windows Server 2003 기능 수준을 사용하여 서버 2008 R2 64 비트 표준
+&nbsp;&nbsp;숲과 도메인 모두.
   </p>
   </blockquote></td></tr></table>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Tomcat instance"><!--()--></a><a name="Tomcat_instance"><strong>Tomcat instance</strong></a></font></td></tr><tr><td><blockquote>
-  <p>These steps assume that Tomcat and a Java 6 JDK/JRE have already been
-  installed and configured and that Tomcat is running as the tc01@DEV.LOCAL
-  user. The steps to configure the Tomcat instance for Windows authentication
-  are as follows:
+  <p>이 단계는 톰캣과 자바 6 JDK / JRE가 이미했다고 가정
+&nbsp;&nbsp; 설치 및 구성하고 Tomcat은 tc01@DEV.LOCAL으로 실행됩니다
+&nbsp;&nbsp; 사용자. 윈도우 인증 톰캣 인스턴스를 구성하는 단계
+&nbsp;&nbsp; 다음과 같습니다 :
   </p>
   <ul>
   <li>Copy the <code>tomcat.keytab</code> file created on the domain controller
   to <code>$CATALINA_BASE/conf/tomcat.keytab</code>.</li>
-  <li>Create the kerberos configuration file
+  <li>Kerberos 구성 파일을 만듭니다
   <code>$CATALINA_BASE/conf/krb5.ini</code>. The file used in this how-to
   contained:<div align="left"><table cellspacing="4" cellpadding="0" border="0"><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#ffffff" height="1"><pre>[libdefaults]
 default_realm = DEV.LOCAL
@@ -109,7 +109,7 @@ DEV.LOCAL = {
 [domain_realm]
 dev.local= DEV.LOCAL
 .dev.local= DEV.LOCAL</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
-  The location of this file can be changed by setting the
+  이 파일의 위치를 설정하여 변경할 수 있습니다
   <code>java.security.krb5.conf</code> systm property.</li>
   <li>Create the JAAS login configuration file
   <code>$CATALINA_BASE/conf/jaas.conf</code>. The file used in this how-to
@@ -130,45 +130,45 @@ com.sun.security.jgss.krb5.accept {
     keyTab="c:/apache-tomcat-7.0.x/conf/tomcat.keytab"
     storeKey=true;
 };</pre></td><td bgcolor="#023264" width="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr><tr><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td><td bgcolor="#023264" width="1" height="1"><img src="./images/void.gif" alt="" width="1" height="1" vspace="0" hspace="0" border="0"></td></tr></table></div>
-  The location of this file can be changed by setting the
-  <code>java.security.auth.login.config</code> system property. The LoginModule
-  used is a JVM specific one so ensure that the LoginModule specified matches
-  the JVM being used. The name of the login configuration must match the
-  value used by the <a href="config/valve.html#SPNEGO_Valve">authentication
+  이 파일의 위치를 설정하여 변경할 수 있습니다
+  <code>java.security.auth.login.config</code> system property.로그인 모듈
+&nbsp;&nbsp; 입니다 사용하는 JVM 특정 하나 때문에 로그인 모듈이 일치에게 지정했는지 확인
+&nbsp;&nbsp;JVM이 사용되고있다.로그인 구성의 이름이 일치해야합니다
+&nbsp;&nbsp;만약 당신이 좋아하면 것인지의 <a href="config/valve.html#SPNEGO_Valve"> 인증에 사용되는 값
   valve</a>.</li>
-  <li>The system property <code>javax.security.auth.useSubjectCredsOnly</code>
-  is automatically set to the required value of false if a web application is
-  configured to use the SPNEGO authentication method.</li>
+  <li>시스템 속성 <code>javax.security.auth.useSubjectCredsOnly</code>
+ 웹 응용 프로그램이있는 경우 자동으로 false를 필요한 값으로 설정됩니다
+&nbsp;&nbsp;SPNEGO 인증 방법을 사용하도록 구성.</li>
   </ul>
-  <p>The SPNEGO authenticator will work with any <a href="config/realm.html">
-  Realm</a> but if used with the JNDI Realm, by default the JNDI Realm will use
-  the user's delegated credentials to connect to the Active Directory.
+  <p>SPNEGO의 인증은 만약 당신이 좋아하면 것인지의 <a href="config/realm.html"> 함께 작동합니다
+&nbsp;&nbsp;JNDI 영역과 함께 사용하는 경우 영역은 </a>하지만, 기본적으로 JNDI 영역을 사용합니다
+&nbsp;&nbsp;사용자의 위임 된 자격 증명을 Active Directory에 연결합니다.
   </p>
-  <p>The above steps have been tested on a Tomcat server running Windows Server
-  2008 R2 64-bit Standard with an Oracle 1.6.0_24 64-bit JDK.</p>
+  <p>위의 단계는 Windows Server를 실행하는 Tomcat 서버에서 테스트되었습니다
+&nbsp;&nbsp; 64 비트 JDK 1.6.0_24 오라클과 함께 2008 R2는 64 비트 표준.</p>
   </blockquote></td></tr></table>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Web application"><!--()--></a><a name="Web_application"><strong>Web application</strong></a></font></td></tr><tr><td><blockquote>
-  <p>The web application needs to be configured to the use Tomcat specific
-  authentication method of <code>SPNEGO</code> (rather than BASIC etc.) in
-  web.xml. As with the other authenticators, behaviour can be customised by
-  explicitly configuring the <a href="config/valve.html#SPNEGO_Valve">
-  authentication valve</a> and setting attributes on the Valve.</p>
+  <p>웹 응용 프로그램을 사용 톰캣 특정을 구성해야
+&nbsp;&nbsp; <code> SPNEGO </code>를 (대신 등 BASIC 이상)에서의 인증 방법
+&nbsp;&nbsp; web.xml에.다른 인증 자와 같이 동작하여 사용자 정의 할 수 있습니다
+&nbsp;&nbsp; 명시 적으로 만약 당신이 좋아하면 것인지의 <a href="config/valve.html#SPNEGO_Valve">을 구성
+&nbsp;&nbsp; 인증 밸브</a> 및 밸브의 속성을 설정.</p>
   </blockquote></td></tr></table>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Client"><strong>Client</strong></a></font></td></tr><tr><td><blockquote>
-  <p>The client must be configured to use Kerberos authentication. For Internet
-  Explorer this means making sure that the Tomcat instance is in the "Local
-  intranet" security domain and that it is configured (Tools &gt; Internet
-  Options &gt; Advanced) with integrated Windows authentication enabled. Note that
-  this <strong>will not</strong> work if you use the same machine for the client
-  and the Tomcat instance as Internet Explorer will use the unsupported NTLM
-  protocol.</p>
+  <p>클라이언트가 Kerberos 인증을 사용하도록 구성해야합니다. 인터넷
+&nbsp;&nbsp; 탐색기이 톰캣 인스턴스가 "로컬에 있는지 확인하는 방법
+&nbsp;&nbsp; 인트라넷 "보안 도메인과 그는 그것을 구성되어 있습니다 (도구&gt; 인터넷
+&nbsp;&nbsp; 옵션&gt; 고급) Windows 통합 인증을 사용하도록 설정. 참고
+&nbsp;&nbsp; 당신은 클라이언트의 동일한 시스템을 사용하는 경우이의 <strong>하지 않습니다 </strong>을 작업
+&nbsp;&nbsp; 및 Internet Explorer와 같은 톰캣 인스턴스가 지원되지 않는 NTLM을 사용합니다
+&nbsp;&nbsp; 프로토콜입니다.</p>
   </blockquote></td></tr></table>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="References"><strong>References</strong></a></font></td></tr><tr><td><blockquote>
-  <p>Correctly configuring Kerberos authentication can be tricky. The following
-  references may prove helpful. Advice is also always available from the
+  <p>제대로 Kerberos 인증을 구성하는 까다로운 수 있습니다.다음
+&nbsp;&nbsp; 참조가 도움이 될 수 있습니다. 조언도에서 항상 사용할 수 있습니다
   <a href="http://tomcat.apache.org/lists.html#tomcat-users">Tomcat users
   mailing list</a>.</p>
   <ol>
@@ -190,73 +190,72 @@ com.sun.security.jgss.krb5.accept {
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Third party libraries"><!--()--></a><a name="Third_party_libraries"><strong>Third party libraries</strong></a></font></td></tr><tr><td><blockquote>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Waffle"><strong>Waffle</strong></a></font></td></tr><tr><td><blockquote>
-  <p>Full details of this solution can be found through the
+  <p>이 솔루션의 전체 세부 사항을 찾을 수 있습니다
   <a href="http://waffle.codeplex.com/">Waffle site</a>. The key features are:</p>
   <ul>
   <li>Drop-in solution</li>
-  <li>Simple configuration (no JAAS or Kerberos keytab configuration required)
+  <li>간단한 구성 (아무 JAAS 또는 Kerberos 키탭 구성 필요)
   </li>
   <li>Uses a native library</li>
   </ul>
   </blockquote></td></tr></table>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Spring Security - Kerberos Extension"><!--()--></a><a name="Spring_Security_-_Kerberos_Extension"><strong>Spring Security - Kerberos Extension</strong></a></font></td></tr><tr><td><blockquote>
-  <p>Full details of this solution can be found through the
+  <p>이 솔루션의 전체 세부 사항을 찾을 수 있습니다
   <a href="http://static.springsource.org/spring-security/site/extensions/krb/index.html">
-  Kerberos extension site</a>. The key features are:</p>
+  Kerberos를 확장 사이트</a>. 주요 기능은 다음과 같습니다 :</p>
   <ul>
-  <li>Extension to Spring Security</li>
-  <li>Requires a Kerberos keytab file to be generated</li>
-  <li>Pure Java solution</li>
+  <li>Spring Security을 확장 </li>
+  <li>커버 로스 키 탭 파일을 생성해야합니다</li>
+  <li>순수 자바 솔루션</li>
   </ul>
   </blockquote></td></tr></table>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="SPNEGO project at SourceForge"><!--()--></a><a name="SPNEGO_project_at_SourceForge"><strong>SPNEGO project at SourceForge</strong></a></font></td></tr><tr><td><blockquote>
-  <p>Full details of this solution can be found through the
+  <p>이 솔루션의 전체 세부 사항을 찾을 수 있습니다
   <a href="http://spnego.sourceforge.net/index.html/">project site</a>. The key
   features are:</p>
   <ul>
-  <li>Uses Kerberos</li>
-  <li>Pure Java solution</li>
+  <li>Kerberos를 사용</li>
+  <li>순수 자바 솔루션</li>
   </ul>
   </blockquote></td></tr></table>
 </blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Reverse proxies"><!--()--></a><a name="Reverse_proxies"><strong>Reverse proxies</strong></a></font></td></tr><tr><td><blockquote>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Microsoft IIS"><!--()--></a><a name="Microsoft_IIS"><strong>Microsoft IIS</strong></a></font></td></tr><tr><td><blockquote>
-  <p>There are three steps to configuring IIS to provide Windows authentication.
-  They are:</p>
+  <p>Windows 인증을 제공하기 위해 IIS를 구성하는 세 가지 단계가 있습니다.
+&nbsp;&nbsp; 그들은 다음과 같습니다 :</p>
   <ol>
-  <li>Configure IIS as a reverse proxy for Tomcat (see the
-  <a href="http://tomcat.apache.org/connectors-doc/webserver_howto/iis.html">
-  IIS Web Server How-To)</a>.</li>
-  <li>Configure IIS to use Windows authentication</li>
-  <li>Configure Tomcat to use the authentication user information from IIS by
-  setting the tomcatAuthentication attribute on the <a href="config/ajp.html">
+  <li>톰캣 역방향 프록시로 IIS를 구성 (참조
+&nbsp;&nbsp; 만약 당신이 좋아하면 것인지의 <a href="http://tomcat.apache.org/connectors-doc/webserver_howto/iis.html">
+&nbsp;&nbsp; IIS 웹 서버 사용 방법까지)</a>.</li>
+  <li>IIS Windows 인증을 사용하도록 구성</li>
+  <li>톰캣으로 IIS에서 인증 사용자 정보를 사용하도록 구성
+&nbsp;&nbsp;에 tomcatAuthentication 속성을 설정 <a href="config/ajp.html">
   AJP connector</a> to <code>false</code>.</li>
   </ol>
   </blockquote></td></tr></table>
 
   <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Apache httpd"><!--()--></a><a name="Apache_httpd"><strong>Apache httpd</strong></a></font></td></tr><tr><td><blockquote>
-  <p>Apache httpd does not support Windows authentication out of the box but
-  there are a number of third-party modules that can be used. These include:</p>
+  <p>Apache의 아파치는 상자에서 Windows 인증을 지원하지 않지만
+&nbsp;&nbsp; 사용할 수있는 타사 모듈은 여러 가지가있을 수 있습니다. 이들은 다음과 같습니다 :</p>
   <ol>
   <li><a href="http://sourceforge.net/projects/mod-auth-sspi/">mod_auth_sspi</a>
-  for use on Windows platforms.</li>
+  윈도우 플랫폼에서 사용.</li>
   <li><a href="http://adldap.sourceforge.net/wiki/doku.php?id=mod_auth_ntlm_winbind">
-  mod_auth_ntlm_winbind</a> for non-Windows platforms. Known to work with httpd
-  2.0.x on 32-bit platforms. Some users have reported stability issues with both
-  httpd 2.2.x builds and 64-bit Linux builds.</li>
+  mod_auth_ntlm_winbind</a> 비 Windows 플랫폼을 위한. 아파치와 함께 작동하는 것으로 알려져
+&nbsp;&nbsp; 32 비트 플랫폼에서의 2.0.x. 일부 사용자는 모두 안정성 문제를 보고있다
+&nbsp;&nbsp; 아파치 2.2.x의 빌드 및 64 비트 Linux 빌드.</li>
   </ol>
-  <p>There are three steps to configuring httpd to provide Windows
-  authentication. They are:</p>
+  <p>윈도우에게 제공하도록 구성 아파치 세 가지 단계가 있습니다
+&nbsp;&nbsp; 인증. 그들은 다음과 같습니다 :</p>
   <ol>
-  <li>Configure httpd as a reverse proxy for Tomcat (see the
-  <a href="http://tomcat.apache.org/connectors-doc/webserver_howto/apache.html">
-  Apache httpd Web Server How-To)</a>.</li>
-  <li>Configure httpd to use Windows authentication</li>
-  <li>Configure Tomcat to use the authentication user information from httpd by
-  setting the tomcatAuthentication attribute on the <a href="config/ajp.html">
-  AJP connector</a> to <code>false</code>.</li>
+  <li>톰캣 역방향 프록시로 아파치를 구성 (참조
+&nbsp;&nbsp; 만약 당신이 좋아하면 것인지의<a href="http://tomcat.apache.org/connectors-doc/webserver_howto/apache.html">
+&nbsp;&nbsp; 아파치 웹 서버 사용 방법까지)</a>.</li>
+  <li>윈도우 인증을 사용하도록 아파치를 구성n</li>
+  <li>톰캣에 의해 아파치에서 인증 사용자 정보를 사용하도록 구성
+&nbsp;&nbsp;에 tomcatAuthentication 속성을 설정 <a href="config/ajp.html">AJP connector</a> to <code>false</code>.</li>
   </ol>
   </blockquote></td></tr></table>
 
