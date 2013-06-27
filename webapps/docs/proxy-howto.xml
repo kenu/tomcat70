@@ -38,14 +38,14 @@
 <section name="Introduction">
 
 
-<p>톰캣의 표준 환경 설정을 사용할, 웹 어플리케이션은 처리하기 위해 요청된 서버 이름과 포트 번호를 물을 수 있습니다. 
+<p>톰캣의 표준 환경 설정을 사용할, 웹 애플리케이션은 처리하기 위해 요청된 서버 이름과 포트 번호를 물을 수 있습니다. 
 톰캣이 <a href="config/coyote.html">Coyote HTTP/1.1 Connector</a>을 통해 독립적으로 구동될 때, 톰캣은 일반적으로 
 요청에 부합하는 서버이름을 전해주며, 포트 번호는 <strong>Connector</strong>가 듣고 있습니다.
 서블릿 API는 아래의 목적과 같은 흥미로운 것을 불러옵니다. 아래 : </p>
 <ul>
 <li><code>ServletRequest.getServerName()</code>: 요청이 전송된 서버의 호스트 이름을 반환.</li>
-<li><code>ServletRequest.getServerPort()</code>: 요청이 전송된 서버의 호스트 이름을 반환.</li>
-<li><code>ServletRequest.getLocalName()</code>: 요청된 인터넷 프로토콜(IP) 인터페이스의 호슽 이름을 반환.</li>
+<li><code>ServletRequest.getServerPort()</code>: 요청이 전송된 서버의 포트 번호를 반환.</li>
+<li><code>ServletRequest.getLocalName()</code>: 요청된 인터넷 프로토콜(IP) 인터페이스의 호스트 이름을 반환.</li>
 <li><code>ServletRequest.getLocalPort()</code>: 요청된 인터넷 프로토콜(IP) 인터페이스의 포트 번호를 반환.</li>
 </ul>
 
