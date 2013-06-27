@@ -36,7 +36,7 @@
 <p>Windows 통합 인증은 가장 자주 인트라넷 내에서 사용
 그것은 서버가 인증을 수행하고 있어야 환경 때문에
 인증 된 사용자는 동일한 도메인의 일부입니다.사용자가 될 때까지
-자동 인증, 사용자가 사용하는 클라이언트 컴퓨터도 있어야합니다
+자동 인증, 사용자가 사용하는 클라이언트 컴퓨터도 있어야 합니다
 도메인의 일부입니다.</p>
 <p>Windows 통합 인증을 구현하기위한 몇 가지 옵션이 있습니다
 아파치 톰캣과 함께. 그들은 다음과 같습니다 :
@@ -83,13 +83,13 @@ Windows 인증을 지원합니다.도메인 컨트롤러를 호스팅하는 서�
    Tomcat이 Windows 인증을 지원할 수 있도록하는 것은 다음과 같습니다 :
   </p>
   <ul>
-  <li>에서 사용하는 서비스 이름에 매핑 될 도메인 사용자를 생성
-   Tomcat 서 v를. 이 방법이 사용자가 <CODE> TC01 </ code>를 호출하고있다에
+  <li>에서 사용하는 서비스 이름에 매핑될 도메인 사용자를 생성
+   Tomcat 서 v를. 이 방법이 사용자가 <code>TC01</code>를 호출하고 있다에
    의 비밀 <code>tc01pass</code>.</li>
   <li>사용자 계정에 서비스 주체 이름 (SPN)을 매핑합니다. SPN이가을
    형태 <code>
   &lt;service class&gt;/&lt;host&gt;:&lt;port&gt;/&lt;service name&gt;</code>.
- 이에 사용되는 SPN 방법 <CODE> HTTP/win-tc01.dev.local입니다 </ code>를. 에
+ 이에 사용되는 SPN 방법 <code> HTTP/win-tc01.dev.local입니다 </code>를. 에
   SPN에 사용자를 매핑하려면 다음을 실행합니다 :
   <source>setspn -A HTTP/win-tc01.dev.local tc01</source>
   </li>
@@ -160,13 +160,13 @@ com.sun.security.jgss.krb5.accept {
   <code>java.security.auth.login.config</code> system property.로그인 모듈
    입니다 사용하는 JVM 특정 하나 때문에 로그인 모듈이 일치에게 지정했는지 확인
   JVM이 사용되고있다.로그인 구성의 이름이 일치해야합니다
-  만약 당신이 좋아하면 것인지의 href="config/valve.html#SPNEGO_Valve"> 인증에 사용되는 값
+  만약 당신이 좋아하면 것인지의 <a href="config/valve.html#SPNEGO_Valve"> 인증에 사용되는 값
   valve</a>.</li>
   <li>시스템 속성 <code>javax.security.auth.useSubjectCredsOnly</code>
  웹 응용 프로그램이있는 경우 자동으로 false를 필요한 값으로 설정됩니다
   SPNEGO 인증 방법을 사용하도록 구성.</li>
   </ul>
-  <p>SPNEGO의 인증은 만약 당신이 좋아하면 것인지의 href="config/realm.html"> 함께 작동합니다
+  <p>SPNEGO의 인증은 만약 당신이 좋아하면 것인지의 <a href="config/realm.html"> 함께 작동합니다
   JNDI 영역과 함께 사용하는 경우 영역은 </a>하지만, 기본적으로 JNDI 영역을 사용합니다
   사용자의 위임 된 자격 증명을 Active Directory에 연결합니다.
   </p>
@@ -176,9 +176,9 @@ com.sun.security.jgss.krb5.accept {
 
   <subsection name="Web application">
   <p>웹 응용 프로그램을 사용 톰캣 특정을 구성해야
-   <CODE> SPNEGO </ code>를 (대신 등 BASIC 이상)에서의 인증 방법
+   <code> SPNEGO </code>를 (대신 등 BASIC 이상)에서의 인증 방법
    web.xml에.다른 인증 자와 같이 동작하여 사용자 정의 할 수 있습니다
-   명시 적으로 만약 당신이 좋아하면 것인지의 </a href="config/valve.html#SPNEGO_Valve">을 구성
+   명시 적으로 만약 당신이 좋아하면 것인지의 <a href="config/valve.html#SPNEGO_Valve">을 구성
    인증 밸브</a> 및 밸브의 속성을 설정.</p>
   </subsection>
 
@@ -187,7 +187,7 @@ com.sun.security.jgss.krb5.accept {
    탐색기이 톰캣 인스턴스가 "로컬에 있는지 확인하는 방법
    인트라넷 "보안 도메인과 그는 그것을 구성되어 있습니다 (도구> 인터넷
    옵션> 고급) Windows 통합 인증을 사용하도록 설정. 참고
-   당신은 클라이언트의 동일한 시스템을 사용하는 경우이의 <strong>하지 않습니다 </ strong>을 작업
+   당신은 클라이언트의 동일한 시스템을 사용하는 경우이의 <strong>하지 않습니다 </strong>을 작업
    및 Internet Explorer와 같은 톰캣 인스턴스가 지원되지 않는 NTLM을 사용합니다
    프로토콜입니다.</p>
   </subsection>
@@ -244,7 +244,7 @@ com.sun.security.jgss.krb5.accept {
   <a href="http://spnego.sourceforge.net/index.html/">project site</a>. The key
   features are:</p>
   <ul>
-  <li></li>Kerberos를 사용</li>
+  <li>Kerberos를 사용</li>
   <li>순수 자바 솔루션</li>
   </ul>
   </subsection>
@@ -273,8 +273,8 @@ com.sun.security.jgss.krb5.accept {
   <li><a href="http://sourceforge.net/projects/mod-auth-sspi/">mod_auth_sspi</a>
   윈도우 플랫폼에서 사용.</li>
   <li><a href="http://adldap.sourceforge.net/wiki/doku.php?id=mod_auth_ntlm_winbind">
-  mod_auth_ntlm_winbind</a> 비 Windows 플랫폼을위한. 아파치와 함께 작동하는 것으로 알려져
-   32 비트 플랫폼에서의 2.0.x. 일부 사용자는 모두 안정성 문제를보고있다
+  mod_auth_ntlm_winbind</a> 비 Windows 플랫폼을 위한. 아파치와 함께 작동하는 것으로 알려져
+   32 비트 플랫폼에서의 2.0.x. 일부 사용자는 모두 안정성 문제를 보고있다
    아파치 2.2.x의 빌드 및 64 비트 Linux 빌드.</li>
   </ol>
   <p>윈도우에게 제공하도록 구성 아파치 세 가지 단계가 있습니다
@@ -283,10 +283,9 @@ com.sun.security.jgss.krb5.accept {
   <li>톰캣 역방향 프록시로 아파치를 구성 (참조
    만약 당신이 좋아하면 것인지의<a href="http://tomcat.apache.org/connectors-doc/webserver_howto/apache.html">
    아파치 웹 서버 사용 방법까지)</a>.</li>
-  <li>윈도우 authenticatio를 사용하도록 아파치를 구성n</li>
+  <li>윈도우 인증을 사용하도록 아파치를 구성n</li>
   <li>톰캣에 의해 아파치에서 인증 사용자 정보를 사용하도록 구성
-  에 tomcatAuthentication 속성을 설정 <a href="config/ajp.html">
-  AJP connector</a> to <code>false</code>.</li>
+  에 tomcatAuthentication 속성을 설정 <a href="config/ajp.html">AJP connector</a> to <code>false</code>.</li>
   </ol>
   </subsection>
 
