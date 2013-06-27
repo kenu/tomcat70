@@ -25,7 +25,7 @@
 
     <properties>
         <author email="craigmcc@apache.org">Craig R. McClanahan</author>
-        <title>Proxy가 어떤 것을 제공하는 지</title>
+        <title>프록시 지원 기능은 어떻게 사용하는가?</title>
     </properties>
 
 <body>
@@ -41,8 +41,8 @@
 <ul>
 <li><code>ServletRequest.getServerName()</code>: 서버의 호스트 네임을 반환.</li>
 <li><code>ServletRequest.getServerPort()</code>: 서버의 호스트 네임을 반환.</li>
-<li><code>ServletRequest.getLocalName()</code>: 수신 된 IP의 인터페이스를 반환.</li>
-<li><code>ServletRequest.getLocalPort()</code>: 수신 된 IP의 인터페이스를 반환.</li>
+<li><code>ServletRequest.getLocalName()</code>: 수신된 IP의 인터페이스를 반환.</li>
+<li><code>ServletRequest.getLocalPort()</code>: 수신된 IP의 인터페이스를 반환.</li>
 </ul>
 
 <p> 당신이 프록시 서버 뒤에 실행하는 경우(또는 프록시 서버처럼 동작되는 웹 서버), 이러한 호출에 의해 반환 된 값을 관리하는 것을 수월하게 할 수 있다.  특히, 커넥터 자체의 것이 아닌 일반적인 요청에 반영할 수 있도록 포트 번호를 얻을 수 있다. ProxyName와 ProxyPort 속성을 사용할 수 있다.</p>
