@@ -205,9 +205,8 @@ conn.close();
     <h3>1.  사용자의 자바빈 클래스 만들기</h3>
 
     <p>자바빈 클래스를 리소스 팩토리가 볼 수 있게 각각의 시간마다 예시로 설명하게 
-    만들어라. 이러한 예시에서, assume
-    you create a class <code>com.mycompany.MyBean</code>, which looks
-    like this:</p>
+    만들어라. 이러한 예시에서, 아래와 같다면 사용자가 <code>com.mycompany.MyBean</code>를 만든것으로 추정한다:
+    </p>
 
 <source>
 package com.mycompany;
