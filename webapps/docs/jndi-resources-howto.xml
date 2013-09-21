@@ -237,7 +237,7 @@ public class MyBean {
 }
 </source>
 
-  <h3>2.  Declare Your Resource Requirements</h3>
+  <h3>2.  사용자 자원 필수조건 제시</h3>
 
   <p>Next, modify your web application deployment descriptor
   (<code>/WEB-INF/web.xml</code>) to declare the JNDI name under which
