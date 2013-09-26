@@ -239,9 +239,9 @@ public class MyBean {
 
   <h3>2.  사용자 자원 필수조건 제시</h3>
 
-  <p>Next, modify your web application deployment descriptor
-  (<code>/WEB-INF/web.xml</code>) to declare the JNDI name under which
-  you will request new instances of this bean.  The simplest approach is
+  <p>다음으로,사용자의 웹 어클리케이션 배치 기술자  
+  (<code>/WEB-INF/web.xml</code>)를  JNDI 이름밑에 빈(Bean)의 새로운 인스턴스를  요청할 것으로 선언하고 변경하라.
+  The simplest approach is
   to use a <code>&lt;resource-env-ref&gt;</code> element, like this:</p>
 
 <source>
