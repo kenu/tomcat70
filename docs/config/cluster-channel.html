@@ -1,4 +1,4 @@
-<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Apache Tomcat 7 Configuration Reference (7.0.28-dev) - The Cluster Channel object</title><meta name="author" content="Filip Hanik"><style type="text/css" media="print">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Apache Tomcat 7 Configuration Reference (7.0.28-dev) - 클러스터 채널 개체</title><meta name="author" content="Filip Hanik"><style type="text/css" media="print">
             .noPrint {display: none;}
             td#mainBody {width: 100%;}
         </style><style type="text/css">
@@ -6,57 +6,56 @@
             code.attributeName, code.propertyName {background-color:transparent;}
         </style></head><body bgcolor="#ffffff" text="#000000" link="#525D76" alink="#525D76" vlink="#525D76"><table border="0" width="100%" cellspacing="0"><!--PAGE HEADER--><tr><td><!--PROJECT LOGO--><a href="http://tomcat.apache.org/"><img src="../images/tomcat.gif" align="right" alt="
     The Apache Tomcat Servlet/JSP Container
-  " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">아파치 톰캣 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, Jul 1 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="../images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="../index.html">Docs Home</a></li><li><a href="index.html">Config Ref. Home</a></li></ul><p><strong>Top Level Elements</strong></p><ul><li><a href="server.html">Server</a></li><li><a href="service.html">Service</a></li></ul><p><strong>Executors</strong></p><ul><li><a href="executor.html">Executor</a></li></ul><p><strong>Connectors</strong></p><ul><li><a href="http.html">HTTP</a></li><li><a href="ajp.html">AJP</a></li></ul><p><strong>Containers</strong></p><ul><li><a href="context.html">Context</a></li><li><a href="engine.html">Engine</a></li><li><a href="host.html">Host</a></li><li><a href="cluster.html">Cluster</a></li></ul><p><strong>Nested Components</strong></p><ul><li><a href="globalresources.html">Global Resources</a></li><li><a href="jar-scanner.html">JarScanner</a></li><li><a href="listeners.html">Listeners</a></li><li><a href="loader.html">Loader</a></li><li><a href="manager.html">Manager</a></li><li><a href="realm.html">Realm</a></li><li><a href="resources.html">Resources</a></li><li><a href="valve.html">Valve</a></li></ul><p><strong>Cluster Elements</strong></p><ul><li><a href="cluster.html">Cluster</a></li><li><a href="cluster-manager.html">Manager</a></li><li><a href="cluster-channel.html">Channel</a></li><li><a href="cluster-membership.html">Channel/Membership</a></li><li><a href="cluster-sender.html">Channel/Sender</a></li><li><a href="cluster-receiver.html">Channel/Receiver</a></li><li><a href="cluster-interceptor.html">Channel/Interceptor</a></li><li><a href="cluster-valve.html">Valve</a></li><li><a href="cluster-deployer.html">Deployer</a></li><li><a href="cluster-listener.html">ClusterListener</a></li></ul><p><strong>Other</strong></p><ul><li><a href="filter.html">Filter</a></li><li><a href="systemprops.html">System properties</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>The Cluster Channel object</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Table of Contents"><!--()--></a><a name="Table_of_Contents"><strong>Table of Contents</strong></a></font></td></tr><tr><td><blockquote>
-<ul><li><a href="#Introduction">Introduction</a></li><li><a href="#Nested_Components">Nested Components</a></li><li><a href="#Attributes">Attributes</a><ol><li><a href="#Common_Attributes">Common Attributes</a></li></ol></li></ul>
-</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Introduction"><strong>Introduction</strong></a></font></td></tr><tr><td><blockquote>
-  The cluster channel is the main component of a small framework we've nicknamed Apache Tribes.<br>
-  The channel manages a set of sub components and together they create a group communication framework.<br>
-  This framework is then used internally by the components that need to send messages between different Tomcat instances.
-  <br>
-  A few examples of these components would be the SimpleTcpCluster that does the messaging for the DeltaManager,
-  or the BackupManager that uses a different replication strategy. The ReplicatedContext object does also
-  use the channel object to communicate context attribute changes.
-</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Nested Components"><!--()--></a><a name="Nested_Components"><strong>Nested Components</strong></a></font></td></tr><tr><td><blockquote>
-  <p><b><a href="cluster-membership.html">Channel/Membership</a>:</b> <br>
-    The Membership component is responsible for auto discovering new nodes in the cluster
-    and also to provide for notifications for any nodes that have not responded with a heartbeat.
-    The default implementation uses multicast.<br>
-    In the membership component you configure how your nodes, aka. members, are to be discovered and/or
-    divided up.
-    You can always find out more about <a href="../tribes/introduction.html">Apache Tribes</a>
+  " border="0"></a></td><td><h1><font face="arial,helvetica,sanserif">아파치 톰캣 7</font></h1><font face="arial,helvetica,sanserif">Version 7.0.28-dev, Oct 2 2013</font></td><td><!--APACHE LOGO--><a href="http://www.apache.org/"><img src="../images/asf-logo.gif" align="right" alt="Apache Logo" border="0"></a></td></tr></table><table border="0" width="100%" cellspacing="4"><!--HEADER SEPARATOR--><tr><td colspan="2"><hr noshade size="1"></td></tr><tr><!--LEFT SIDE NAVIGATION--><td width="20%" valign="top" nowrap class="noPrint"><p><strong>Links</strong></p><ul><li><a href="../index.html">Docs Home</a></li><li><a href="index.html">Config Ref. Home</a></li></ul><p><strong>Top Level Elements</strong></p><ul><li><a href="server.html">Server</a></li><li><a href="service.html">Service</a></li></ul><p><strong>Executors</strong></p><ul><li><a href="executor.html">Executor</a></li></ul><p><strong>Connectors</strong></p><ul><li><a href="http.html">HTTP</a></li><li><a href="ajp.html">AJP</a></li></ul><p><strong>Containers</strong></p><ul><li><a href="context.html">Context</a></li><li><a href="engine.html">Engine</a></li><li><a href="host.html">Host</a></li><li><a href="cluster.html">Cluster</a></li></ul><p><strong>Nested Components</strong></p><ul><li><a href="globalresources.html">Global Resources</a></li><li><a href="jar-scanner.html">JarScanner</a></li><li><a href="listeners.html">Listeners</a></li><li><a href="loader.html">Loader</a></li><li><a href="manager.html">Manager</a></li><li><a href="realm.html">Realm</a></li><li><a href="resources.html">Resources</a></li><li><a href="valve.html">Valve</a></li></ul><p><strong>Cluster Elements</strong></p><ul><li><a href="cluster.html">Cluster</a></li><li><a href="cluster-manager.html">Manager</a></li><li><a href="cluster-channel.html">Channel</a></li><li><a href="cluster-membership.html">Channel/Membership</a></li><li><a href="cluster-sender.html">Channel/Sender</a></li><li><a href="cluster-receiver.html">Channel/Receiver</a></li><li><a href="cluster-interceptor.html">Channel/Interceptor</a></li><li><a href="cluster-valve.html">Valve</a></li><li><a href="cluster-deployer.html">Deployer</a></li><li><a href="cluster-listener.html">ClusterListener</a></li></ul><p><strong>Other</strong></p><ul><li><a href="filter.html">Filter</a></li><li><a href="systemprops.html">System properties</a></li></ul></td><!--RIGHT SIDE MAIN BODY--><td width="80%" valign="top" align="left" id="mainBody"><h1>클러스터 채널 개체</h1><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="%EC%B0%A8%EB%A1%80"><strong>차례</strong></a></font></td></tr><tr><td><blockquote>
+<ul><li><a href="#%EC%86%8C%EA%B0%9C">소개</a></li><li><a href="#%EC%A4%91%EC%B2%A9%EB%90%9C_%EA%B5%AC%EC%84%B1%EC%9A%94%EC%86%8C">중첩된 구성요소</a></li><li><a href="#%EC%86%8D%EC%84%B1">속성</a><ol><li><a href="#%EA%B3%B5%ED%86%B5_%EC%86%8D%EC%84%B1">공통 속성</a></li></ol></li></ul>
+</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="%EC%86%8C%EA%B0%9C"><strong>소개</strong></a></font></td></tr><tr><td><blockquote>
+  클러스터 채널은 우리가 Apache Tribes의 다른 별칭으로 한 작은 프레임 워크의 주요 구성 요소입니다.<br>
+  채널은 하위 구성 요소의 집합을 관리하고 그들은 함께 그룹 통신 프레임 워크를 만들 수 있습니다.<br>
+  이 프레임 워크는 다음 여러 톰캣 인스턴스간에 메시지를 전송하는 데 필요한 구성 요소가 내부적으로 사용됩니다.<br>
+  이러한 구성 요소의 몇 가지 예 DeltaManager에 대한 메시징을 수행하는 SimpleTcpCluster, 또는 다른 복제 
+  방법을 사용한 BackupManager 것입니다.ReplicatedContext 객체는 컨텍스트 속성 변경을 전달하는 채널 
+  객체를 사용하지 않습니다.
+</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="%EC%A4%91%EC%B2%A9%EB%90%9C %EA%B5%AC%EC%84%B1%EC%9A%94%EC%86%8C"><!--()--></a><a name="%EC%A4%91%EC%B2%A9%EB%90%9C_%EA%B5%AC%EC%84%B1%EC%9A%94%EC%86%8C"><strong>중첩된 구성요소</strong></a></font></td></tr><tr><td><blockquote>
+  <p><b><a href="cluster-membership.html">채널 / 멤버쉽</a>:</b> <br>
+    멤버쉽 구성 요소는 자동 클러스터의 새 노드를 발견하고 또한 하트 비트에 대응하지 않는 모든 노드의 알림
+    을 제공하는 것을 담당하고 있습니다. 기본 구현은 멀티 캐스트를 사용하고 있습니다.<br>
+    멤버십 구성 요소는 구성 방법, 노드 별명. 회원은 발견 된 그리고 / 또는 나눌수 있습니다.
+    당신은 항상 <a href="../tribes/introduction.html">Apache Tribes</a>에 대한 자세한 내용을 확인할 수 있습니다.
   </p>
-  <p><b><a href="cluster-sender.html">Channel/Sender</a>:</b> <br>
-    The Sender component manages all outbound connections and data messages that are sent
-    over the network from one node to another.
-    This component allows messages to be sent in parallel.
-    The default implementation uses TCP client sockets, and socket tuning for outgoing messages are
-    configured here.<br>
-    You can always find out more about <a href="../tribes/introduction.html">Apache Tribes</a>
+  <p><b><a href="cluster-sender.html">채널l/보내는 사람</a>:</b> <br>
+    전송 구성 요소는 한 노드에서 다른 노드로 네트워크를 통해 전송되는 모든 아웃 바운드 연결 및 데이터 메
+    시지를 관리합니다.
+    이 구성 요소는 메시지를 동시에 보낼 수있습니다.
+    기본 구현은 TCP 클라이언트 소켓을 사용하여 보내는 메시지의 소켓의 튜닝은 여기에서 설정되어 있습니다.<br>
+    당신은 항상 <a href="../tribes/introduction.html">Apache Tribes</a>에 대한 자세한 내용을 확인할 수 있습니다.
   </p>
-  <p><b><a href="cluster-sender.html#transport">Channel/Sender/Transport</a>:</b> <br>
-    The Transport component is the bottom IO layer for the sender component.
-    The default implementation uses non-blocking TCP client sockets.<br>
-    You can always find out more about <a href="../tribes/introduction.html">Apache Tribes</a>
+  <p><b><a href="cluster-sender.html#transport">채널/보내는 사람/전송</a>:</b> <br>
+    전송 구성 요소는 전송 구성 요소의 바닥 IO 층입니다. 
+    기본 구현은 비 블로킹 TCP 클라이언트 소켓을 사용하고 있습니다.<br>
+    당신은 항상 <a href="../tribes/introduction.html">Apache Tribes</a>에 대한 자세한 내용을 확인할 수 있
+
+습니다.
   </p>
-  <p><b><a href="cluster-receiver.html">Channel/Receiver</a>:</b> <br>
-    The receiver component listens for messages from other nodes.
-    Here you will configure the cluster thread pool, as it will dispatch incoming
-    messages to a thread pool for faster processing.
-    The default implementation uses non-blocking TCP server sockets.<br>
-    You can always find out more about <a href="../tribes/introduction.html">Apache Tribes</a>
+  <p><b><a href="cluster-receiver.html">채널/리시버</a>:</b> <br>
+    수신기 구성 요소는 다른 노드에서 메시지를 수신합니다.
+    빠른 처리를 위해 스레드 풀에 메시지를 표시하고,
+    그것이 와서 보내지도록 여기에서는 클러스터의 스레드 풀을 설정합니다.
+    기본 구현은 비 블로킹 TCP 클라이언트 소켓을 사용하고 있습니다.<br>
+    당신은 항상 <a href="../tribes/introduction.html">Apache Tribes</a>에 대한 자세한 내용을 확인할 수 있습니다.
   </p>
   <p><b><a href="cluster-interceptor.html">Channel/Interceptor</a>:</b> <br>
-    The channel will send messages through an interceptor stack. Because of this, you have the ability to
-    customize the way messages are sent and received, and even how membership is handled.<br>
-    You can always find out more about <a href="../tribes/introduction.html">Apache Tribes</a>
+    채널은 인터셉터 스택을 통해 메시지를 보냅니다. 이를 위해 능력을 가지고
+    회원이 그것을 어떻게 처리할지와 메시지가 전송되는 방법을 사용자 정의합니다..<br>
+    당신은 항상 <a href="../tribes/introduction.html">Apache Tribes</a>에 대한 자세한 내용을 확인할 수 있
+    습니다.
   </p>
-</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Attributes"><strong>Attributes</strong></a></font></td></tr><tr><td><blockquote>
+</blockquote></td></tr></table><table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#525D76"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="%EC%86%8D%EC%84%B1"><strong>속성</strong></a></font></td></tr><tr><td><blockquote>
 
-  <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="Common Attributes"><!--()--></a><a name="Common_Attributes"><strong>Common Attributes</strong></a></font></td></tr><tr><td><blockquote>
+  <table border="0" cellspacing="0" cellpadding="2"><tr><td bgcolor="#828DA6"><font color="#ffffff" face="arial,helvetica.sanserif"><a name="%EA%B3%B5%ED%86%B5 %EC%86%8D%EC%84%B1"><!--()--></a><a name="%EA%B3%B5%ED%86%B5_%EC%86%8D%EC%84%B1"><strong>공통 속성</strong></a></font></td></tr><tr><td><blockquote>
 
-  <table border="1" cellpadding="5"><tr><th width="15%" bgcolor="#023264"><font color="#ffffff">Attribute</font></th><th width="85%" bgcolor="#023264"><font color="#ffffff">Description</font></th></tr><tr><td align="left" valign="center"><strong><code class="attributeName">className</code></strong></td><td align="left" valign="center">
-       The default value here is <code>org.apache.catalina.tribes.group.GroupChannel</code> and is
-       currently the only implementation available.
+  <table border="1" cellpadding="5"><tr><th width="15%" bgcolor="#023264"><font color="#ffffff">Attribute</font></th><th width="85%" bgcolor="#023264"><font color="#ffffff">Description</font></th></tr><tr><td align="left" valign="center"><strong><code class="attributeName">집단이름</code></strong></td><td align="left" valign="center">
+       여기에서 디폴트 값은 <code>org.apache.catalina.tribes.group.GroupChannel</code>에서 현재 사용 
+       가능한 유일한 구현입니다.
     </td></tr></table>
 
 
